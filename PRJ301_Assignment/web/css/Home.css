@@ -1,0 +1,31 @@
+/*home*/
+.logoimg{
+    width: 250px;
+}
+/*menu*/
+.name1{
+    display: flex;
+    margin-top: 5rem;
+  
+}
+.name1 p{
+    padding:  10px;
+}
+/* Weekly timetable */
+.blue{
+    width: 20rem;
+    background: #00BFFF;
+}
+.selectt{
+    border-radius: 5px;
+    margin-left: 10px;
+}
+.selec1{
+    border:  3px solid white ; 
+    background: #00BFFF;
+}
+/*Mark Report*/
+.weekly  li a{
+   
+    
+}

@@ -6,7 +6,9 @@
 package controller;
 
 import DBcontext.AcountDBcontext;
+import DBcontext.ListLoginStudentDBcontext;
 import Model.Account;
+import Model.ListLoginStudent;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -14,12 +16,13 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.util.ArrayList;
 
 /**
  *
  * @author phung
  */
-public class AccountController extends HttpServlet {
+public class AcountController extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -30,19 +33,7 @@ public class AccountController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet Account</title>");  
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet Account at " + request.getContextPath () + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
+      
     } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -56,7 +47,7 @@ public class AccountController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        request.getRequestDispatcher("login.jsp").forward(request, response);
+    request.getRequestDispatcher("login.jsp").forward(request, response);
     } 
 
     /** 
@@ -69,21 +60,33 @@ public class AccountController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-         String user=request.getParameter("user");
+        int id = Integer.parseInt(request.getParameter("id"));
+        String user=request.getParameter("user");
          String Pass=request.getParameter("pass");
         AcountDBcontext dbaccount = new AcountDBcontext();
        Account accounts = dbaccount.AccountLogin(user, Pass);
+        ListLoginStudentDBcontext dblistloginstudent = new ListLoginStudentDBcontext();
+       ListLoginStudent listlogstudentt = dblistloginstudent.get(id);
         if(accounts == null)
         {
-            
+            request.setAttribute("error", "error");
             request.getRequestDispatcher("login.jsp").forward(request, response);
         }
         else
-        { 
-            HttpSession session = request.getSession();
-            session.setAttribute("accounts", accounts);
-            request.getRequestDispatcher("menu.jsp").forward(request, response);
+        {   
+            HttpSession session = request.getSession();   
+            if(accounts.getRole()==0){
+                 session.setAttribute("accounts", accounts);
+            request.getRequestDispatcher("admin.jsp").forward(request, response);
+            }
+            else {
+               request.setAttribute("listlogstudentt", listlogstudentt);
+               session.setAttribute("accounts", accounts);
+            request.getRequestDispatcher("Home.jsp").forward(request, response);  
+            }
+            
         }
+        
     }
 
     /** 

@@ -13,7 +13,7 @@ import java.sql.Date;
 public class Course {
     private int id;
     private String name;
-    private Date start;
+    private int session;
 
     public int getId() {
         return id;
@@ -31,14 +31,15 @@ public class Course {
         this.name = name;
     }
 
-    public Date getStart() {
-        return start;
+    public int getSession() {
+        return session;
     }
 
-    public void setStart(Date start) {
-        this.start = start;
+    public void setSession(int session) {
+        this.session = session;
     }
 
+   
     
     
 }

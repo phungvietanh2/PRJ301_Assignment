@@ -4,6 +4,7 @@
     Author     : phung
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -13,83 +14,81 @@
     </head>
     <body>
         <jsp:include page="menu.jsp"></jsp:include>
-        <div class="container">
-            <h1>View attendance for Phùng Việt Anh (AnhPVHE153711)</h1>
-            <div class="row">
-                <div class="col-sm-7">
-                    <h3>
-                        Select a campus/program, term, course ...
-                    </h3>
-                </div>
-                <div class="col-sm-5">
-                    <h3 >... then see report</h3>
-                </div>
-            </div>         
-        </div>
-        <nav class="container">
-            <div class="row">
-                <div class="col-sm-4">
-                    <div class="table-responsive ">          
-                        <table class="table">
-                            <thead>
-                                <tr>                     
-                                    <th class="selec1">TERM</th>
-                                    <th class="selec1">COURSE </th>                            
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Summer2021</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>Summer2022</td>
-                                    <td class="weekly"><li><a>Summer2022</a></li>
-                            <li><a>Summer2022</a></li></td>
-                            </tr>
+            <div class="container">
+                <h1>View attendance for Phùng Việt Anh (AnhPVHE153711)</h1>
+                <div class="row">
+                    <div class="col-sm-7">
+                        <h3>
+                            Select a campus/program, term, course ...
+                        </h3>
+                    </div>
+                    <div class="col-sm-5">
+                        <h3 >... then see report</h3>
+                    </div>
+                </div>         
+            </div>
+            <nav  class="container">
+                <div class="row">
+                    <div  class="col-sm-4">
+                        
+                            <div  class="table-responsive ">          
+                            <table class="table">
+                                <thead>
+                                    <tr>                     
+                                        <th class="selec1">COURSE </th>                            
+                                    </tr>
+                                </thead>
+                                <tbody >
+
+
+                                <c:forEach items="${requestScope.courses}" var="c">
+                                    <tr>
+                                        <td>
+                                            <a href="Account?id=${c.id}">${c.name}</a></td>
+                                    </tr>
+                                </c:forEach>
+
                             </tbody>
                         </table>
                     </div>
+                       
                 </div>
+                    <form action="Account" method="POST">
                 <div class="col-sm-8">  
                     <div class="table-responsive ">          
                         <table class="table">
                             <thead>
                                 <tr>                     
-                                    <th class="selec1">NO</th>
+
                                     <th class="selec1">SLOT </th>      
                                     <th class="selec1">ROOM </th> 
-                                    <th class="selec1">LECTURER </th> 
+
                                     <th class="selec1">GROUP<br> NAME </th>
                                     <th class="selec1">ATTEDANCE <br> STATUS</th> 
                                     <th class="selec1">LECTURER'S <br> COMMENT</th> 
                                 </tr>
                             </thead>
+                           
                             <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>2</td>
-                                    <td>3</td>
-                                    <td>4</td>
-                                    <td>5</td>
-                                    <td>6</td>
-                                    <td>7</td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>2</td>
-                                    <td>3</td>
-                                    <td>4</td>
-                                    <td>5</td>
-                                    <td>6</td>
-                                    <td>7</td>
-                                </tr>
+                            
+                                 <c:forEach items="${requestScope.test}" var="c">
+                                    <tr>
+                                        <td> ${c.slot}</td>
+                                        <td>${c.room}</td>
+                                        <td>${c.name}</td>
+                                        <td>${c.attendencee}</td>
+                                        <td>${c.notee}</td>
+                                    </tr> 
+                                </c:forEach>
+                            
                             </tbody>
+                            
                         </table>
                     </div>
                 </div>
+                        </form>
             </div>
         </nav>
-         <jsp:include page="footer.jsp"></jsp:include>
+        <jsp:include page="footer.jsp"></jsp:include>
     </body>
 </html>

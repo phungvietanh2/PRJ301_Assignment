@@ -5,21 +5,19 @@
 
 package controller;
 
-import DBcontext.CourseDBcontext;
-import Model.Course;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
+import jakarta.servlet.http.HttpSession;
 
 /**
  *
  * @author phung
  */
-public class CourseController extends HttpServlet {
+public class LogoutController extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -30,19 +28,10 @@ public class CourseController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet CourseController</title>");  
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet CourseController at " + request.getContextPath () + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
+      HttpSession session =request.getSession();
+       session.removeAttribute("accounts");
+       request.removeAttribute("listlogstudentt");
+      request.getRequestDispatcher("Home").forward(request, response);
     } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -56,11 +45,7 @@ public class CourseController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        CourseDBcontext dbcoure = new CourseDBcontext();
-        ArrayList<Course> courses = dbcoure.list();
-        request.setAttribute("courses", courses);
-        request.getRequestDispatcher("Mark Report.jsp").forward(request, response);
-  
+        processRequest(request, response);
     } 
 
     /** 

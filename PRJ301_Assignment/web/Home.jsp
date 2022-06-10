@@ -4,6 +4,7 @@
     Author     : phung
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -28,19 +29,18 @@
                                 <thead>
                                     <tr>
                                         <th>Login</th>
-                                        <th>Full name</th>
-                                        <th>Image</th>
+                                        <th>Full name</th>                                      
                                         <th>Email</th> 
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>phungvietanh</td>
-                                        <td>phubgvietanh</td>
-                                        <td><img style="width: 100px" src="img/logofpt.png"></td>
-                                        <td>phungvietanh@fpt.edu.vn</td>
-                                       
+                                <c:forEach items="${requestScope.listlogstudentt}" var="c">
+                                      <tr>
+                                          <td>${c.username}</td>
+                                          <td>${c.fullname}</td>
+                                          <td>${c.fullname} <td>
                                     </tr>
+                                </c:forEach>
                                     
                                 </tbody>
                             </table>
@@ -57,5 +57,6 @@
             </div>
         </div>
     </nav>
+        <jsp:include page="footer.jsp" ></jsp:include>
 </body>
 </html>

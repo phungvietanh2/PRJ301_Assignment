@@ -4,6 +4,7 @@
     Author     : phung
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -24,9 +25,15 @@
                         <img class="logoimg" src="img/logofpt.png">
                     </div>
                     <div class="col-sm-2 name1">
-                        <p>Home</p>
-                        <p>Logout</p>
-                        <p>hello</p>
+                      <c:if test="${sessionScope.accounts == null}">
+                            <a style="font-size: 25px ; display: flex ;margin-top: 10px ;text-decoration: none" href="login.jsp">Login</a>
+                       </c:if>                 
+                        <c:if test="${sessionScope.accounts != null}">
+                            <div style="font-size: 25px ; display: flex ;">
+                             <p>  ${sessionScope.accounts.user} </p> 
+                             <a style="margin-top: 10px ;text-decoration: none" href="Logout">Logout</a>
+                            </div>       
+                        </c:if>
                     </div>
                 </div>
             </div>

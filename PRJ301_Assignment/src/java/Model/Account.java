@@ -9,59 +9,41 @@ package Model;
  * @author phung
  */
 public class Account {
-    private int Acid;
-    private String Acuser;
-    private String Acpass;
-    private int AcisSell;
-    private int AcisAdmin;
-    private String image;
+    private int id;
+    private String user;
+    private String pass;
+    private int role;
 
-    public String getImage() {
-        return image;
+    public int getId() {
+        return id;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public int getAcid() {
-        return Acid;
+    public String getUser() {
+        return user;
     }
 
-    public void setAcid(int Acid) {
-        this.Acid = Acid;
+    public void setUser(String user) {
+        this.user = user;
     }
 
-    public String getAcuser() {
-        return Acuser;
+    public String getPass() {
+        return pass;
     }
 
-    public void setAcuser(String Acuser) {
-        this.Acuser = Acuser;
+    public void setPass(String pass) {
+        this.pass = pass;
     }
 
-    public String getAcpass() {
-        return Acpass;
+    public int getRole() {
+        return role;
     }
 
-    public void setAcpass(String Acpass) {
-        this.Acpass = Acpass;
+    public void setRole(int role) {
+        this.role = role;
     }
-
-    public int getAcisSell() {
-        return AcisSell;
-    }
-
-    public void setAcisSell(int AcisSell) {
-        this.AcisSell = AcisSell;
-    }
-
-    public int getAcisAdmin() {
-        return AcisAdmin;
-    }
-
-    public void setAcisAdmin(int AcisAdmin) {
-        this.AcisAdmin = AcisAdmin;
-    }
-    
+   
 }

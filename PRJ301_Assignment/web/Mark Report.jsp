@@ -4,6 +4,7 @@
     Author     : phung
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -29,14 +30,16 @@
                     </tr>
                 </thead>
                 <tbody>
-                     <tr>
-                        <td>Summer2021</td>
-                        <td></td>
-                </tr>
+                     
                     <tr>
                         <td>Summer2022</td>
-                        <td class="weekly"><li><a>Summer2022</a></li>
-                <li><a>Summer2022</a></li></td>
+                        <td class="weekly">
+                        <c:forEach items="${requestScope.courses}" var="c">
+                    <li>
+                        <a>${c.name}</a>
+                    </li>
+                </c:forEach>
+                        </td>
                 </tr>
                 </tbody>
             </table>
