@@ -36,6 +36,18 @@
         <servlet-name>HomeController</servlet-name>
         <servlet-class>controller.HomeController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AdminController</servlet-name>
+        <servlet-class>controller.AdminController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminSearchController</servlet-name>
+        <servlet-class>controller.AdminSearchController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Admin1Controller</servlet-name>
+        <servlet-class>controller.Admin1Controller</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>DEMOcontroller</servlet-name>
         <url-pattern>/demo</url-pattern>
@@ -71,6 +83,18 @@
     <servlet-mapping>
         <servlet-name>HomeController</servlet-name>
         <url-pattern>/Home</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminController</servlet-name>
+        <url-pattern>/Admin</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminSearchController</servlet-name>
+        <url-pattern>/AdminSearch</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Admin1Controller</servlet-name>
+        <url-pattern>/Admin1Controller</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

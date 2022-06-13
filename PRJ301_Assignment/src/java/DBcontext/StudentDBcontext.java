@@ -4,7 +4,9 @@
  */
 package DBcontext;
 
+import Model.Classs;
 import Model.Student;
+import Model.subjects;
 import jakarta.servlet.jsp.jstl.sql.Result;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -24,12 +26,18 @@ public class StudentDBcontext extends DBcontext<Student>{
     public ArrayList<Student> list() {
         ArrayList<Student> students=new ArrayList<>();
          try {
-             String sql="select Sfullname FROM Student";
+             String sql="select MaSV , TenSV , GioiTinh , NgaySinh, gmail ,MaLop from  Student";
              PreparedStatement stm = connection.prepareStatement(sql);
              ResultSet rs = stm.executeQuery();
              while (rs.next()) {
-                 Student S = new Student();  
-                 S.setName(rs.getString("Sfullname"));              
+                 Student S = new Student(); 
+                 S.setMasv(rs.getInt("MaSV"));
+                 S.setName(rs.getString("TenSV"));
+                 S.setGender(rs.getString("GioiTinh"));   
+                 S.setBirthday(rs.getDate("NgaySinh"));
+                 S.setGmail(rs.getString("gmail"));
+                 Classs cl = new Classs();
+                 cl.setMalop(rs.getInt("MaLop"));
                  students.add(S);
              }
          } catch (SQLException ex) {

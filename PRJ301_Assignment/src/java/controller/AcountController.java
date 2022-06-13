@@ -6,9 +6,14 @@
 package controller;
 
 import DBcontext.AcountDBcontext;
-import DBcontext.ListLoginStudentDBcontext;
+import DBcontext.ClassDBcontext;
+import DBcontext.StudentDBcontext;
+
+
 import Model.Account;
-import Model.ListLoginStudent;
+import Model.Classs;
+import Model.Student;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -60,13 +65,15 @@ public class AcountController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        int id = Integer.parseInt(request.getParameter("id"));
         String user=request.getParameter("user");
-         String Pass=request.getParameter("pass");
+        String Pass=request.getParameter("pass");
         AcountDBcontext dbaccount = new AcountDBcontext();
-       Account accounts = dbaccount.AccountLogin(user, Pass);
-        ListLoginStudentDBcontext dblistloginstudent = new ListLoginStudentDBcontext();
-       ListLoginStudent listlogstudentt = dblistloginstudent.get(id);
+        Account accounts = dbaccount.AccountLogin(user, Pass);
+        ClassDBcontext dbclass = new ClassDBcontext();
+        ArrayList<Classs> classs = dbclass.list();
+        StudentDBcontext dbstudent = new StudentDBcontext();
+        ArrayList<Student> students = dbstudent.list();
+       
         if(accounts == null)
         {
             request.setAttribute("error", "error");
@@ -75,16 +82,17 @@ public class AcountController extends HttpServlet {
         else
         {   
             HttpSession session = request.getSession();   
-            if(accounts.getRole()==0){
-                 session.setAttribute("accounts", accounts);
-            request.getRequestDispatcher("admin.jsp").forward(request, response);
+            if(accounts.getRole()==0){  
+                 request.setAttribute("classs", classs);
+               session.setAttribute("accounts", accounts);
+               request.setAttribute("students", students);
+           request.getRequestDispatcher("admin/AdminHome.jsp").forward(request, response);
             }
             else {
-               request.setAttribute("listlogstudentt", listlogstudentt);
                session.setAttribute("accounts", accounts);
-            request.getRequestDispatcher("Home.jsp").forward(request, response);  
-            }
+           request.getRequestDispatcher("Home.jsp").forward(request, response);  
             
+                    }
         }
         
     }
