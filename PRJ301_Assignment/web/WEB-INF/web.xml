@@ -60,6 +60,10 @@
         <servlet-name>AdminInsertStudent</servlet-name>
         <servlet-class>controller.AdminInsertStudent</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AdminListStudent</servlet-name>
+        <servlet-class>controller.AdminListStudent</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>DEMOcontroller</servlet-name>
         <url-pattern>/demo</url-pattern>
@@ -119,6 +123,10 @@
     <servlet-mapping>
         <servlet-name>AdminInsertStudent</servlet-name>
         <url-pattern>/AdminInsertStudent</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminListStudent</servlet-name>
+        <url-pattern>/AdminListStudent</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

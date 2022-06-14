@@ -1,8 +1,9 @@
 <%-- 
-    Document   : admin
-    Created on : Jun 1, 2022, 11:41:36 AM
+    Document   : AdminListClass
+    Created on : Jun 14, 2022, 9:53:37 AM
     Author     : phung
 --%>
+
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -16,6 +17,8 @@
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
         <link href="css/admin.css" rel="stylesheet" type="text/css"/>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+              rel="stylesheet">
         <title>JSP Page</title>
     </head>
     <body>
@@ -34,8 +37,8 @@
                         <span class="icon-bar"></span>
                     </button>
                     <p class="navbar-brand">
-                        Hello ${sessionScope.accounts.user} <img style="width: 58px;
-                                                                 margin-top: -13px;" src="img/hello.png">
+                        Hello ${sessionScope.accounts.user} 
+                        <img style="width: 58px;margin-top:-13px;" src="img/hello.png">
                     </p>
 
                 </div>
@@ -49,8 +52,8 @@
                         <button type="submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i></button>
                     </form>
 
-                </div><!-- /.navbar-collapse -->
-            </div><!-- /.container-fluid -->
+                </div>
+            </div>
         </nav>  	
         <div class="container-fluid main-container">
             <div class="col-md-2 sidebar">
@@ -65,7 +68,7 @@
                                 <ul class="nav navbar-nav">
 
 
-                                    <li><a href="AdminInsertStudent"><span class="glyphicon "></span> INSERT STUDENT</a></li>
+                                    <li><a href="#"><span class="glyphicon "></span> Course</a></li>
                                     <li><a href="#"><span class="glyphicon "></span> Class</a></li>
                                     <li><a href="#"><span class="glyphicon "></span> Student</a></li>
                                     <li><a href="login.jsp"><span class="glyphicon  glyphicon-log-out"></span> Log out</a></li>
@@ -79,25 +82,44 @@
             <div class="col-md-10 content">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        List  
+                        <h3>List Class/ 
+                            <a style="color: black;font-size: 20p" href="Admin">Back</a> 
+                            <span class="material-icons">
+                                keyboard_return
+                            </span></h3>
                     </div>
-                    <h3>PROJEC_PRJ301</h3>
-                    <button type="button" class="navbar navbar-default"  
-                            style="border: 1px solid;
-                            margin-left: 45px;
-                            background: #f8f8f8;
-                            width: 10rem;
-                            font-size: 3rem; " data-toggle="collapse" data-target="#demo">List</button>
-                    <div id="demo" class="collapse">
-                        <li style="text-decoration: none;font-size: 3rem" ><a href="AdminListStudent">List Student</a></li>
-                        <li style="text-decoration: none;font-size: 3rem"><a href="AdminListMark"> List Mark</a></li>
-                        <li style="text-decoration: none;font-size: 3rem" ><a href="AdminListClass">List Class</a></li>
-                    </div>
-
-
+                    <form action="AdminListClass" method="POST">
+                        <div class="panel-body">
+                            <div class="container"><h1>Student</h1> </div> 
+                           <table  class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <td>Mã Sinh Viên </td>
+                                    <td>Tên Sinh Viên </td>
+                                    <td>Giới Tính </td>
+                                    <td>Ngày Sinh</td>  
+                                    <td>Gmail</td>
+                               
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <c:forEach items="${requestScope.students}" var="e">
+                                    <tr> 
+                                        <td>${e.masv}</td>
+                                        <td>${e.name}</td>
+                                        <td>${e.gender}</td>
+                                        <td>${e.birthday}</td>
+                                        <td>${e.gmail}</td>
+                                      
+                                    </tr>   
+                                </c:forEach>
+                            </tbody>
+                        </table>
+                        </div>
+                    </form>
+                   
                 </div>
             </div>
-
         </div>
     </body>
 </html>

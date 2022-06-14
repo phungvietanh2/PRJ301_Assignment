@@ -6,7 +6,9 @@
 package controller;
 
 import DBcontext.ClassDBcontext;
+import DBcontext.StudentDBcontext;
 import Model.Classs;
+import Model.Student;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -19,7 +21,7 @@ import java.util.ArrayList;
  *
  * @author phung
  */
-public class AdminInsertStudent extends HttpServlet {
+public class AdminListStudent extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -36,10 +38,10 @@ public class AdminInsertStudent extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet AdminInsertStudent</title>");  
+            out.println("<title>Servlet AdminListStudent</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet AdminInsertStudent at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet AdminListStudent at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -56,10 +58,11 @@ public class AdminInsertStudent extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        ClassDBcontext dbclass = new ClassDBcontext();
-           ArrayList<Classs> classs = dbclass.list();
-            request.setAttribute("classs", classs);
-       request.getRequestDispatcher("admin/insert student.jsp").forward(request, response);
+        StudentDBcontext dbstudent = new StudentDBcontext();
+         ArrayList<Student> students = dbstudent.list();
+        request.setAttribute("students", students);
+        
+       request.getRequestDispatcher("admin/AdminListStudent.jsp").forward(request, response);
     } 
 
     /** 
