@@ -5,11 +5,13 @@
 
 package controller;
 
-import DBcontext.AdminDBcontext;
-import DBcontext.ClassDBcontext;
+
+import DBcontext.AdminListMarkDBcontext;
 import DBcontext.StudentDBcontext;
-import Model.Classs;
+import DBcontext.SubjectsDBcontext;
+import Model.Mark;
 import Model.Student;
+import Model.subjects;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -22,7 +24,7 @@ import java.util.ArrayList;
  *
  * @author phung
  */
-public class AdminSearchController extends HttpServlet {
+public class AdminListMark extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -39,10 +41,10 @@ public class AdminSearchController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet AdminSearchController</title>");  
+            out.println("<title>Servlet AdminListMark</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet AdminSearchController at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet AdminListMark at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -59,13 +61,11 @@ public class AdminSearchController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        ClassDBcontext dbclass = new ClassDBcontext();
-        ArrayList<Classs> classs = dbclass.list();
-      request.setAttribute("classs", classs);
-      StudentDBcontext dbstudent = new StudentDBcontext();
-        ArrayList<Student> students = dbstudent.list();
-          request.setAttribute("students", students);
-           request.getRequestDispatcher("admin/AdminHome.jsp").forward(request, response);
+         SubjectsDBcontext dbSubjects = new SubjectsDBcontext();
+        ArrayList<subjects> subjectss = dbSubjects.list();
+        request.setAttribute("subjectss", subjectss);
+      
+       request.getRequestDispatcher("admin/AdminListMark.jsp").forward(request, response);
     } 
 
     /** 
@@ -77,15 +77,16 @@ public class AdminSearchController extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {        
-       int id = Integer.parseInt(request.getParameter("id"));
-        AdminDBcontext dbadmin = new AdminDBcontext();
-        ArrayList<Student> students = dbadmin.SearchByid(id);
-         ClassDBcontext dbclass = new ClassDBcontext();
-         ArrayList<Classs> classs = dbclass.list();
-      request.setAttribute("classs", classs);
-        request.setAttribute("ac", students);
-        request.getRequestDispatcher("admin/AdminHome.jsp").forward(request, response);
+    throws ServletException, IOException {
+       String id = request.getParameter("id");
+        SubjectsDBcontext dbSubjects = new SubjectsDBcontext();
+        ArrayList<subjects> subjectss = dbSubjects.list();
+        request.setAttribute("subjectss", subjectss);
+        
+        AdminListMarkDBcontext dblistmark = new AdminListMarkDBcontext();
+        ArrayList<Mark> markss=dblistmark.SearchByid(id);
+        request.setAttribute("markss", markss);
+      request.getRequestDispatcher("admin/AdminListMark.jsp").forward(request, response);
     }
 
     /** 

@@ -5,18 +5,24 @@
 
 package controller;
 
+import DBcontext.SearchListClassDBconstext;
+import DBcontext.ClassDBcontext;
+import DBcontext.StudentDBcontext;
+import Model.Classs;
+import Model.Student;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 
 /**
  *
  * @author phung
  */
-public class Admin1Controller extends HttpServlet {
+public class AdminListClass extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -33,10 +39,10 @@ public class Admin1Controller extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Admin1Controller</title>");  
+            out.println("<title>Servlet AdminListClass</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet Admin1Controller at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet AdminListClass at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -53,7 +59,10 @@ public class Admin1Controller extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+           ClassDBcontext dbclass = new ClassDBcontext();
+           ArrayList<Classs> classs = dbclass.list();
+            request.setAttribute("classs", classs);
+           request.getRequestDispatcher("admin/AdminListClass.jsp").forward(request, response);
     } 
 
     /** 
@@ -66,7 +75,16 @@ public class Admin1Controller extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        int id = Integer.parseInt(request.getParameter("id"));
+        SearchListClassDBconstext dbadmin = new SearchListClassDBconstext();
+        ArrayList<Student> students = dbadmin.SearchByid(id);
+        
+         ClassDBcontext dbclass = new ClassDBcontext();
+         ArrayList<Classs> classs = dbclass.list();
+         
+        request.setAttribute("classs", classs);
+        request.setAttribute("students", students);
+        request.getRequestDispatcher("admin/AdminListClass.jsp").forward(request, response);
     }
 
     /** 

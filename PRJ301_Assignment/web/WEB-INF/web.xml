@@ -48,6 +48,18 @@
         <servlet-name>Admin1Controller</servlet-name>
         <servlet-class>controller.Admin1Controller</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AdminListClass</servlet-name>
+        <servlet-class>controller.AdminListClass</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminListMark</servlet-name>
+        <servlet-class>controller.AdminListMark</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminInsertStudent</servlet-name>
+        <servlet-class>controller.AdminInsertStudent</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>DEMOcontroller</servlet-name>
         <url-pattern>/demo</url-pattern>
@@ -95,6 +107,18 @@
     <servlet-mapping>
         <servlet-name>Admin1Controller</servlet-name>
         <url-pattern>/Admin1Controller</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminListClass</servlet-name>
+        <url-pattern>/AdminListClass</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminListMark</servlet-name>
+        <url-pattern>/AdminListMark</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminInsertStudent</servlet-name>
+        <url-pattern>/AdminInsertStudent</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -9,10 +9,9 @@ package Model;
  * @author phung
  */
 public class Mark {
-    private Student studentt ;
-    private subjects subjectss;
+    private int masv ;
+    private  subjects subjectss;
     private int mark1;
-    private int mark2;
     private int mark21;
     private int mark22;
     private int mark3;
@@ -20,12 +19,12 @@ public class Mark {
     private int mark5;
     private int mark6;
 
-    public Student getStudentt() {
-        return studentt;
+    public int getMasv() {
+        return masv;
     }
 
-    public void setStudentt(Student studentt) {
-        this.studentt = studentt;
+    public void setMasv(int masv) {
+        this.masv = masv;
     }
 
     public subjects getSubjectss() {
@@ -36,6 +35,10 @@ public class Mark {
         this.subjectss = subjectss;
     }
 
+    
+
+    
+
     public int getMark1() {
         return mark1;
     }
@@ -44,13 +47,7 @@ public class Mark {
         this.mark1 = mark1;
     }
 
-    public int getMark2() {
-        return mark2;
-    }
-
-    public void setMark2(int mark2) {
-        this.mark2 = mark2;
-    }
+   
 
     public int getMark21() {
         return mark21;

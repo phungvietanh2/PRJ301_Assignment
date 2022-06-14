@@ -65,7 +65,7 @@
                                 <ul class="nav navbar-nav">
 
 
-                                    <li><a href="AdminInsertStudent"><span class="glyphicon "></span> INSERT STUDENT</a></li>
+                                    <li class="active" ><a href="AdminInsertStudent"><span class="glyphicon  "></span> INSERT STUDENT</a></li>
                                     <li><a href="#"><span class="glyphicon "></span> Class</a></li>
                                     <li><a href="#"><span class="glyphicon "></span> Student</a></li>
                                     <li><a href="login.jsp"><span class="glyphicon  glyphicon-log-out"></span> Log out</a></li>
@@ -81,18 +81,8 @@
                     <div class="panel-heading">
                         List  
                     </div>
-                    <h3>PROJEC_PRJ301</h3>
-                    <button type="button" class="navbar navbar-default"  
-                            style="border: 1px solid;
-                            margin-left: 45px;
-                            background: #f8f8f8;
-                            width: 10rem;
-                            font-size: 3rem; " data-toggle="collapse" data-target="#demo">List</button>
-                    <div id="demo" class="collapse">
-                        <li style="text-decoration: none;font-size: 3rem" ><a href="AdminListClass">List Class</a></li>
-                        <li style="text-decoration: none;font-size: 3rem"><a href="AdminListMark"> List Mark</a></li>  
-                    </div>
-
+                    
+                   
 
                 </div>
             </div>
