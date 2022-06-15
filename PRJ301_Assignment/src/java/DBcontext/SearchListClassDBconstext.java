@@ -22,7 +22,8 @@ public class SearchListClassDBconstext extends DBcontext<Student>{
      public ArrayList<Student> SearchByid(int id){
          ArrayList<Student> students = new ArrayList<>();
          try {
-             String sql = "select s.MaSV , s.TenSV ,c.MaLop,c.TenLop   from Student s  INNER JOIN Class c  on s.MaLop = c.MaLop where  c.MaLop = ?";
+             String sql = " select s.MaSV , s.TenSV ,c.MaLop,c.TenLop   from Student s \n" +
+" INNER JOIN Class c  on s.MaLop = c.MaLop where  c.MaLop = ?";
              PreparedStatement stm= connection.prepareStatement(sql);
              stm.setInt(1, id);
              ResultSet rs = stm.executeQuery();
@@ -31,7 +32,7 @@ public class SearchListClassDBconstext extends DBcontext<Student>{
                  d.setMalop(rs.getInt("MaLop"));
                  d.setTenlop(rs.getString("TenLop"));
                  Student e = new Student();
-                 e.setMasv(rs.getInt("MaSV"));
+                 e.setMasv(rs.getString("MaSV"));
                  e.setName(rs.getString("TenSV"));
                  e.setClasss(d);
                  students.add(e);

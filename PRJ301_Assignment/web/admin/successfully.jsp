@@ -19,7 +19,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-<!------------------------------------------------------------------------------------------------------------------------>
+        <!------------------------------------------------------------------------------------------------------------------------>
         <nav class="navbar navbar-default navbar-static-top">
             <div class="container-fluid">
                 <!-- Brand and toggle get grouped for better mobile display -->
@@ -33,7 +33,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    
+
                     <!-----xin chao nguoi dang nhap ---->
                     <p class="navbar-brand">
                         Hello ${sessionScope.accounts.user} 
@@ -61,7 +61,7 @@
                             <!-- Main Menu -->
                             <div class="side-menu-container">
                                 <ul class="nav navbar-nav">
-                                    <li class="active"><a href="Admin"><span class="glyphicon "></span>Home</a></li>
+                                    <li><a href="Admin"><span class="glyphicon "></span>Home</a></li>
                                     <li><a href="AdminInsertStudent"><span class="glyphicon "></span> INSERT STUDENT</a></li>
                                     <li><a href="#"><span class="glyphicon "></span> Student</a></li>
                                     <li><a href="login.jsp"><span class="glyphicon  glyphicon-log-out"></span> Log out</a></li>
@@ -71,26 +71,19 @@
                     </div>
                 </div>  		
             </div>
-            
+
             <!--start code-->
             <div class="col-md-10 content">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         List  
                     </div>
-                    <h3>PROJEC_PRJ301</h3>
-                    <button type="button" class="navbar navbar-default"  
-                            style="border: 1px solid;
-                            margin-left: 45px;
-                            background: #f8f8f8;
-                            width: 10rem;
-                            font-size: 3rem; " data-toggle="collapse" data-target="#demo">List</button>
-                    <div id="demo" class="collapse">
-                        <li style="text-decoration: none;font-size: 3rem" ><a href="AdminListStudent">List Student</a></li>
-                        <li style="text-decoration: none;font-size: 3rem"><a href="AdminListMark"> List Mark</a></li>
-                        <li style="text-decoration: none;font-size: 3rem" ><a href="AdminListClass">List Class</a></li>
-                    </div>
-
+                    <h3 style="color: red"> ${requestScope.exist} <br> </h3>  
+                    <h3 style="color: red"> ${requestScope.action} <br> </h3>
+                    <h3> <a href="AdminListStudent">List Student</a> 
+                        <br>
+                        <a href="AdminInsertStudent"> Back Insert Student</a> 
+                    </h3> 
 
                 </div>
             </div>

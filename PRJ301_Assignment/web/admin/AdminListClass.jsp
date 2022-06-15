@@ -22,8 +22,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-
-        <nav class="navbar navbar-default navbar-static-top">
+<nav class="navbar navbar-default navbar-static-top">
             <div class="container-fluid">
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
@@ -36,14 +35,13 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
+                    
+                    <!-----xin chao nguoi dang nhap ---->
                     <p class="navbar-brand">
                         Hello ${sessionScope.accounts.user} 
                         <img style="width: 58px;margin-top:-13px;" src="img/hello.png">
                     </p>
-
                 </div>
-
-                <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">      
                     <form class="navbar-form navbar-left" method="GET" role="search">
                         <div class="form-group">
@@ -54,11 +52,10 @@
 
                 </div>
             </div>
-        </nav>  	
+        </nav>  		
         <div class="container-fluid main-container">
             <div class="col-md-2 sidebar">
                 <div class="row">
-                    <!-- uncomment code for absolute positioning tweek see top comment in css -->
                     <div class="absolute-wrapper"> </div>
                     <!-- Menu -->
                     <div class="side-menu">
@@ -66,19 +63,18 @@
                             <!-- Main Menu -->
                             <div class="side-menu-container">
                                 <ul class="nav navbar-nav">
-
-
-                                    <li><a href="#"><span class="glyphicon "></span> Course</a></li>
+                                    <li><a href="Admin"><span class="glyphicon "></span>Home</a></li>
+                                    <li class="active" ><a href="AdminInsertStudent"><span class="glyphicon  "></span> INSERT STUDENT</a></li>
                                     <li><a href="#"><span class="glyphicon "></span> Class</a></li>
                                     <li><a href="#"><span class="glyphicon "></span> Student</a></li>
                                     <li><a href="login.jsp"><span class="glyphicon  glyphicon-log-out"></span> Log out</a></li>
-
                                 </ul>
-                            </div><!-- /.navbar-collapse -->
+                            </div>
                         </nav>
-
                     </div>
-                </div>  		</div>
+                </div>  	
+            </div>
+            
             <div class="col-md-10 content">
                 <div class="panel panel-default">
                     <div class="panel-heading">

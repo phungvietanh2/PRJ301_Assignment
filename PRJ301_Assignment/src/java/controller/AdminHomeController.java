@@ -5,29 +5,18 @@
 
 package controller;
 
-import DBcontext.AcountDBcontext;
-import DBcontext.ClassDBcontext;
-import DBcontext.StudentDBcontext;
-
-
-import Model.Account;
-import Model.Classs;
-import Model.Student;
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import java.util.ArrayList;
 
 /**
  *
  * @author phung
  */
-public class AcountController extends HttpServlet {
+public class AdminHomeController extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -38,8 +27,8 @@ public class AcountController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-      
-    } 
+       
+           } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /** 
@@ -52,7 +41,8 @@ public class AcountController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-    request.getRequestDispatcher("login.jsp").forward(request, response);
+        request.getRequestDispatcher("admin/AdminHome.jsp").forward(request, response);
+
     } 
 
     /** 
@@ -65,29 +55,7 @@ public class AcountController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        String user=request.getParameter("user");
-        String Pass=request.getParameter("pass");
-        AcountDBcontext dbaccount = new AcountDBcontext();
-        Account accounts = dbaccount.AccountLogin(user, Pass); 
-        if(accounts == null)
-        {
-            request.setAttribute("error", "error");
-            request.getRequestDispatcher("login.jsp").forward(request, response);
-        }
-        else
-        {   
-            HttpSession session = request.getSession();   
-            if(accounts.getRole()==0){  
-               session.setAttribute("accounts", accounts);    
-           request.getRequestDispatcher("admin/AdminHome.jsp").forward(request, response);
-            }
-            else {
-               session.setAttribute("accounts", accounts);
-           request.getRequestDispatcher("Home.jsp").forward(request, response);  
-            
-                    }
-        }
-        
+        processRequest(request, response);
     }
 
     /** 

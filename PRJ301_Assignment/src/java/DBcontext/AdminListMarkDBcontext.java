@@ -34,7 +34,7 @@ public class AdminListMarkDBcontext extends DBcontext<Mark> {
                 subjects d = new subjects();
                 d.setId(rs.getString("MaMH"));
                 Mark e = new Mark();
-                e.setMasv(rs.getInt("MaSV"));
+                e.setMasv(rs.getString("MaSV"));
                 e.setMark1(rs.getInt("DiemLan1"));
                 e.setMark21(rs.getInt("DiemLan21"));
                 e.setMark22(rs.getInt("DiemLan22"));
@@ -43,6 +43,7 @@ public class AdminListMarkDBcontext extends DBcontext<Mark> {
                 e.setMark5(rs.getInt("DiemLan5"));
                 e.setMark6(rs.getInt("DiemLan6"));  
                 e.setSubjectss(d);
+                
                 marks.add(e);
 
             }

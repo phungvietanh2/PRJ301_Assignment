@@ -38,7 +38,7 @@
     </servlet>
     <servlet>
         <servlet-name>AdminController</servlet-name>
-        <servlet-class>controller.AdminController</servlet-class>
+        <servlet-class>controller.AdminHomeController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>AdminSearchController</servlet-name>
@@ -63,6 +63,14 @@
     <servlet>
         <servlet-name>AdminListStudent</servlet-name>
         <servlet-class>controller.AdminListStudent</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Adminmenu</servlet-name>
+        <servlet-class>controller.Adminmenu</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DelectController</servlet-name>
+        <servlet-class>controller.DelectController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>DEMOcontroller</servlet-name>
@@ -127,6 +135,14 @@
     <servlet-mapping>
         <servlet-name>AdminListStudent</servlet-name>
         <url-pattern>/AdminListStudent</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Adminmenu</servlet-name>
+        <url-pattern>/Adminmenu</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DelectController</servlet-name>
+        <url-pattern>/DelectController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

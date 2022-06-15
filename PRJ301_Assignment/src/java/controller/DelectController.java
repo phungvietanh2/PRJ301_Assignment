@@ -5,6 +5,8 @@
 
 package controller;
 
+import DBcontext.StudentDBcontext;
+import Model.Student;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -16,7 +18,7 @@ import jakarta.servlet.http.HttpServletResponse;
  *
  * @author phung
  */
-public class AdminController extends HttpServlet {
+public class DelectController extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -27,8 +29,14 @@ public class AdminController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-       
-           } 
+        response.setContentType("text/html;charset=UTF-8");
+         int id = Integer.parseInt(request.getParameter("id"));
+         StudentDBcontext dbstudent = new StudentDBcontext();
+         Student s = dbstudent.get(id);
+         dbstudent.delete(s);
+        request.getRequestDispatcher("AdminListStudent").forward(request, response);
+   
+    } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /** 
@@ -41,8 +49,7 @@ public class AdminController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        request.getRequestDispatcher("admin/AdminHome.jsp").forward(request, response);
-
+        processRequest(request, response);
     } 
 
     /** 

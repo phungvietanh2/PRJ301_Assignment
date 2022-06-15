@@ -9,7 +9,7 @@ package Model;
  * @author phung
  */
 public class Mark {
-    private int masv ;
+    private String masv ;
     private  subjects subjectss;
     private int mark1;
     private int mark21;
@@ -19,13 +19,16 @@ public class Mark {
     private int mark5;
     private int mark6;
 
-    public int getMasv() {
+    public String getMasv() {
         return masv;
     }
 
-    public void setMasv(int masv) {
+    public void setMasv(String masv) {
         this.masv = masv;
     }
+
+    
+    
 
     public subjects getSubjectss() {
         return subjectss;

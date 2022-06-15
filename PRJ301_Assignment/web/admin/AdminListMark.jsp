@@ -22,7 +22,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-
+        <!------------------------------------------------------------------------------------------------------------------------>
         <nav class="navbar navbar-default navbar-static-top">
             <div class="container-fluid">
                 <!-- Brand and toggle get grouped for better mobile display -->
@@ -36,14 +36,13 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
+                    
+                    <!-----xin chao nguoi dang nhap ---->
                     <p class="navbar-brand">
                         Hello ${sessionScope.accounts.user} 
                         <img style="width: 58px;margin-top:-13px;" src="img/hello.png">
                     </p>
-
                 </div>
-
-                <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">      
                     <form class="navbar-form navbar-left" method="GET" role="search">
                         <div class="form-group">
@@ -57,8 +56,7 @@
         </nav>  	
         <div class="container-fluid main-container">
             <div class="col-md-2 sidebar">
-                <div class="row">
-                    <!-- uncomment code for absolute positioning tweek see top comment in css -->
+                <div class="row">                 
                     <div class="absolute-wrapper"> </div>
                     <!-- Menu -->
                     <div class="side-menu">
@@ -66,19 +64,18 @@
                             <!-- Main Menu -->
                             <div class="side-menu-container">
                                 <ul class="nav navbar-nav">
-
-
-                                    <li><a href="#"><span class="glyphicon "></span> Course</a></li>
-                                    <li><a href="#"><span class="glyphicon "></span> Class</a></li>
+                                    <li><a href="Admin"><span class="glyphicon "></span>Home</a></li>
+                                     <li><a href="AdminInsertStudent"><span class="glyphicon "></span> INSERT STUDENT</a></li>
                                     <li><a href="#"><span class="glyphicon "></span> Student</a></li>
                                     <li><a href="login.jsp"><span class="glyphicon  glyphicon-log-out"></span> Log out</a></li>
-
                                 </ul>
-                            </div><!-- /.navbar-collapse -->
+                            </div>
                         </nav>
-
                     </div>
-                </div>  		</div>
+                </div>  		
+            </div>
+            
+            <!--start code-->
             <div class="col-md-10 content">
                 <div class="panel panel-default">
                     <div class="panel-heading">
@@ -95,20 +92,20 @@
                                     text-align: center; "  name="id">
                                 <c:forEach items="${requestScope.subjectss}" var="c">
                                     <option <c:if test="${param.id == c.id}" >selected="selected" </c:if>  value="${c.id}" >
-                                     ${c.id}
+                                        ${c.id}
                                     </option>
                                 </c:forEach>
                             </select>
                             <br>
                             <input  style="border-radius: 10px ;
-                                   height: 4rem;
-                                   width: 10rem;
-                                   font-size: 20px;
-                                   margin-top: 15px;
-                                   margin-left: 0px;"  type="submit" value="Search" /> 
+                                    height: 4rem;
+                                    width: 10rem;
+                                    font-size: 20px;
+                                    margin-top: 15px;
+                                    margin-left: 0px;"  type="submit" value="Search" /> 
                         </div>
                     </form>
-                    
+
                     <c:if test="${requestScope.markss != null}">
                         <table  class="table table-bordered">
                             <thead>
@@ -122,7 +119,7 @@
                                     <td>Exercise 1</td>
                                     <td>Exercise 2</td>
                                     <td>Exercise 1</td>
-                                    
+
                                 </tr>
                             </thead>
                             <tbody>
@@ -145,6 +142,6 @@
                 </div>
             </div>
         </div>
-                        
+
     </body>
 </html>

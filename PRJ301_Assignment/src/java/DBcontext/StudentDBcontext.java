@@ -20,46 +20,96 @@ import java.util.logging.Logger;
  *
  * @author phung
  */
-public class StudentDBcontext extends DBcontext<Student>{
+public class StudentDBcontext extends DBcontext<Student> {
 
     @Override
     public ArrayList<Student> list() {
-        ArrayList<Student> students=new ArrayList<>();
-         try {
-             String sql="select MaSV , TenSV , GioiTinh , NgaySinh, gmail ,MaLop from  Student";
-             PreparedStatement stm = connection.prepareStatement(sql);
-             ResultSet rs = stm.executeQuery();
-             while (rs.next()) {
-                 Student S = new Student(); 
-                 S.setMasv(rs.getInt("MaSV"));
-                 S.setName(rs.getString("TenSV"));
-                 S.setGender(rs.getString("GioiTinh"));   
-                 S.setBirthday(rs.getDate("NgaySinh"));
-                 S.setGmail(rs.getString("gmail"));
-                 Classs cl = new Classs();
-                 cl.setMalop(rs.getInt("MaLop"));
-                 students.add(S);
-             }
-         } catch (SQLException ex) {
-             Logger.getLogger(StudentDBcontext.class.getName()).log(Level.SEVERE, null, ex);
-         }
-         return students;
+        ArrayList<Student> students = new ArrayList<>();
+        try {
+            String sql = "select Sid, MaSV , TenSV , GioiTinh , NgaySinh, gmail ,MaLop from  Student";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                Student S = new Student();
+                S.setId(rs.getInt("Sid"));
+                S.setMasv(rs.getString("MaSV"));
+                S.setName(rs.getString("TenSV"));
+                S.setGender(rs.getString("GioiTinh"));
+                S.setBirthday(rs.getDate("NgaySinh"));
+                S.setGmail(rs.getString("gmail"));
+                Classs cl = new Classs();
+                cl.setMalop(rs.getInt("MaLop"));
+                students.add(S);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(StudentDBcontext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return students;
     }
+
     public static void main(String[] args) {
-       StudentDBcontext dao = new StudentDBcontext();
-        List<Student> a  = dao.list();
+        StudentDBcontext dao = new StudentDBcontext();
+        List<Student> a = dao.list();
         for (Student o : a) {
             System.out.println(o);
         }
     }
-    @Override
-    public Student get(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
 
     @Override
+    public Student get(int id) {
+  try {
+            String sql = "select Sid, MaSV , TenSV , GioiTinh , NgaySinh, gmail ,MaLop from  Student"
+                    + " where Sid=? ";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, id);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                Student S = new Student();
+                S.setId(rs.getInt("Sid"));
+                S.setMasv(rs.getString("MaSV"));
+                S.setName(rs.getString("TenSV"));
+                S.setGender(rs.getString("GioiTinh"));
+                S.setBirthday(rs.getDate("NgaySinh"));
+                S.setGmail(rs.getString("gmail"));
+                Classs cl = new Classs();
+                cl.setMalop(rs.getInt("MaLop"));
+               return S;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(StudentDBcontext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+ 
+    @Override
     public void insert(Student model) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        ArrayList<Student> students = new ArrayList<>();
+        try {
+            String sql = "INSERT INTO [Student]\n"
+                    + "           ([MaSV]\n"
+                    + "           ,[TenSV]\n"
+                    + "           ,[NgaySinh]\n"
+                    + "           ,[gmail]\n"
+                    + "           ,[MaLop]\n"
+                    + "           ,[GioiTinh])\n"
+                    + "     VALUES\n"
+                    + "           (?\n"
+                    + "           ,?\n"
+                    + "           ,?\n"
+                    + "           ,?\n"
+                    + "           ,?\n"
+                    + "           ,?)";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setString(1, model.getMasv());
+            stm.setString(2, model.getName());
+            stm.setDate(3, model.getBirthday());
+            stm.setString(4, model.getGmail());
+            stm.setInt(5, model.getClasss().getMalop());
+            stm.setString(6, model.getGender());
+            stm.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(StudentDBcontext.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override
@@ -69,8 +119,16 @@ public class StudentDBcontext extends DBcontext<Student>{
 
     @Override
     public void delete(Student model) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    try {
+            String sql = "DELETE Student"
+                    + " WHERE [MaSV] = ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setString(1, model.getMasv());
+            stm.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(StudentDBcontext.class.getName()).log(Level.SEVERE, null, ex);
+        } 
     }
-    
-    
+
+   
 }

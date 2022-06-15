@@ -12,7 +12,16 @@ import java.util.ArrayList;
  * @author phung
  */
 public class Student {
-    private int masv;
+    private int id;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    private String Masv;
     private String name;
     private String gender;
     private Date birthday;
@@ -20,6 +29,7 @@ public class Student {
     private Classs classs;
     ArrayList<Mark> marks = new ArrayList<>();
 
+ 
     public ArrayList<Mark> getMarks() {
         return marks;
     }
@@ -28,14 +38,17 @@ public class Student {
         this.marks = marks;
     }
 
-    public int getMasv() {
-        return masv;
+  
+
+    public String getMasv() {
+        return Masv;
     }
 
-    public void setMasv(int masv) {
-        this.masv = masv;
+    public void setMasv(String Masv) {
+        this.Masv = Masv;
     }
 
+    
     
 
     public String getName() {
@@ -80,5 +93,6 @@ public class Student {
     public void setClasss(Classs classs) {
         this.classs = classs;
     }
+
     
 }
