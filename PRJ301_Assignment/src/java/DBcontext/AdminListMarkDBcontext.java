@@ -32,7 +32,7 @@ public class AdminListMarkDBcontext extends DBcontext<Mark> {
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
                 subjects d = new subjects();
-                d.setId(rs.getString("MaMH"));
+                d.setMamh(rs.getString("MaMH"));
                 Mark e = new Mark();
                 e.setMasv(rs.getString("MaSV"));
                 e.setMark1(rs.getInt("DiemLan1"));

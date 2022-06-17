@@ -72,6 +72,14 @@
         <servlet-name>DelectController</servlet-name>
         <servlet-class>controller.DelectController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>MarkReportController</servlet-name>
+        <servlet-class>controller.MarkReportController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewmarkController</servlet-name>
+        <servlet-class>controller.ViewmarkController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>DEMOcontroller</servlet-name>
         <url-pattern>/demo</url-pattern>
@@ -143,6 +151,14 @@
     <servlet-mapping>
         <servlet-name>DelectController</servlet-name>
         <url-pattern>/DelectController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MarkReportController</servlet-name>
+        <url-pattern>/MarkReport</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewmarkController</servlet-name>
+        <url-pattern>/Viewmark</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

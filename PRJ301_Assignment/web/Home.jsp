@@ -49,8 +49,7 @@
                 
                 <div class="col-sm-4">
                     <div><ul>
-                        <li><a>Weekly timetable (Thời khóa biểu từng tuần)</a></li>
-                        <li><a>Mark Report (Báo cáo điểm)</a></li>
+                            <li><a href="MarkReport">Mark Report (Báo cáo điểm)</a></li>
                     </ul></div>
                 </div>
                     </div>

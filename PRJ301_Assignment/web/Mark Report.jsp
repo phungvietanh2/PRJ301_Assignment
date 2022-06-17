@@ -16,30 +16,32 @@
 </head>
 <body>
     <jsp:include page="menu.jsp"></jsp:include>
-    <nav class="container">
-        <h1>View attendance for</h1>
-        <h5 style="text-align: center ; font-size: 2rem ; line-height: 50px" > 
-            Select a campus/program, term, course ...
-        </h5>
-        <div class="table-responsive ">          
-            <table class="table">
-                <thead>
-                    <tr>                     
-                        <th class="selec1">TERM</th>
-                        <th class="selec1">COURSE </th>                            
-                    </tr>
-                </thead>
-                <tbody>
-                     
-                    <tr>
-                        <td>Summer2022</td>
-                        <td class="weekly">
-                        <c:forEach items="${requestScope.courses}" var="c">
-                    <li>
-                        <a>${c.name}</a>
-                    </li>
-                </c:forEach>
-                        </td>
+        <nav class="container">
+            <h1>View attendance for</h1>
+            <h5 style="text-align: center ; font-size: 2rem ; line-height: 50px" > 
+                Select a campus/program, term, course ...
+            </h5>
+            <div class="table-responsive ">          
+                <table class="table">
+                    <thead>
+                        <tr>                     
+                            <th class="selec1">TERM</th>
+                            <th class="selec1">COURSE </th>                            
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <tr>
+                            <td>Summer2022</td>
+                            <td class="weekly">
+                            
+                        <li><a href="ListMark/IOT.jsp">IOT102</a></li>
+                    <li><a href="#">JPD123</a></li>
+                    <li><a href="#">MAS291</a></li>
+                    <li><a href="#">PRJ301</a></li>
+                    <li><a href="#">SWE201c</a></li>
+                
+                </td>
                 </tr>
                 </tbody>
             </table>

@@ -25,12 +25,13 @@ public class SubjectsDBcontext extends DBcontext<subjects>{
     public ArrayList<subjects> list() {
     ArrayList<subjects> subjectss=new ArrayList<>();
          try {
-             String sql="select MaMH,TenMH from subjects";
+             String sql="select id, MaMH,TenMH from subjects";
              PreparedStatement stm = connection.prepareStatement(sql);
              ResultSet rs = stm.executeQuery();
              while (rs.next()) {
                  subjects S = new subjects(); 
-                 S.setId(rs.getString("MaMH"));
+                 S.setId(rs.getInt("id"));
+                 S.setMamh(rs.getString("MaMH"));
                  S.setNameMh(rs.getString("TenMH"));
                  subjectss.add(S);
              }
@@ -41,14 +42,32 @@ public class SubjectsDBcontext extends DBcontext<subjects>{
     }
   public static void main(String[] args) {
        SubjectsDBcontext dao = new SubjectsDBcontext();
-        List<subjects> a  = dao.list();
-        for (subjects o : a) {
-            System.out.println(o);
-        }
+      //  List<subjects> a  = dao.list();
+      //  for (subjects o : a) {
+      //      System.out.println(o);
+      //  }
+      subjects acc = dao.get(10);
+      System.out.println(acc);
     }
     @Override
     public subjects get(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+     try {
+             String sql="select id, MaMH,TenMH from subjects where id=?";
+             PreparedStatement stm = connection.prepareStatement(sql);
+              stm.setInt(1, id);
+             ResultSet rs = stm.executeQuery();
+             while (rs.next()) {
+                 subjects S = new subjects(); 
+                 S.setId(rs.getInt("id"));
+                 S.setMamh(rs.getString("MaMH"));
+                 S.setNameMh(rs.getString("TenMH"));
+                 return S;
+             }
+         } catch (SQLException ex) {
+             Logger.getLogger(StudentDBcontext.class.getName()).log(Level.SEVERE, null, ex);
+         }
+         return null;    
+    
     }
 
     @Override

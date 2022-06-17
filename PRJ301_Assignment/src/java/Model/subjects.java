@@ -12,17 +12,28 @@ import java.util.ArrayList;
  * @author phung
  */
 public class subjects {
-    private String id;
+    private int id;
+    private String mamh;
     private String nameMh;
     ArrayList<Mark> marks = new ArrayList<>();
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
+
+    public String getMamh() {
+        return mamh;
+    }
+
+    public void setMamh(String mamh) {
+        this.mamh = mamh;
+    }
+
+   
 
     public String getNameMh() {
         return nameMh;

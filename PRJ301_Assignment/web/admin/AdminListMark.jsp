@@ -112,21 +112,21 @@
                                 <tr>
                                     <td>Mã Môn Học </td>
                                     <td>Mã Sinh Viên</td>
-                                    <td>Tên Sinh Viên</td> 
                                     <td>Active learning</td>
                                     <td>Exercise 1</td>
                                     <td>Exercise 2</td>
-                                    <td>Exercise 1</td>
-                                    <td>Exercise 2</td>
-                                    <td>Exercise 1</td>
-
+                                    <td>Presentation</td>
+                                    <td>Project</td>
+                                    <td>Practical Exam</td>
+                                    <td>Final Exam</td>
+                                   
                                 </tr>
                             </thead>
                             <tbody>
                                 <c:forEach items="${requestScope.markss}" var="e">
                                     <tr> 
                                         <td>${e.subjectss.id}</td>
-                                        <td><a href="#">FULL</a>${e.masv}</td>
+                                        <td>${e.masv}</td>
                                         <td>${e.mark1}</td>
                                         <td>${e.mark21}</td>
                                         <td>${e.mark22}</td>

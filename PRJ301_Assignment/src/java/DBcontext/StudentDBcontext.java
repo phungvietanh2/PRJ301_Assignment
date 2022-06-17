@@ -111,12 +111,11 @@ public class StudentDBcontext extends DBcontext<Student> {
             Logger.getLogger(StudentDBcontext.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+   
     @Override
     public void update(Student model) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-
     @Override
     public void delete(Student model) {
     try {
