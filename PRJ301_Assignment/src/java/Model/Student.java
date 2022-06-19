@@ -12,8 +12,8 @@ import java.util.ArrayList;
  * @author phung
  */
 public class Student {
-    private int Sid;
-    private String Masv;
+   private int Sid;
+   private String Masv;
     private String name;
     private String gender;
     private Date dob;
@@ -53,6 +53,8 @@ public class Student {
     public void setMasv(String Masv) {
         this.Masv = Masv;
     }
+
+   
 
     public String getName() {
         return name;

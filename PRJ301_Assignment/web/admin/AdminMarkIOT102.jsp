@@ -19,11 +19,9 @@
         <link href="css/admin.css" rel="stylesheet" type="text/css"/>
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
               rel="stylesheet">
-        <link href="css/mark.css" rel="stylesheet" type="text/css"/>
         <title>JSP Page</title>
     </head>
     <body>
-        <!------------------------------------------------------------------------------------------------------------------------>
         <nav class="navbar navbar-default navbar-static-top">
             <div class="container-fluid">
                 <!-- Brand and toggle get grouped for better mobile display -->
@@ -54,10 +52,10 @@
 
                 </div>
             </div>
-        </nav>  	
+        </nav>  		
         <div class="container-fluid main-container">
             <div class="col-md-2 sidebar">
-                <div class="row">                 
+                <div class="row">
                     <div class="absolute-wrapper"> </div>
                     <!-- Menu -->
                     <div class="side-menu">
@@ -66,90 +64,49 @@
                             <div class="side-menu-container">
                                 <ul class="nav navbar-nav">
                                     <li><a href="Admin"><span class="glyphicon "></span>Home</a></li>
-                                    <li><a href="AdminInsertStudent"><span class="glyphicon "></span> INSERT STUDENT</a></li>
+                                    <li class="active" ><a href="AdminInsertStudent"><span class="glyphicon  "></span> INSERT STUDENT</a></li>
+                                    <li><a href="#"><span class="glyphicon "></span> Class</a></li>
                                     <li><a href="#"><span class="glyphicon "></span> Student</a></li>
                                     <li><a href="login.jsp"><span class="glyphicon  glyphicon-log-out"></span> Log out</a></li>
                                 </ul>
                             </div>
                         </nav>
                     </div>
-                </div>  		
+                </div>  	
             </div>
 
-            <!--start code-->
             <div class="col-md-10 content">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h3>List Mark Report/ 
-                            <a style="color: black;font-size: 20px" href="Admin">Back</a> 
+                        <h3>List Class/
+                            <a style="color: black;font-size: 20p" href="Admin">Back</a> 
                             <span class="material-icons">
                                 keyboard_return
                             </span></h3>
                     </div>
-                    <div id="home_quicklinks">
-                      
-                        <a class="quicklink link3" href="#">
-                            <span class="ql_caption">
-                                <span class="outer">
-                                    <span class="inner">
-                                        <h2>MAS291</h2>
-                                    </span>
-                                </span>
-                            </span>
-                            <span class="ql_top"></span>
-                            <span class="ql_bottom"></span>
-                        </a>
-                        <a class="quicklink link3" href="#">
-                            <span class="ql_caption">
-                                <span class="outer">
-                                    <span class="inner">
-                                        <h2>JPD123 </h2>
-                                    </span>
-                                </span>
-                            </span>
-                            <span class="ql_top"></span>
-                            <span class="ql_bottom"></span>
-                        </a>
-                        <a class="quicklink link3" href="AdminMarkIot102">
-                            <span class="ql_caption">
-                                <span class="outer">
-                                    <span class="inner">
-                                        <h2>IOT102 </h2>
-                                    </span>
-                                </span>
-                            </span>
-                            <span class="ql_top"></span>
-                            <span class="ql_bottom"></span>
-                        </a>
-                        <a class="quicklink link3" href="https://www.facebook.com/">
-                            <span class="ql_caption">
-                                <span class="outer">
-                                    <span class="inner">
-                                        <h2>PRJ301 </h2>
-                                    </span>
-                                </span>
-                            </span>
-                            <span class="ql_top"></span>
-                            <span class="ql_bottom"></span>
-                        </a>
-                        <a class="quicklink link3" href="https://www.facebook.com/">
-                            <span class="ql_caption">
-                                <span class="outer">
-                                    <span class="inner">
-                                        <h2>SWE201c </h2>
-                                    </span>
-                                </span>
-                            </span>
-                            <span class="ql_top"></span>
-                            <span class="ql_bottom"></span>
-                        </a>
+                    <c:if test="${requestScope.markIot102s != null}">
+                        <table  class="table table-bordered">
+                            <thead>
+                                <tr>
 
-                        <div class="clear"></div>
-                    </div>
-                    
+                                    <td>Tên Lớp</td>
+                                    <td>Mã Sinh Viên </td>
+                                    <td>Tên Sinh Viên</td>       
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <c:forEach items="${requestScope.markIot102s}" var="a">
+                                    <tr> 
+                                        <td>${a.students.masv}</td>
+                                        <td>${a.students.name}</td>
+                                        <td>${a.exercise1}</td>
+                                    </tr>   
+                                </c:forEach>
+                            </tbody>
+                        </table>
+                    </c:if>
                 </div>
             </div>
         </div>
-
     </body>
 </html>

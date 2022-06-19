@@ -24,7 +24,7 @@ public class ClassDBcontext extends DBcontext<Classs>{
     public ArrayList<Classs> list() {
      ArrayList<Classs> classes = new ArrayList<>();
         try {
-            String sql = "select cl.Clname , c.Cocode ,c.Coname from Class cl INNER JOIN  Course c on  cl.Coid = c.Coid";
+            String sql = "select cl.Clname , c.Cocode ,c.Coname from Class cl INNER JOIN  Course c on  cl.Cocode = c.Cocode ";
             PreparedStatement stm = connection.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {

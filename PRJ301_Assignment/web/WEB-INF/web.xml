@@ -53,10 +53,6 @@
         <servlet-class>controller.AdminListClass</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>AdminListMark</servlet-name>
-        <servlet-class>controller.AdminListMark</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>AdminInsertStudent</servlet-name>
         <servlet-class>controller.AdminInsertStudent</servlet-class>
     </servlet>
@@ -83,6 +79,14 @@
     <servlet>
         <servlet-name>AdminInserMark</servlet-name>
         <servlet-class>controller.AdminInserMark</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminMarkIot102Controller</servlet-name>
+        <servlet-class>controller.AdminMarkIot102Controller</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminListMarkController</servlet-name>
+        <servlet-class>controller.AdminListMarkController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>DEMOcontroller</servlet-name>
@@ -137,10 +141,6 @@
         <url-pattern>/AdminListClass</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>AdminListMark</servlet-name>
-        <url-pattern>/AdminListMark</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>AdminInsertStudent</servlet-name>
         <url-pattern>/AdminInsertStudent</url-pattern>
     </servlet-mapping>
@@ -167,6 +167,14 @@
     <servlet-mapping>
         <servlet-name>AdminInserMark</servlet-name>
         <url-pattern>/AdminInserMark</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminMarkIot102Controller</servlet-name>
+        <url-pattern>/AdminMarkIot102</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminListMarkController</servlet-name>
+        <url-pattern>/AdminListMark</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -5,12 +5,10 @@
 
 package controller;
 
-
-import DBcontext.MarkDBcontext;
+import DBcontext.IOT102DBcontext;
 import DBcontext.StudentDBcontext;
-
+import Model.MarkIot102;
 import Model.Student;
-import Model.subjects;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -23,7 +21,7 @@ import java.util.ArrayList;
  *
  * @author phung
  */
-public class AdminListMark extends HttpServlet {
+public class AdminMarkIot102Controller extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -35,18 +33,14 @@ public class AdminListMark extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet AdminListMark</title>");  
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet AdminListMark at " + request.getContextPath () + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
+        StudentDBcontext dbstudent = new StudentDBcontext();
+        ArrayList<Student> students = dbstudent.list();
+        request.setAttribute("students", students);
+        
+        IOT102DBcontext DBmarkiot102 =new IOT102DBcontext();
+        ArrayList<MarkIot102> markIot102s = DBmarkiot102.list();
+        request.setAttribute("markIot102s", markIot102s);
+        request.getRequestDispatcher("admin/AdminMarkIOT102.jsp").forward(request, response);
     } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -60,11 +54,8 @@ public class AdminListMark extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-         SubjectsDBcontext dbSubjects = new SubjectsDBcontext();
-        ArrayList<subjects> subjectss = dbSubjects.list();
-        request.setAttribute("subjectss", subjectss);
-      
-       request.getRequestDispatcher("admin/AdminListMark.jsp").forward(request, response);
+        processRequest(request, response);
+       
     } 
 
     /** 
@@ -77,15 +68,7 @@ public class AdminListMark extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-       String id = request.getParameter("id");
-        SubjectsDBcontext dbSubjects = new SubjectsDBcontext();
-        ArrayList<subjects> subjectss = dbSubjects.list();
-        request.setAttribute("subjectss", subjectss);
-        
-        MarkDBcontext dblistmark = new MarkDBcontext();
-        ArrayList<Mark> markss=dblistmark.SearchByid(id);
-        request.setAttribute("markss", markss);
-      request.getRequestDispatcher("admin/AdminListMark.jsp").forward(request, response);
+        processRequest(request, response);
     }
 
     /** 

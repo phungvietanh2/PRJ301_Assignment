@@ -60,9 +60,7 @@ public class MarkReportController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       SubjectsDBcontext dbSubjects = new SubjectsDBcontext();
-        ArrayList<subjects> subjectss = dbSubjects.list();
-        request.setAttribute("subjectss", subjectss);
+       
         request.getRequestDispatcher("Mark Report.jsp").forward(request, response);
     }
 

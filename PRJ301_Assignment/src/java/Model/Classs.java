@@ -11,10 +11,9 @@ import java.util.ArrayList;
  * @author phung
  */
 public class Classs {
-  private int malop;
   private String tenlop; 
   private subjects subjectss;
-    ArrayList<Student> students = new ArrayList<>();
+   ArrayList<Student> students = new ArrayList<>();
 
     public subjects getSubjectss() {
         return subjectss;
@@ -24,13 +23,6 @@ public class Classs {
         this.subjectss = subjectss;
     }
 
-    public int getMalop() {
-        return malop;
-    }
-
-    public void setMalop(int malop) {
-        this.malop = malop;
-    }
 
     public String getTenlop() {
         return tenlop;

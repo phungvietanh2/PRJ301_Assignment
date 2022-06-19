@@ -16,6 +16,15 @@ public class subjects {
     private String Mamh;
     private String Namemh;
     ArrayList<Classs>classses=new ArrayList<>();
+    ArrayList<MarkIot102> markIot102s = new ArrayList<>();
+
+    public ArrayList<MarkIot102> getMarkIot102s() {
+        return markIot102s;
+    }
+
+    public void setMarkIot102s(ArrayList<MarkIot102> markIot102s) {
+        this.markIot102s = markIot102s;
+    }
 
     public ArrayList<Classs> getClassses() {
         return classses;
