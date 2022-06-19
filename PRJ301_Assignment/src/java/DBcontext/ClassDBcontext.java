@@ -4,6 +4,7 @@
  */
 package DBcontext;
 import Model.Classs;
+import Model.Student;
 import Model.subjects;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,20 +19,22 @@ import java.util.logging.Logger;
  * @author phung
  */
 public class ClassDBcontext extends DBcontext<Classs>{
-      
+    
     @Override
     public ArrayList<Classs> list() {
      ArrayList<Classs> classes = new ArrayList<>();
         try {
-            String sql = "select Malop ,TenLop from Class";
+            String sql = "select cl.Clname , c.Cocode ,c.Coname from Class cl INNER JOIN  Course c on  cl.Coid = c.Coid";
             PreparedStatement stm = connection.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
             Classs cl = new Classs();
-            cl.setMalop(rs.getInt("Malop"));
-            cl.setTenlop(rs.getString("TenLop"));
+            cl.setTenlop(rs.getString("Clname"));
+            subjects s = new subjects();
+            s.setMamh(rs.getString("Cocode"));
+            s.setNamemh(rs.getString("Coname"));
+            cl.setSubjectss(s);
             classes.add(cl);
-                
             }
         } catch (SQLException ex) {
              Logger.getLogger(ClassDBcontext.class.getName()).log(Level.SEVERE, null, ex);

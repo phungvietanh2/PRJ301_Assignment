@@ -78,34 +78,28 @@ public class AdminInsertStudent extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String raw_Masv = request.getParameter("MaSV");
-        String raw_TenSV = request.getParameter("TenSV");
-        String raw_NgaySinh = request.getParameter("dob");
+        String raw_rollnumber = request.getParameter("MaSV");
+        String raw_Namesv = request.getParameter("TenSV");
+        String raw_dob = request.getParameter("dob");
         String raw_gmail = request.getParameter("gmail");
-        String raw_MaLop = request.getParameter("did");
-        String raw_GioiTinh = request.getParameter("gender");
+        String raw_gender = request.getParameter("gender");
+        String raw_Nameclass = request.getParameter("nameclass");
 
 //        check 
         //validate inputs
         Student s = new Student();
-        s.setMasv(raw_Masv);
-        s.setName(raw_TenSV);
-        s.setBirthday(Date.valueOf(raw_NgaySinh));
+        s.setMasv(raw_rollnumber);
+        s.setName(raw_Namesv);
+        s.setDob(Date.valueOf(raw_dob));
         s.setGmail(raw_gmail);
-        s.setGender(raw_GioiTinh);
+        s.setGender(raw_gender);
         Classs c = new Classs();
-        c.setMalop(Integer.parseInt(raw_MaLop));
+        c.setTenlop(raw_Nameclass);
         s.setClasss(c);
-        StudentDBcontext dbstudent = new StudentDBcontext();
-//        Student acc = dbstudent.checkStudent(raw_Masv);
-//        if (acc == null) {
-//            request.setAttribute("exist", "\"Error ! This student ID already exists or is already in the class .\"\n" +//
-//"                    + \" Please check ID student here of back insert\"");
-//            request.getRequestDispatcher("admin/successfully.jsp").forward(request, response);
-//       } else {
-            dbstudent.insert(s);
-            request.setAttribute("action", "Insert Successfully");
-            request.getRequestDispatcher("admin/successfully.jsp").forward(request, response);
+        StudentDBcontext dbstudent = new StudentDBcontext();   
+        dbstudent.insert(s);
+        request.setAttribute("action", "Insert Successfully");
+        request.getRequestDispatcher("admin/successfully.jsp").forward(request, response);
         }   
 
     

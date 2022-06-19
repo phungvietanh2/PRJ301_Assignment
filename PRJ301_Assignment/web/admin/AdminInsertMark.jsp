@@ -1,9 +1,8 @@
 <%-- 
-    Document   : AdminListClass
-    Created on : Jun 14, 2022, 9:53:37 AM
+    Document   : admin
+    Created on : Jun 1, 2022, 11:41:36 AM
     Author     : phung
 --%>
-
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -17,12 +16,11 @@
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
         <link href="css/admin.css" rel="stylesheet" type="text/css"/>
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-              rel="stylesheet">
+        <link href="css/adminInser.css" rel="stylesheet" type="text/css"/>
         <title>JSP Page</title>
     </head>
     <body>
-<nav class="navbar navbar-default navbar-static-top">
+        <nav class="navbar navbar-default navbar-static-top">
             <div class="container-fluid">
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
@@ -35,7 +33,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    
+
                     <!-----xin chao nguoi dang nhap ---->
                     <p class="navbar-brand">
                         Hello ${sessionScope.accounts.user} 
@@ -74,59 +72,63 @@
                     </div>
                 </div>  	
             </div>
-            
+
             <div class="col-md-10 content">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h3>List Class/ 
-                            <a style="color: black;font-size: 20p" href="Admin">Back</a> 
-                            <span class="material-icons">
-                                keyboard_return
-                            </span></h3>
+                        <h4>Inser Mark</h4>  
                     </div>
-                    <form action="AdminListClass" method="POST">
-                        <div class="panel-body">
-                            <div class="container"><h1>Class</h1> </div> 
-                            <select style="border-radius: 10px ; height: 4rem;
-                                    text-align: center; "  name="id">
-                                <c:forEach items="${requestScope.classs}" var="c">
-                                    <option <c:if test="${param.id == c.tenlop}" >selected="selected" </c:if>  value="${c.tenlop}" >
-                                        ${c.tenlop}
-                                    </option>
-                                </c:forEach>
-                            </select>
-                            <br>
-                            <input style="border-radius: 10px ;
-                                   height: 4rem;
-                                   width: 10rem;
-                                   font-size: 20px;
-                                   margin-top: 15px;
-                                   margin-left: 0px;" type="submit" value="Search" /> 
-                        </div>
+
+                    <form action="AdminInserMark" method="POST" class="a">
+                        <label for="fname">Class</label><br>
+                        <select style="border-radius: 54px;
+                                width: 10rem;
+                                height: 4rem;
+                                text-align: center;" name="Mamh">
+                            <c:forEach  items="${requestScope.subjectss}" var="d">
+                                <option  
+                                    <c:if  test="${param.Mamh eq d.mamh}">selected="selected"</c:if>
+                                    value="${d.mamh}" >${d.mamh}
+                                </option>
+                            </c:forEach>
+                        </select> 
+                        <br>
+                        <label for="fname">Student</label><br>
+                        <select style="border-radius: 54px;
+                                width: 10rem;
+                                height: 4rem;
+                                text-align: center;" name="MaSV">
+                            <c:forEach  items="${requestScope.students}" var="s">
+                                <option  
+                                    <c:if  test="${param.MaSV eq s.masv }">selected="selected"</c:if>
+                                    value="${s.masv}" >${s.masv}
+                                </option>
+                            </c:forEach>
+                        </select> 
+                        <br>
+                        <label for="fname">Active learning</label>
+                        <input type="number" name="Active">
+<!--                        <label for="fname">Exercise 1</label>
+                        <input type="number"  name="Exercise1">
+                        <label for="fname">Exercise 2</label>
+                        <input type="number"  name="Exercise2">
+                        <label for="fname">Presentation</label>
+                        <input type="number"  name="Presentation">
+                        <label for="fname">Project</label>
+                        <input type="number"  name="Project">
+                        <label for="fname">Final Exam</label>
+                        <input type="number"  name="FinalExam">
+                        <label for="fname">Final Exam Resit</label>
+                        <input type="number"  name="FinalExamResit">
+                        <br/>-->
+                        <input style="margin-top: 20px;border-radius:  10px ;width: 10rem; height: 5rem;" type="submit" value="Save" />
+
                     </form>
-                    <c:if test="${requestScope.students != null}">
-                        <table  class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    
-                                    <td>Tên Lớp</td>
-                                    <td>Mã Sinh Viên </td>
-                                    <td>Tên Sinh Viên</td>       
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <c:forEach items="${requestScope.students}" var="e">
-                                    <tr> 
-                                        <td>${e.classs.tenlop}</td>
-                                        <td>${e.masv}</td>
-                                        <td>${e.name}</td>
-                                    </tr>   
-                                </c:forEach>
-                            </tbody>
-                        </table>
-                    </c:if>
+
+
                 </div>
             </div>
+
         </div>
     </body>
 </html>

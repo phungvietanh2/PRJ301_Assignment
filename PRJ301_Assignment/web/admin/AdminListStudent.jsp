@@ -90,26 +90,27 @@
                            <table  class="table table-bordered">
                             <thead>
                                 <tr>
-                                    <td>Mã Sinh Viên </td>
-                                    <td>Tên Sinh Viên </td>
-                                    <td>Giới Tính </td>
-                                    <td>Ngày Sinh</td>  
+                                    <td>RollNumber</td>
+                                    <td>Name</td>
+                                    <td>Gender</td>
+                                    <td>Dob</td>  
                                     <td>Gmail</td>
+                                    <td>Class</td>
                                     <td>Edit</td>
                                     <td>Delete</td>
                                 </tr>
                             </thead>
                             <tbody>
                                 <c:forEach items="${requestScope.students}" var="e">
-                                    <tr> 
-                                        
-                                        <td>${e.masv}</td>
+                                    <tr>                                     
+                                         <td>${e.masv}</td>
                                         <td>${e.name}</td>
                                         <td>${e.gender}</td>
-                                        <td>${e.birthday}</td>
+                                        <td>${e.dob}</td>
                                         <td>${e.gmail}</td>
+                                        <td>${e.classs.tenlop}</td>
                                         <td><a href="#">edit</a></td>
-                                        <td><input class="btn btn-primary"  type="button" value="Delete" onclick="removeEmp(${e.id})"/></td>
+                                        <td><input class="btn btn-primary"  type="button" value="Delete" onclick="removeEmp(${e.sid})"/></td>
                                     </tr>   
                                 </c:forEach>
                             </tbody>

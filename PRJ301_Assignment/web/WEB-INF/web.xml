@@ -80,6 +80,10 @@
         <servlet-name>ViewmarkController</servlet-name>
         <servlet-class>controller.ViewmarkController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AdminInserMark</servlet-name>
+        <servlet-class>controller.AdminInserMark</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>DEMOcontroller</servlet-name>
         <url-pattern>/demo</url-pattern>
@@ -159,6 +163,10 @@
     <servlet-mapping>
         <servlet-name>ViewmarkController</servlet-name>
         <url-pattern>/Viewmark</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminInserMark</servlet-name>
+        <url-pattern>/AdminInserMark</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -12,33 +12,39 @@ import java.util.ArrayList;
  * @author phung
  */
 public class Student {
-    private int id;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
+    private int Sid;
     private String Masv;
     private String name;
     private String gender;
-    private Date birthday;
+    private Date dob;
     private String gmail;
     private Classs classs;
-    ArrayList<Mark> marks = new ArrayList<>();
+    ArrayList<MarkIot102> markIot102s = new ArrayList<>();
+    ArrayList<Markjpd123> markjpd123s = new ArrayList<>();
 
- 
-    public ArrayList<Mark> getMarks() {
-        return marks;
+    public ArrayList<Markjpd123> getMarkjpd123s() {
+        return markjpd123s;
     }
 
-    public void setMarks(ArrayList<Mark> marks) {
-        this.marks = marks;
+    public void setMarkjpd123s(ArrayList<Markjpd123> markjpd123s) {
+        this.markjpd123s = markjpd123s;
+    }
+    
+    public ArrayList<MarkIot102> getMarkIot102s() {
+        return markIot102s;
     }
 
-  
+    public void setMarkIot102s(ArrayList<MarkIot102> markIot102s) {
+        this.markIot102s = markIot102s;
+    }
+
+    public int getSid() {
+        return Sid;
+    }
+
+    public void setSid(int Sid) {
+        this.Sid = Sid;
+    }
 
     public String getMasv() {
         return Masv;
@@ -47,9 +53,6 @@ public class Student {
     public void setMasv(String Masv) {
         this.Masv = Masv;
     }
-
-    
-    
 
     public String getName() {
         return name;
@@ -67,15 +70,12 @@ public class Student {
         this.gender = gender;
     }
 
-   
-   
-
-    public Date getBirthday() {
-        return birthday;
+    public Date getDob() {
+        return dob;
     }
 
-    public void setBirthday(Date birthday) {
-        this.birthday = birthday;
+    public void setDob(Date dob) {
+        this.dob = dob;
     }
 
     public String getGmail() {
@@ -93,6 +93,8 @@ public class Student {
     public void setClasss(Classs classs) {
         this.classs = classs;
     }
+
+ 
 
     
 }

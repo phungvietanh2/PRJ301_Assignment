@@ -95,11 +95,11 @@
                         <select style="border-radius: 54px;
                                 width: 10rem;
                                 height: 4rem;
-                                text-align: center;" name="did">
+                                text-align: center;" name="nameclass">
                             <c:forEach  items="${requestScope.classs}" var="d">
                                 <option  
-                                    <c:if  test="${param.did eq d.malop}">selected="selected"</c:if>
-                                    value="${d.malop}" >${d.tenlop}
+                                    <c:if  test="${param.nameclass eq d.tenlop}">selected="selected"</c:if>
+                                    value="${d.tenlop}" >${d.tenlop}
                                 </option>
                             </c:forEach>
                         </select> <br/>

@@ -13,7 +13,16 @@ import java.util.ArrayList;
 public class Classs {
   private int malop;
   private String tenlop; 
+  private subjects subjectss;
     ArrayList<Student> students = new ArrayList<>();
+
+    public subjects getSubjectss() {
+        return subjectss;
+    }
+
+    public void setSubjectss(subjects subjectss) {
+        this.subjectss = subjectss;
+    }
 
     public int getMalop() {
         return malop;
@@ -35,9 +44,4 @@ public class Classs {
         return students;
     }
 
-    public void setStudents(ArrayList<Student> students) {
-        this.students = students;
-    }
-
-   
 }

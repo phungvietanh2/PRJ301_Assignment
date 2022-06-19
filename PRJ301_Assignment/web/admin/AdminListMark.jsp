@@ -91,8 +91,8 @@
                             <select style="border-radius: 10px ; height: 4rem;
                                     text-align: center; "  name="id">
                                 <c:forEach items="${requestScope.subjectss}" var="c">
-                                    <option <c:if test="${param.id == c.id}" >selected="selected" </c:if>  value="${c.id}" >
-                                        ${c.id}
+                                    <option <c:if test="${param.id == c.mamh}" >selected="selected" </c:if>  value="${c.mamh}" >
+                                        ${c.mamh}
                                     </option>
                                 </c:forEach>
                             </select>
@@ -125,7 +125,7 @@
                             <tbody>
                                 <c:forEach items="${requestScope.markss}" var="e">
                                     <tr> 
-                                        <td>${e.subjectss.id}</td>
+                                        <td>${e.subjectss.mamh}</td>
                                         <td>${e.masv}</td>
                                         <td>${e.mark1}</td>
                                         <td>${e.mark21}</td>

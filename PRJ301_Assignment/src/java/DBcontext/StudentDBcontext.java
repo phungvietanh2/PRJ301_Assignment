@@ -26,19 +26,21 @@ public class StudentDBcontext extends DBcontext<Student> {
     public ArrayList<Student> list() {
         ArrayList<Student> students = new ArrayList<>();
         try {
-            String sql = "select Sid, MaSV , TenSV , GioiTinh , NgaySinh, gmail ,MaLop from  Student";
+            String sql = "select s.Sid,s.Scode,s.Sgender,s.Sname,s.Sdob,s.Sgmail,c.Clname "
+                    + "from Student s INNER JOIN Class c on s.Clname = c.Clname";
             PreparedStatement stm = connection.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
-                Student S = new Student();
-                S.setId(rs.getInt("Sid"));
-                S.setMasv(rs.getString("MaSV"));
-                S.setName(rs.getString("TenSV"));
-                S.setGender(rs.getString("GioiTinh"));
-                S.setBirthday(rs.getDate("NgaySinh"));
-                S.setGmail(rs.getString("gmail"));
                 Classs cl = new Classs();
-                cl.setMalop(rs.getInt("MaLop"));
+                cl.setTenlop(rs.getString("Clname"));
+                Student S = new Student();
+                S.setSid(rs.getInt("Sid"));
+                S.setMasv(rs.getString("Scode"));
+                S.setName(rs.getString("Sname"));
+                S.setGender(rs.getString("Sgender"));
+                S.setDob(rs.getDate("Sdob"));
+                S.setGmail(rs.getString("Sgmail"));
+                S.setClasss(cl);
                 students.add(S);
             }
         } catch (SQLException ex) {
@@ -47,51 +49,73 @@ public class StudentDBcontext extends DBcontext<Student> {
         return students;
     }
 
+    public ArrayList<Student> SearchByid(String id) {
+        ArrayList<Student> students = new ArrayList<>();
+        try {
+            String sql = " select cl.Clname , c.Scode , c.Sname  from Class cl INNER JOIN  Student c"
+                    + " on  cl.Clname = c.Clname where cl.Clname =?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setString(1, id);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                Classs cl = new Classs();
+                cl.setTenlop(rs.getString("Clname"));
+                Student s = new Student();
+                s.setMasv(rs.getString("Scode"));
+                s.setName(rs.getString("Sname"));
+                s.setClasss(cl);
+                students.add(s);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ClassDBcontext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return students;
+    }
+
     public static void main(String[] args) {
         StudentDBcontext dao = new StudentDBcontext();
-        List<Student> a = dao.list();
-        for (Student o : a) {
-            System.out.println(o);
-        }
+        List<Student> a = dao.SearchByid("SE1111");
+        //System.out.println(a);
+       // for (Student student : a) {
+           System.out.println(a);
+       // }
     }
 
     @Override
     public Student get(int id) {
-  try {
-            String sql = "select Sid, MaSV , TenSV , GioiTinh , NgaySinh, gmail ,MaLop from  Student"
-                    + " where Sid=? ";
+        try {
+            String sql = " select s.Sid, s.Scode,s.Sgender,s.Sname,s.Sdob,s.Sgmail,c.Clname \n" +
+"                    from Student s INNER JOIN Class c on s.Clname = c.Clname where s.Sid = ?";
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setInt(1, id);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
-                Student S = new Student();
-                S.setId(rs.getInt("Sid"));
-                S.setMasv(rs.getString("MaSV"));
-                S.setName(rs.getString("TenSV"));
-                S.setGender(rs.getString("GioiTinh"));
-                S.setBirthday(rs.getDate("NgaySinh"));
-                S.setGmail(rs.getString("gmail"));
                 Classs cl = new Classs();
-                cl.setMalop(rs.getInt("MaLop"));
-               return S;
+                cl.setTenlop(rs.getString("Clname"));
+                Student s = new Student();
+                s.setSid(rs.getInt("Sid"));
+                s.setMasv(rs.getString("Scode"));
+                s.setName(rs.getString("Sname"));
+                s.setClasss(cl);
+               return s;
             }
         } catch (SQLException ex) {
-            Logger.getLogger(StudentDBcontext.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ClassDBcontext.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
- 
+
     @Override
     public void insert(Student model) {
         ArrayList<Student> students = new ArrayList<>();
         try {
             String sql = "INSERT INTO [Student]\n"
-                    + "           ([MaSV]\n"
-                    + "           ,[TenSV]\n"
-                    + "           ,[NgaySinh]\n"
-                    + "           ,[gmail]\n"
-                    + "           ,[MaLop]\n"
-                    + "           ,[GioiTinh])\n"
+                    + "           ([Scode]\n"
+                    + "           ,[Sname]\n"
+                    + "           ,[Sgender]\n"
+                    + "           ,[Sdob]\n"
+                    + "           ,[Sgmail]\n"
+                    + "           ,[Clname])\n"
                     + "     VALUES\n"
                     + "           (?\n"
                     + "           ,?\n"
@@ -102,32 +126,32 @@ public class StudentDBcontext extends DBcontext<Student> {
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setString(1, model.getMasv());
             stm.setString(2, model.getName());
-            stm.setDate(3, model.getBirthday());
-            stm.setString(4, model.getGmail());
-            stm.setInt(5, model.getClasss().getMalop());
-            stm.setString(6, model.getGender());
+            stm.setString(3, model.getGender());
+            stm.setDate(4, model.getDob());
+            stm.setString(5, model.getGmail());
+            stm.setString(6, model.getClasss().getTenlop());
             stm.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(StudentDBcontext.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-   
+
     @Override
     public void update(Student model) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+
     @Override
     public void delete(Student model) {
-    try {
+        try {
             String sql = "DELETE Student"
-                    + " WHERE [MaSV] = ?";
+                    + " WHERE [Sid] = ?";
             PreparedStatement stm = connection.prepareStatement(sql);
-            stm.setString(1, model.getMasv());
+            stm.setInt(1, model.getSid());
             stm.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(StudentDBcontext.class.getName()).log(Level.SEVERE, null, ex);
-        } 
+        }
     }
 
-   
 }

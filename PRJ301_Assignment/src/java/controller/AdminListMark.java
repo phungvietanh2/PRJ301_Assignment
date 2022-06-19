@@ -6,10 +6,9 @@
 package controller;
 
 
-import DBcontext.AdminListMarkDBcontext;
+import DBcontext.MarkDBcontext;
 import DBcontext.StudentDBcontext;
-import DBcontext.SubjectsDBcontext;
-import Model.Mark;
+
 import Model.Student;
 import Model.subjects;
 import java.io.IOException;
@@ -83,7 +82,7 @@ public class AdminListMark extends HttpServlet {
         ArrayList<subjects> subjectss = dbSubjects.list();
         request.setAttribute("subjectss", subjectss);
         
-        AdminListMarkDBcontext dblistmark = new AdminListMarkDBcontext();
+        MarkDBcontext dblistmark = new MarkDBcontext();
         ArrayList<Mark> markss=dblistmark.SearchByid(id);
         request.setAttribute("markss", markss);
       request.getRequestDispatcher("admin/AdminListMark.jsp").forward(request, response);

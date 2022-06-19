@@ -19,7 +19,7 @@ import java.util.logging.Logger;
  *
  * @author phung
  */
-public class AdminListMarkDBcontext extends DBcontext<Mark> {
+public class MarkDBcontext extends DBcontext<Mark> {
 
     public ArrayList<Mark> SearchByid(String id) {
         ArrayList<Mark> marks = new ArrayList<>();
@@ -41,9 +41,9 @@ public class AdminListMarkDBcontext extends DBcontext<Mark> {
                 e.setMark3(rs.getInt("DiemLan3"));
                 e.setMark4(rs.getInt("DiemLan4"));
                 e.setMark5(rs.getInt("DiemLan5"));
-                e.setMark6(rs.getInt("DiemLan6"));  
+                e.setMark6(rs.getInt("DiemLan6"));
                 e.setSubjectss(d);
-                
+
                 marks.add(e);
 
             }
@@ -65,7 +65,19 @@ public class AdminListMarkDBcontext extends DBcontext<Mark> {
 
     @Override
     public void insert(Mark model) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        ArrayList<Mark> marks = new ArrayList<>();
+        try {
+            String sql = "INSERT INTO [Mark]([MaSV] ,[MaMH]  ,[DiemLan1] )   "
+                    + "VALUES (?  , ?  , ?)";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setString(1, model.getMasv());
+            stm.setString(2, model.getSubjectss().getMamh());
+            stm.setInt(3, model.getMark1());
+            
+            stm.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(StudentDBcontext.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override

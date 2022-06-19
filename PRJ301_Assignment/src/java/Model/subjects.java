@@ -13,9 +13,17 @@ import java.util.ArrayList;
  */
 public class subjects {
     private int id;
-    private String mamh;
-    private String nameMh;
-    ArrayList<Mark> marks = new ArrayList<>();
+    private String Mamh;
+    private String Namemh;
+    ArrayList<Classs>classses=new ArrayList<>();
+
+    public ArrayList<Classs> getClassses() {
+        return classses;
+    }
+
+    public void setClassses(ArrayList<Classs> classses) {
+        this.classses = classses;
+    }
 
     public int getId() {
         return id;
@@ -26,31 +34,22 @@ public class subjects {
     }
 
     public String getMamh() {
-        return mamh;
+        return Mamh;
     }
 
-    public void setMamh(String mamh) {
-        this.mamh = mamh;
+    public void setMamh(String Mamh) {
+        this.Mamh = Mamh;
     }
 
-   
-
-    public String getNameMh() {
-        return nameMh;
+    public String getNamemh() {
+        return Namemh;
     }
 
-    public void setNameMh(String nameMh) {
-        this.nameMh = nameMh;
+    public void setNamemh(String Namemh) {
+        this.Namemh = Namemh;
     }
 
-    public ArrayList<Mark> getMarks() {
-        return marks;
-    }
 
-    public void setMarks(ArrayList<Mark> marks) {
-        this.marks = marks;
-    }
-    
 
 
    
