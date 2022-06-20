@@ -14,17 +14,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <jsp:include page="menu.jsp"></jsp:include>
-        <nav class="container">
-            <h1>View attendance for</h1>
-            <h5  style="text-align: center ; font-size: 2rem ; line-height: 50px" > 
-                Select a campus/program, term, course ...
-            </h5>
-            ${requestScope.subjectss.id}
-                
+      
 
-
-
-        </nav>
     </body>
 </html>

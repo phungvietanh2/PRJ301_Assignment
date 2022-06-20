@@ -12,14 +12,14 @@ import java.util.ArrayList;
  */
 public class Classs {
   private String tenlop; 
-  private subjects subjectss;
+  private Subjects subjectss;
    ArrayList<Student> students = new ArrayList<>();
 
-    public subjects getSubjectss() {
+    public Subjects getSubjectss() {
         return subjectss;
     }
 
-    public void setSubjectss(subjects subjectss) {
+    public void setSubjectss(Subjects subjectss) {
         this.subjectss = subjectss;
     }
 

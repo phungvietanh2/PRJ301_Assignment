@@ -89,9 +89,15 @@
                             <thead>
                                 <tr>
 
-                                    <td>Tên Lớp</td>
-                                    <td>Mã Sinh Viên </td>
-                                    <td>Tên Sinh Viên</td>       
+                                    <td>RollNumber</td>
+                                    <td>Name</td>
+                                    <td>Active learning</td>
+                                    <td>Exercise 1</td>
+                                    <td>Exercise 2</td>  
+                                    <td>Presentation</td>
+                                    <td>Project</td>
+                                    <td>Final Exam</td>
+                                    <td>Final Exam Resit</td>
                                 </tr>
                             </thead>
                             <tbody>
@@ -99,7 +105,13 @@
                                     <tr> 
                                         <td>${a.students.masv}</td>
                                         <td>${a.students.name}</td>
+                                        <td>${a.activelearning}</td>
                                         <td>${a.exercise1}</td>
+                                        <td>${a.exercise2}</td>
+                                        <td>${a.presentation}</td>
+                                        <td>${a.project}</td>
+                                        <td>${a.finalExam}</td>
+                                        <td>${a.finalExamResit}</td>     
                                     </tr>   
                                 </c:forEach>
                             </tbody>

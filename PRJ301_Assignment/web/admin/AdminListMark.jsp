@@ -56,7 +56,7 @@
             </div>
         </nav>  	
         <div class="container-fluid main-container">
-            <div class="col-md-2 sidebar">
+             <div class="col-md-2 sidebar">
                 <div class="row">                 
                     <div class="absolute-wrapper"> </div>
                     <!-- Menu -->
@@ -65,9 +65,9 @@
                             <!-- Main Menu -->
                             <div class="side-menu-container">
                                 <ul class="nav navbar-nav">
-                                    <li><a href="Admin"><span class="glyphicon "></span>Home</a></li>
+                                    <li ><a href="Admin"><span class="glyphicon "></span>Home</a></li>
                                     <li><a href="AdminInsertStudent"><span class="glyphicon "></span> INSERT STUDENT</a></li>
-                                    <li><a href="#"><span class="glyphicon "></span> Student</a></li>
+                                    <li class="active"><a  href="AdminListInsertMark"><span class="glyphicon "></span> INSERT MARK</a></li>
                                     <li><a href="login.jsp"><span class="glyphicon  glyphicon-log-out"></span> Log out</a></li>
                                 </ul>
                             </div>
@@ -110,7 +110,7 @@
                             <span class="ql_top"></span>
                             <span class="ql_bottom"></span>
                         </a>
-                        <a class="quicklink link3" href="AdminMarkIot102">
+                        <a class="quicklink link3" href="AdminInsertMarkIot102">
                             <span class="ql_caption">
                                 <span class="outer">
                                     <span class="inner">

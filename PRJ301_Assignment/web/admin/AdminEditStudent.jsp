@@ -1,9 +1,8 @@
 <%-- 
-    Document   : AdminListClass
-    Created on : Jun 14, 2022, 9:53:37 AM
+    Document   : admin
+    Created on : Jun 1, 2022, 11:41:36 AM
     Author     : phung
 --%>
-
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -17,10 +16,7 @@
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
         <link href="css/admin.css" rel="stylesheet" type="text/css"/>
-        <script src="js/Basic Pagination.js" type="text/javascript"></script>
-        <link href="css/Pagination.css" rel="stylesheet" type="text/css"/>
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-              rel="stylesheet">
+        <link href="css/adminInser.css" rel="stylesheet" type="text/css"/>
         <title>JSP Page</title>
     </head>
     <body>
@@ -66,7 +62,7 @@
                             <div class="side-menu-container">
                                 <ul class="nav navbar-nav">
                                     <li><a href="Admin"><span class="glyphicon "></span>Home</a></li>
-                                    <li><a href="AdminInsertStudent"><span class="glyphicon  "></span> INSERT STUDENT</a></li>
+                                    <li class="active" ><a href="AdminInsertStudent"><span class="glyphicon  "></span> INSERT STUDENT</a></li>
                                     <li><a href="#"><span class="glyphicon "></span> Class</a></li>
                                     <li><a href="#"><span class="glyphicon "></span> Student</a></li>
                                     <li><a href="login.jsp"><span class="glyphicon  glyphicon-log-out"></span> Log out</a></li>
@@ -80,56 +76,43 @@
             <div class="col-md-10 content">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h3>List Class/ 
-                            <a style="color: black;font-size: 20p" href="Admin">Back</a> 
-                            <span class="material-icons">
-                                keyboard_return
-                            </span></h3>
+                        <h4> INSERT STUDENT</h4>  
                     </div>
-                    <form >
-                        <div class="panel-body">
-                            <div class="container"><h1>Student</h1> </div> 
-                            <table  class="table table-bordered">
-                                <thead>
-                                    <tr>
-                                        <td>RollNumber</td>
-                                        <td>Name</td>
-                                        <td>Gender</td>
-                                        <td>Dob</td>  
-                                        <td>Gmail</td>
-                                        <td>Class</td>
-                                        <td>Edit</td>
-                                        <td>Delete</td>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <c:forEach items="${requestScope.students}" var="e">
-                                        <tr>                                     
-                                            <td>${e.sid}</td>
-                                            <td>${e.name}</td>
-                                            <td>${e.gender}</td>
-                                            <td>${e.dob}</td>
-                                            <td>${e.gmail}</td>
-                                            <td>${e.classs.tenlop}</td>
-                                            <td><a class="btn btn-primary" href="AdminEditStudent?id=${e.sid}">Edit</a></td>
-                                            <td><input class="btn btn-primary"  type="button" value="Delete" onclick="removeEmp(${e.sid})"/></td>
-                                        </tr>   
-                                    </c:forEach>
+                    ${requestScope.action}
+                    <form action="AdminInsertStudent" method="post" class="a">
+                        <label for="fname">ID : ${requestScope.student.sid}</label>
+                        <input type="hidden" name="id" value="${requestScope.student.sid}"/> <br/>
+                        <label for="fname">MaSV</label>
+                        <input type="text" name="MaSV">
+                        <label for="fname">TenSV</label>
+                        <input type="text"  name="TenSV">
+                        <label for="fname">Gmail</label>
+                        <input type="text"  name="gmail">
+                        <label for="fname">Gender</label><br>                      
+                        <input class="Gender1" checked="checked"type="radio"name="gender"value="male"/> Male
+                        <input  class="Gender1" type="radio" name="gender" value="female" /> Female <br/>
+                        <label for="fname">Dob</label><br>
+                        <input type="date" name="dob" /> <br/>
+                        <label for="fname">Class</label><br>
+                        <select style="border-radius: 54px;
+                                width: 10rem;
+                                height: 4rem;
+                                text-align: center;" name="nameclass">
+                            <c:forEach  items="${requestScope.classs}" var="d">
+                                <option  
+                                    <c:if  test="${param.nameclass eq d.tenlop}">selected="selected"</c:if>
+                                    value="${d.tenlop}" >${d.tenlop}
+                                </option>
+                            </c:forEach>
+                        </select> <br/>
+                        <input style="margin-top: 20px;border-radius:  10px ;width: 10rem; height: 5rem;" type="submit" value="Save" />
 
-                                </tbody>
-                            </table>
-
-                            <div id="bot_pagger" class="Pagination"> 
-                            </div>
-                        </div>
                     </form>
+
 
                 </div>
             </div>
-        </div>
-        <script>
-            render("bot_pagger",${requestScope.pageindex},${requestScope.totalpage}, 1);
-        </script>
 
+        </div>
     </body>
 </html>

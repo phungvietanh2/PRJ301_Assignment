@@ -6,7 +6,7 @@ package DBcontext;
 
 import Model.Classs;
 import Model.Student;
-import Model.subjects;
+import Model.Subjects;
 import jakarta.servlet.jsp.jstl.sql.Result;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -74,18 +74,18 @@ public class StudentDBcontext extends DBcontext<Student> {
 
     public static void main(String[] args) {
         StudentDBcontext dao = new StudentDBcontext();
-        List<Student> a = dao.SearchByid("SE1111");
+       ArrayList<Student>  a = dao.getMarkclass();
         //System.out.println(a);
-       // for (Student student : a) {
-           System.out.println(a);
-       // }
+        for (Student student : a) {
+        System.out.println(a);
+         }
     }
 
     @Override
     public Student get(int id) {
         try {
-            String sql = " select s.Sid, s.Scode,s.Sgender,s.Sname,s.Sdob,s.Sgmail,c.Clname \n" +
-"                    from Student s INNER JOIN Class c on s.Clname = c.Clname where s.Sid = ?";
+            String sql = " select s.Sid, s.Scode,s.Sgender,s.Sname,s.Sdob,s.Sgmail,c.Clname \n"
+                    + "                    from Student s INNER JOIN Class c on s.Clname = c.Clname where s.Sid = ?";
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setInt(1, id);
             ResultSet rs = stm.executeQuery();
@@ -97,12 +97,30 @@ public class StudentDBcontext extends DBcontext<Student> {
                 s.setMasv(rs.getString("Scode"));
                 s.setName(rs.getString("Sname"));
                 s.setClasss(cl);
-               return s;
+                return s;
             }
         } catch (SQLException ex) {
             Logger.getLogger(ClassDBcontext.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
+    }
+    
+    public ArrayList<Student>  getMarkclass() {
+        ArrayList<Student> students = new ArrayList<>();
+        try {
+            String sql = " select s.Sid ,s.Scode from Class m INNER JOIN Student s on m.Clname = s.Clname where m.Cocode = 'IOT102'  ";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                Student s = new Student();
+                s.setSid(rs.getInt("Sid"));
+                s.setMasv(rs.getString("Scode"));
+                students.add(s);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ClassDBcontext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return students;
     }
 
     @Override
@@ -154,4 +172,52 @@ public class StudentDBcontext extends DBcontext<Student> {
         }
     }
 
+    //Basic Pagination : Phân trang cơ bản 
+    public int count() {
+
+        try {
+            String sql = "SELECT COUNT(*) as [sum] FROM Student";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                return rs.getInt("sum");
+
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(StudentDBcontext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return -1;
+    }
+
+    public ArrayList<Student> Pagination(int pageindex, int pagesize) {
+        ArrayList<Student> students = new ArrayList<>();
+        try {
+            String sql = "select s.Sid, s.Scode,s.Sgender,s.Sname,s.Sdob,s.Sgmail,c.Clname\n"
+                    + "from Student s INNER JOIN Class c on s.Clname = c.Clname\n"
+                    + "ORDER BY Sid OFFSET (?-1)* ? ROWS \n"
+                    + "FETCH NEXT ? ROWS ONLY;";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, pageindex);
+            stm.setInt(2, pagesize);
+            stm.setInt(3, pagesize);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                Classs cl = new Classs();
+                cl.setTenlop(rs.getString("Clname"));
+                Student S = new Student();
+                 S.setSid(rs.getInt("Sid"));
+                S.setMasv(rs.getString("Scode"));
+                S.setName(rs.getString("Sname"));
+                S.setGender(rs.getString("Sgender"));
+                S.setDob(rs.getDate("Sdob"));
+                S.setGmail(rs.getString("Sgmail"));
+                S.setClasss(cl);
+                students.add(S);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(StudentDBcontext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return students;
+    }
+    
 }

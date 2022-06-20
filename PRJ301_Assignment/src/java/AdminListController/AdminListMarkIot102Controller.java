@@ -3,12 +3,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
-package controller;
+package AdminListController;
 
+import DBcontext.CourseDBcontext;
 import DBcontext.IOT102DBcontext;
 import DBcontext.StudentDBcontext;
 import Model.MarkIot102;
 import Model.Student;
+import Model.Subjects;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -21,7 +23,7 @@ import java.util.ArrayList;
  *
  * @author phung
  */
-public class AdminMarkIot102Controller extends HttpServlet {
+public class AdminListMarkIot102Controller extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -40,6 +42,12 @@ public class AdminMarkIot102Controller extends HttpServlet {
         IOT102DBcontext DBmarkiot102 =new IOT102DBcontext();
         ArrayList<MarkIot102> markIot102s = DBmarkiot102.list();
         request.setAttribute("markIot102s", markIot102s);
+        
+        CourseDBcontext dbcourse = new CourseDBcontext();
+        ArrayList<Subjects> coursess = dbcourse.list();
+        request.setAttribute("coursess", coursess);
+        
+        
         request.getRequestDispatcher("admin/AdminMarkIOT102.jsp").forward(request, response);
     } 
 

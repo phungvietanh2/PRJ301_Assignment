@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+    <context-param>
+        <param-name>pagesize</param-name>
+        <param-value>3</param-value>
+    </context-param>
     <servlet>
         <servlet-name>DEMOcontroller</servlet-name>
         <servlet-class>controller.DEMOcontroller</servlet-class>
@@ -50,15 +54,15 @@
     </servlet>
     <servlet>
         <servlet-name>AdminListClass</servlet-name>
-        <servlet-class>controller.AdminListClass</servlet-class>
+        <servlet-class>AdminListController.AdminListClass</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>AdminInsertStudent</servlet-name>
-        <servlet-class>controller.AdminInsertStudent</servlet-class>
+        <servlet-class>AdminInsertController.AdminInsertStudent</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>AdminListStudent</servlet-name>
-        <servlet-class>controller.AdminListStudent</servlet-class>
+        <servlet-class>AdminListController.AdminListStudent</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Adminmenu</servlet-name>
@@ -66,7 +70,7 @@
     </servlet>
     <servlet>
         <servlet-name>DelectController</servlet-name>
-        <servlet-class>controller.DelectController</servlet-class>
+        <servlet-class>AdminEditDelectController.AdminDelectStudentController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>MarkReportController</servlet-name>
@@ -82,11 +86,23 @@
     </servlet>
     <servlet>
         <servlet-name>AdminMarkIot102Controller</servlet-name>
-        <servlet-class>controller.AdminMarkIot102Controller</servlet-class>
+        <servlet-class>AdminListController.AdminListMarkIot102Controller</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>AdminListMarkController</servlet-name>
-        <servlet-class>controller.AdminListMarkController</servlet-class>
+        <servlet-class>AdminListController.AdminListMarkController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminListInsertMarkController</servlet-name>
+        <servlet-class>AdminListController.AdminListInsertMarkController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminInsertMarkIot102</servlet-name>
+        <servlet-class>AdminInsertController.AdminInsertMarkIot102</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminEditStudentController</servlet-name>
+        <servlet-class>AdminEditDelectController.AdminEditStudentController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>DEMOcontroller</servlet-name>
@@ -175,6 +191,18 @@
     <servlet-mapping>
         <servlet-name>AdminListMarkController</servlet-name>
         <url-pattern>/AdminListMark</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminListInsertMarkController</servlet-name>
+        <url-pattern>/AdminListInsertMark</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminInsertMarkIot102</servlet-name>
+        <url-pattern>/AdminInsertMarkIot102</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminEditStudentController</servlet-name>
+        <url-pattern>/AdminEditStudent</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

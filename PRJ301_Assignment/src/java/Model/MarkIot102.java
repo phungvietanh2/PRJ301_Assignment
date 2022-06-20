@@ -10,7 +10,7 @@ package Model;
  */
 public class MarkIot102 {
     private Student students ;
-    private subjects subjectss;
+    private Subjects subjectss;
     private int Activelearning;
     private int Exercise1;
     private int Exercise2;
@@ -19,11 +19,11 @@ public class MarkIot102 {
     private int FinalExam;
     private int FinalExamResit;
 
-    public subjects getSubjectss() {
+    public Subjects getSubjectss() {
         return subjectss;
     }
 
-    public void setSubjectss(subjects subjectss) {
+    public void setSubjectss(Subjects subjectss) {
         this.subjectss = subjectss;
     }
 

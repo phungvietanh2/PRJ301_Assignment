@@ -11,10 +11,11 @@ import java.util.ArrayList;
  *
  * @author phung
  */
-public class subjects {
-    private int id;
-    private String Mamh;
-    private String Namemh;
+public class Subjects {
+    private String id;
+    private String coname;
+    private int credit;
+    private int term;
     ArrayList<Classs>classses=new ArrayList<>();
     ArrayList<MarkIot102> markIot102s = new ArrayList<>();
 
@@ -34,30 +35,39 @@ public class subjects {
         this.classses = classses;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public String getMamh() {
-        return Mamh;
+    public String getConame() {
+        return coname;
     }
 
-    public void setMamh(String Mamh) {
-        this.Mamh = Mamh;
+    public void setConame(String coname) {
+        this.coname = coname;
     }
 
-    public String getNamemh() {
-        return Namemh;
+    public int getCredit() {
+        return credit;
     }
 
-    public void setNamemh(String Namemh) {
-        this.Namemh = Namemh;
+    public void setCredit(int credit) {
+        this.credit = credit;
     }
 
+    public int getTerm() {
+        return term;
+    }
+
+    public void setTerm(int term) {
+        this.term = term;
+    }
+
+    
 
 
 

@@ -76,39 +76,28 @@
             <div class="col-md-10 content">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h4>Inser Mark</h4>  
+                        <h4> INSERT STUDENT</h4>  
                     </div>
-
-                    <form action="AdminInserMark" method="POST" class="a">
-                        <label for="fname">Class</label><br>
+                    ${requestScope.action}
+                    <form action="AdminInsertMarkIot102" method="post" class="a">
+                        <label for="fname">ID</label><br>
                         <select style="border-radius: 54px;
                                 width: 10rem;
                                 height: 4rem;
-                                text-align: center;" name="Mamh">
-                            <c:forEach  items="${requestScope.subjectss}" var="d">
+                                text-align: center;" name="ID">
+                            <c:forEach  items="${requestScope.students}" var="d">
+                                
                                 <option  
-                                    <c:if  test="${param.Mamh eq d.mamh}">selected="selected"</c:if>
-                                    value="${d.mamh}" >${d.mamh}
+                                    <c:if  test="${param.ID eq d.sid}">selected="selected"</c:if>
+                                    value="${d.sid}" >${d.masv}
                                 </option>
                             </c:forEach>
-                        </select> 
-                        <br>
-                        <label for="fname">Student</label><br>
-                        <select style="border-radius: 54px;
-                                width: 10rem;
-                                height: 4rem;
-                                text-align: center;" name="MaSV">
-                            <c:forEach  items="${requestScope.students}" var="s">
-                                <option  
-                                    <c:if  test="${param.MaSV eq s.masv }">selected="selected"</c:if>
-                                    value="${s.masv}" >${s.masv}
-                                </option>
-                            </c:forEach>
-                        </select> 
-                        <br>
+                        </select> <br/>
+               
+                        
                         <label for="fname">Active learning</label>
-                        <input type="number" name="Active">
-<!--                        <label for="fname">Exercise 1</label>
+                        <input type="number"  name="Active">
+                        <label for="fname">Exercise 1</label>
                         <input type="number"  name="Exercise1">
                         <label for="fname">Exercise 2</label>
                         <input type="number"  name="Exercise2">
@@ -120,7 +109,7 @@
                         <input type="number"  name="FinalExam">
                         <label for="fname">Final Exam Resit</label>
                         <input type="number"  name="FinalExamResit">
-                        <br/>-->
+
                         <input style="margin-top: 20px;border-radius:  10px ;width: 10rem; height: 5rem;" type="submit" value="Save" />
 
                     </form>

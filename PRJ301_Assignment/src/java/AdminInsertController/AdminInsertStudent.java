@@ -2,25 +2,26 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package controller;
+package AdminInsertController;
 
 import DBcontext.ClassDBcontext;
-
+import DBcontext.StudentDBcontext;
 import Model.Classs;
-import Model.Subjects;
+import Model.Student;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.sql.Date;
 import java.util.ArrayList;
 
 /**
  *
  * @author phung
  */
-public class MarkReportController extends HttpServlet {
+public class AdminInsertStudent extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,10 +40,10 @@ public class MarkReportController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet MarkReportController</title>");
+            out.println("<title>Servlet AdminInsertStudent</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet MarkReportController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet AdminInsertStudent at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -60,8 +61,10 @@ public class MarkReportController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       
-        request.getRequestDispatcher("Mark Report.jsp").forward(request, response);
+        ClassDBcontext dbclass = new ClassDBcontext();
+        ArrayList<Classs> classs = dbclass.list();
+        request.setAttribute("classs", classs);
+        request.getRequestDispatcher("admin/AdminInsertStudent.jsp").forward(request, response);
     }
 
     /**
@@ -75,8 +78,31 @@ public class MarkReportController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
-    }
+        String raw_rollnumber = request.getParameter("MaSV");
+        String raw_Namesv = request.getParameter("TenSV");
+        String raw_dob = request.getParameter("dob");
+        String raw_gmail = request.getParameter("gmail");
+        String raw_gender = request.getParameter("gender");
+        String raw_Nameclass = request.getParameter("nameclass");
+
+//        check 
+        //validate inputs
+        Student s = new Student();
+        s.setMasv(raw_rollnumber);
+        s.setName(raw_Namesv);
+        s.setDob(Date.valueOf(raw_dob));
+        s.setGmail(raw_gmail);
+        s.setGender(raw_gender);
+        Classs c = new Classs();
+        c.setTenlop(raw_Nameclass);
+        s.setClasss(c);
+        StudentDBcontext dbstudent = new StudentDBcontext();   
+        dbstudent.insert(s);
+        request.setAttribute("action", "Insert Successfully");
+        request.getRequestDispatcher("admin/successfully.jsp").forward(request, response);
+        }   
+
+    
 
     /**
      * Returns a short description of the servlet.

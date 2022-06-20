@@ -63,7 +63,7 @@
                                 <ul class="nav navbar-nav">
                                     <li class="active"><a href="Admin"><span class="glyphicon "></span>Home</a></li>
                                     <li><a href="AdminInsertStudent"><span class="glyphicon "></span> INSERT STUDENT</a></li>
-                                    <li><a href="#"><span class="glyphicon "></span> INSERT MARK</a></li>
+                                    <li><a href="AdminListInsertMark"><span class="glyphicon "></span> INSERT MARK</a></li>
                                     <li><a href="login.jsp"><span class="glyphicon  glyphicon-log-out"></span> Log out</a></li>
                                 </ul>
                             </div>

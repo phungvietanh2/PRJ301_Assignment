@@ -1,0 +1,31 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/css.css to edit this template
+*/
+/* 
+    Created on : Jun 20, 2022, 1:34:45 PM
+    Author     : phung
+*/
+
+.Pagination span
+{
+   color: black;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+  
+}
+.Pagination {
+    margin-left: 79%;
+}
+.Pagination a
+{
+   color: black;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+}
+.Pagination a:hover
+{background-color: #ddd;
+  border-radius: 5px;
+}
