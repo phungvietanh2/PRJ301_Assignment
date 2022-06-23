@@ -86,67 +86,37 @@
                                 keyboard_return
                             </span></h3>
                     </div>
-                    <div id="home_quicklinks">
                       
-                        <a class="quicklink link3" href="#">
-                            <span class="ql_caption">
-                                <span class="outer">
-                                    <span class="inner">
-                                        <h2>MAS291</h2>
-                                    </span>
-                                </span>
-                            </span>
-                            <span class="ql_top"></span>
-                            <span class="ql_bottom"></span>
-                        </a>
-                        <a class="quicklink link3" href="#">
-                            <span class="ql_caption">
-                                <span class="outer">
-                                    <span class="inner">
-                                        <h2>JPD123 </h2>
-                                    </span>
-                                </span>
-                            </span>
-                            <span class="ql_top"></span>
-                            <span class="ql_bottom"></span>
-                        </a>
-                        <a class="quicklink link3" href="AdminInsertMarkIot102">
-                            <span class="ql_caption">
-                                <span class="outer">
-                                    <span class="inner">
-                                        <h2>IOT102 </h2>
-                                    </span>
-                                </span>
-                            </span>
-                            <span class="ql_top"></span>
-                            <span class="ql_bottom"></span>
-                        </a>
-                        <a class="quicklink link3" href="https://www.facebook.com/">
-                            <span class="ql_caption">
-                                <span class="outer">
-                                    <span class="inner">
-                                        <h2>PRJ301 </h2>
-                                    </span>
-                                </span>
-                            </span>
-                            <span class="ql_top"></span>
-                            <span class="ql_bottom"></span>
-                        </a>
-                        <a class="quicklink link3" href="https://www.facebook.com/">
-                            <span class="ql_caption">
-                                <span class="outer">
-                                    <span class="inner">
-                                        <h2>SWE201c </h2>
-                                    </span>
-                                </span>
-                            </span>
-                            <span class="ql_top"></span>
-                            <span class="ql_bottom"></span>
-                        </a>
+                     <form >
+                        <div class="panel-body">
+                            <div class="container"><h1>Student</h1> </div> 
+                            <table  class="table table-bordered">
+                                <thead>
+                                <td>id</td>
+                                    <c:forEach items="${requestScope.Assessments}" var="e">                                     
+                                            <td>${e.aname}</td>
+    
+                                    </c:forEach>
+                                </thead>
+                                <tbody>
+                                    
+                                    
+                                    <c:forEach items="${requestScope.AssessmentIDStudents}" var="a">
+                                                                      
+                                          
+                                            <td>${a.samark}</td>
+                                           
+                                         
+                                    </c:forEach>
 
-                        <div class="clear"></div>
-                    </div>
-                    
+                                </tbody>
+                            </table>
+
+                            <div id="bot_pagger" class="Pagination"> 
+                            </div>
+                        </div>
+                    </form>
+
                 </div>
             </div>
         </div>

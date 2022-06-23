@@ -8,9 +8,9 @@ package Model;
  *
  * @author phung
  */
-public class MarkIot102 {
+public class IOT102 {
     private Student students ;
-    private Subjects subjectss;
+    private Subjects Subjectss;
     private int Activelearning;
     private int Exercise1;
     private int Exercise2;
@@ -19,20 +19,20 @@ public class MarkIot102 {
     private int FinalExam;
     private int FinalExamResit;
 
-    public Subjects getSubjectss() {
-        return subjectss;
-    }
-
-    public void setSubjectss(Subjects subjectss) {
-        this.subjectss = subjectss;
-    }
-
     public Student getStudents() {
         return students;
     }
 
     public void setStudents(Student students) {
         this.students = students;
+    }
+
+    public Subjects getSubjectss() {
+        return Subjectss;
+    }
+
+    public void setSubjectss(Subjects Subjectss) {
+        this.Subjectss = Subjectss;
     }
 
     public int getActivelearning() {
@@ -90,5 +90,8 @@ public class MarkIot102 {
     public void setFinalExamResit(int FinalExamResit) {
         this.FinalExamResit = FinalExamResit;
     }
+    
+    
+    
     
 }

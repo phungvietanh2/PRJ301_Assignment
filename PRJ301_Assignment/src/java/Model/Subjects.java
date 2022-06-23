@@ -12,43 +12,61 @@ import java.util.ArrayList;
  * @author phung
  */
 public class Subjects {
-    private String id;
-    private String coname;
+
+    private String suid;
+    private String suname;
     private int credit;
     private int term;
-    ArrayList<Classs>classses=new ArrayList<>();
-    ArrayList<MarkIot102> markIot102s = new ArrayList<>();
+    ArrayList<IOT102> IOT102S = new ArrayList<>();
+    ArrayList<Classs> Classss = new ArrayList<>();
+    ArrayList<PRJ301> PRJ301S = new ArrayList<>();
 
-    public ArrayList<MarkIot102> getMarkIot102s() {
-        return markIot102s;
+    public ArrayList<IOT102> getIOT102S() {
+        return IOT102S;
     }
 
-    public void setMarkIot102s(ArrayList<MarkIot102> markIot102s) {
-        this.markIot102s = markIot102s;
+    public void setIOT102S(ArrayList<IOT102> IOT102S) {
+        this.IOT102S = IOT102S;
     }
 
-    public ArrayList<Classs> getClassses() {
-        return classses;
+    public ArrayList<PRJ301> getPRJ301S() {
+        return PRJ301S;
     }
 
-    public void setClassses(ArrayList<Classs> classses) {
-        this.classses = classses;
+    public void setPRJ301S(ArrayList<PRJ301> PRJ301S) {
+        this.PRJ301S = PRJ301S;
     }
 
-    public String getId() {
-        return id;
+    public ArrayList<Classs> getClassss() {
+        return Classss;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setClassss(ArrayList<Classs> Classss) {
+        this.Classss = Classss;
     }
 
-    public String getConame() {
-        return coname;
+    public ArrayList<IOT102> getAssessments() {
+        return IOT102S;
     }
 
-    public void setConame(String coname) {
-        this.coname = coname;
+    public void setAssessments(ArrayList<IOT102> Assessments) {
+        this.IOT102S = Assessments;
+    }
+
+    public String getSuid() {
+        return suid;
+    }
+
+    public void setSuid(String suid) {
+        this.suid = suid;
+    }
+
+    public String getSuname() {
+        return suname;
+    }
+
+    public void setSuname(String suname) {
+        this.suname = suname;
     }
 
     public int getCredit() {
@@ -67,11 +85,4 @@ public class Subjects {
         this.term = term;
     }
 
-    
-
-
-
-   
-    
-    
 }

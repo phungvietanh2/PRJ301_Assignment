@@ -22,7 +22,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-<nav class="navbar navbar-default navbar-static-top">
+        <nav class="navbar navbar-default navbar-static-top">
             <div class="container-fluid">
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
@@ -35,7 +35,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    
+
                     <!-----xin chao nguoi dang nhap ---->
                     <p class="navbar-brand">
                         Hello ${sessionScope.accounts.user} 
@@ -74,7 +74,7 @@
                     </div>
                 </div>  	
             </div>
-            
+
             <div class="col-md-10 content">
                 <div class="panel panel-default">
                     <div class="panel-heading">
@@ -90,8 +90,8 @@
                             <select style="border-radius: 10px ; height: 4rem;
                                     text-align: center; "  name="id">
                                 <c:forEach items="${requestScope.classs}" var="c">
-                                    <option <c:if test="${param.id == c.tenlop}" >selected="selected" </c:if>  value="${c.tenlop}" >
-                                        ${c.tenlop}
+                                    <option <c:if test="${param.id == c.cid}" >selected="selected" </c:if>  value="${c.cid}" >
+                                        ${c.cid}
                                     </option>
                                 </c:forEach>
                             </select>
@@ -104,22 +104,91 @@
                                    margin-left: 0px;" type="submit" value="Search" /> 
                         </div>
                     </form>
-                    <c:if test="${requestScope.students != null}">
+                    <c:if test="${requestScope.IOT102s !=null }">
                         <table  class="table table-bordered">
                             <thead>
-                                <tr>
-                                    
-                                    <td>Tên Lớp</td>
-                                    <td>Mã Sinh Viên </td>
-                                    <td>Tên Sinh Viên</td>       
+                                    <tr>
+                                    <td>RollNumber</td>
+                                    <td>Activelearning <br>(10%)</td>
+                                    <td>Exercise 1<br> (5%)</td> 
+                                    <td>Exercise 2 <br>(5%)</td>  
+                                    <td>Presentation <br>(10%)</td> 
+                                    <td>Project<br>(30%)</td> 
+                                    <td>FinalExam<br>(40%)</td>  
+                                    <td>FinalExamResit<br>(40%)</td>
+                                    <td>AVERAGE STATUS</td>
+                                    <td>STATUS</td>
                                 </tr>
+                             
                             </thead>
                             <tbody>
-                                <c:forEach items="${requestScope.students}" var="e">
+                               
+                                <c:forEach items="${requestScope.IOT102s}" var="e">
                                     <tr> 
-                                        <td>${e.classs.tenlop}</td>
-                                        <td>${e.masv}</td>
-                                        <td>${e.name}</td>
+                                        <td>${e.students.rollnumber}</td>
+                                        <td>${e.activelearning }</td>
+                                        <td>${e.exercise1}</td>
+                                        <td>${e.exercise2}</td>
+                                        <td>${e.presentation}</td>
+                                        <td>${e.project}</td>
+                                        <td>${e.finalExam}</td>
+                                        <td>                         
+                                            ${e.finalExamResit != 0 ? e.finalExamResit :'' }
+                                        </td>
+                                        <!--AVERAGE STATUS-->
+                                        <c:set var="sum1" value="
+                                               ${((e.activelearning*0.1) + (e.exercise1*0.05 + e.exercise2*0.05)
+                                                 +e.presentation*0.1 + e.project*0.4 +e.finalExam*0.4)}">
+
+                                        </c:set>
+                                        <c:set var="sum2" value="
+                                               ${((e.activelearning*0.1) + (e.exercise1*0.05 + e.exercise2*0.05)
+                                                 +e.presentation*0.1 + e.project*0.3 +e.finalExamResit*0.4)}">
+                                        </c:set>
+                                        <td>
+                                            <c:if test="${e.finalExam != 0 && e.finalExamResit ==0}">
+                                                ${Math.round(sum1*100)/100}
+                                            </c:if>
+                                            <c:if test="${e.finalExam != 0 && e.finalExamResit !=0}">
+                                                ${Math.round(sum2*100)/100}
+                                            </c:if>
+                                        </td>
+                                        <!--STATUS-->
+                                        <td>
+                                            <!--sum-->
+                                            <c:if test="${e.finalExam >=4 && e.finalExamResit ==0}">
+                                                <c:if test="${Math.round(sum1*100)/100 >= 5}">
+                                                    <h4 style="color: lime"> passed</h4>
+                                                </c:if>
+                                                <c:if test="${Math.round(sum1*100)/100 < 5}">
+                                                    <h4 style="color: red">Not passed</h4>
+                                                </c:if>
+                                            </c:if>
+                                            <!------------------------------------------------------------------------------------------------------------------------------------------------->
+                                            <!-- check -->
+                                            <c:if test="${e.finalExam <4 && e.finalExamResit ==0||
+                                                          e.finalExam <4 && e.finalExamResit <4||
+                                                          e.finalExam >=4 && e.finalExamResit <4||
+                                                          e.activelearning == 0 || 
+                                                          e.exercise1 == 0 ||  e.exercise2 == 0 || e.presentation==0 || e.project==0
+                                                  }">
+                                                <h4 style="color: red">Not passed</h4>
+                                            </c:if>
+                                            <!------------------------------------------------------------------------------------------------------------------------------------------------->
+                                            <!--check pass--> 
+                                            <c:if test="${e.finalExam != 0 && e.finalExamResit >=4 || e.finalExam == 0 && e.finalExamResit !=0 }">
+
+                                                <c:if test="${Math.round(sum2*100)/100  >=5}">
+                                                    <h4 style="color: lime"> passed</h4>
+                                                </c:if>
+                                                <c:if test="${Math.round(sum2*100)/100  <5}">
+                                                    <h4 style="color: red">Not passed</h4>
+                                                </c:if>
+                                            </c:if>
+
+
+                                        </td>
+
                                     </tr>   
                                 </c:forEach>
                             </tbody>

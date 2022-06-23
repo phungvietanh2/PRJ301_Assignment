@@ -4,6 +4,7 @@
  */
 package Model;
 
+import java.sql.Date;
 import java.util.ArrayList;
 
 /**
@@ -11,9 +12,44 @@ import java.util.ArrayList;
  * @author phung
  */
 public class Classs {
-  private String tenlop; 
-  private Subjects subjectss;
-   ArrayList<Student> students = new ArrayList<>();
+
+    private String cid;
+    private Date clstart;
+    private Date clend;
+    private Subjects subjectss;
+    ArrayList<Student> Students = new ArrayList<>();
+
+    public ArrayList<Student> getGroupClasss() {
+        return Students;
+    }
+
+    public void setGroupClasss(ArrayList<Student> GroupClasss) {
+        this.Students = GroupClasss;
+    }
+
+    public String getCid() {
+        return cid;
+    }
+
+    public void setCid(String cid) {
+        this.cid = cid;
+    }
+
+    public Date getClstart() {
+        return clstart;
+    }
+
+    public void setClstart(Date clstart) {
+        this.clstart = clstart;
+    }
+
+    public Date getClend() {
+        return clend;
+    }
+
+    public void setClend(Date clend) {
+        this.clend = clend;
+    }
 
     public Subjects getSubjectss() {
         return subjectss;
@@ -21,19 +57,6 @@ public class Classs {
 
     public void setSubjectss(Subjects subjectss) {
         this.subjectss = subjectss;
-    }
-
-
-    public String getTenlop() {
-        return tenlop;
-    }
-
-    public void setTenlop(String tenlop) {
-        this.tenlop = tenlop;
-    }
-
-    public ArrayList<Student> getStudents() {
-        return students;
     }
 
 }

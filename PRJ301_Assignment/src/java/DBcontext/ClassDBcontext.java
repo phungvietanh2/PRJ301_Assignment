@@ -24,16 +24,13 @@ public class ClassDBcontext extends DBcontext<Classs>{
     public ArrayList<Classs> list() {
      ArrayList<Classs> classes = new ArrayList<>();
         try {
-            String sql = "select cl.Clname , c.Cocode ,c.Coname from Class cl INNER JOIN  Course c on  cl.Cocode = c.Cocode ";
+            String sql = "select Clid from Class ";
             PreparedStatement stm = connection.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
             Classs cl = new Classs();
-            cl.setTenlop(rs.getString("Clname"));
-            Subjects s = new Subjects();
-            s.setConame(rs.getString("Cocode"));
-            s.setConame(rs.getString("Coname"));
-            cl.setSubjectss(s);
+            cl.setCid(rs.getString("Clid"));
+            
             classes.add(cl);
             }
         } catch (SQLException ex) {

@@ -5,8 +5,12 @@
 package AdminListController;
 
 import DBcontext.ClassDBcontext;
+import DBcontext.IOT102DBcontext;
+import DBcontext.PRJ301DBcontext;
 import DBcontext.StudentDBcontext;
 import Model.Classs;
+import Model.IOT102;
+import Model.PRJ301;
 import Model.Student;
 import Model.Subjects;
 import java.io.IOException;
@@ -64,6 +68,7 @@ public class AdminListClass extends HttpServlet {
         ClassDBcontext dbclass = new ClassDBcontext();
         ArrayList<Classs> classs = dbclass.list();
         request.setAttribute("classs", classs);
+
         request.getRequestDispatcher("admin/AdminListClass.jsp").forward(request, response);
     }
 
@@ -78,14 +83,24 @@ public class AdminListClass extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
         ClassDBcontext dbclass = new ClassDBcontext();
         ArrayList<Classs> classs = dbclass.list();
         request.setAttribute("classs", classs);
 
-        String id = request.getParameter("id");
         StudentDBcontext dbstudent = new StudentDBcontext();
-        ArrayList<Student> students = dbstudent.SearchByid(id);
+        ArrayList<Student> students = dbstudent.list();
         request.setAttribute("students", students);
+        
+        String id = request.getParameter("id");
+        IOT102DBcontext dbIOT102s = new IOT102DBcontext();
+       ArrayList<IOT102> IOT102s = dbIOT102s.SearchMarkClass(id);
+       request.setAttribute("IOT102s", IOT102s);
+        
+       
+        PRJ301DBcontext dbprj301 = new PRJ301DBcontext();
+        ArrayList<PRJ301> prj301s = dbprj301.SearchMarkClass(id);
+        request.setAttribute("prj301s", prj301s);
         request.getRequestDispatcher("admin/AdminListClass.jsp").forward(request, response);
     }
 

@@ -28,8 +28,8 @@ public class CourseDBcontext extends DBcontext<Subjects>{
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
                Subjects s = new Subjects();
-               s.setId(rs.getString("Cocode"));
-               s.setConame(rs.getString("Coname"));
+               s.setSuid(rs.getString("Cocode"));
+               s.setSuname(rs.getString("Coname"));
                s.setCredit(rs.getInt("Cocredit"));
                s.setTerm(rs.getInt("Coterm"));
                subjectss.add(s);

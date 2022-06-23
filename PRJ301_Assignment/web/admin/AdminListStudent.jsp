@@ -97,7 +97,8 @@
                                         <td>Gender</td>
                                         <td>Dob</td>  
                                         <td>Gmail</td>
-                                        <td>Class</td>
+                                        <td>Start</td>
+                                        <td>Sk</td>
                                         <td>Edit</td>
                                         <td>Delete</td>
                                     </tr>
@@ -105,14 +106,15 @@
                                 <tbody>
                                     <c:forEach items="${requestScope.students}" var="e">
                                         <tr>                                     
-                                            <td>${e.sid}</td>
-                                            <td>${e.name}</td>
-                                            <td>${e.gender}</td>
-                                            <td>${e.dob}</td>
-                                            <td>${e.gmail}</td>
-                                            <td>${e.classs.tenlop}</td>
-                                            <td><a class="btn btn-primary" href="AdminEditStudent?id=${e.sid}">Edit</a></td>
-                                            <td><input class="btn btn-primary"  type="button" value="Delete" onclick="removeEmp(${e.sid})"/></td>
+                                            <td>${e.rollnumber}</td>
+                                            <td>${e.sname}</td>
+                                            <td>${e.sgender}</td>
+                                            <td>${e.sdob}</td>
+                                            <td>${e.sgmail}</td>
+                                            <td>${e.start}</td>
+                                            <td>${e.sk}</td>
+                                            <td><a class="btn btn-primary" href="AdminEditStudent?id=${e.rollnumber}">Edit</a></td>
+                                            <td><input class="btn btn-primary"  type="button" value="Delete" onclick="removeEmp(${e.rollnumber})"/></td>
                                         </tr>   
                                     </c:forEach>
 

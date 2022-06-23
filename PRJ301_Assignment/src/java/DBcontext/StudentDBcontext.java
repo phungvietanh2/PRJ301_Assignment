@@ -26,21 +26,18 @@ public class StudentDBcontext extends DBcontext<Student> {
     public ArrayList<Student> list() {
         ArrayList<Student> students = new ArrayList<>();
         try {
-            String sql = "select s.Sid,s.Scode,s.Sgender,s.Sname,s.Sdob,s.Sgmail,c.Clname "
-                    + "from Student s INNER JOIN Class c on s.Clname = c.Clname";
+            String sql = "select Srollnumber , Sname , Sgender , Sdob, Sgmail, Sstart, Sk  from Student ";
             PreparedStatement stm = connection.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
-                Classs cl = new Classs();
-                cl.setTenlop(rs.getString("Clname"));
                 Student S = new Student();
-                S.setSid(rs.getInt("Sid"));
-                S.setMasv(rs.getString("Scode"));
-                S.setName(rs.getString("Sname"));
-                S.setGender(rs.getString("Sgender"));
-                S.setDob(rs.getDate("Sdob"));
-                S.setGmail(rs.getString("Sgmail"));
-                S.setClasss(cl);
+                S.setRollnumber(rs.getString("Srollnumber"));
+                S.setSname(rs.getString("Sname"));
+                S.setSgender(rs.getString("Sgender"));
+                S.setSdob(rs.getDate("Sdob"));
+                S.setSgmail(rs.getString("Sgmail"));
+                S.setStart(rs.getDate("Sstart"));
+                S.setSk(rs.getInt("Sk"));
                 students.add(S);
             }
         } catch (SQLException ex) {
@@ -52,19 +49,21 @@ public class StudentDBcontext extends DBcontext<Student> {
     public ArrayList<Student> SearchByid(String id) {
         ArrayList<Student> students = new ArrayList<>();
         try {
-            String sql = " select cl.Clname , c.Scode , c.Sname  from Class cl INNER JOIN  Student c"
-                    + " on  cl.Clname = c.Clname where cl.Clname =?";
+            String sql = " select Srollnumber , Sname , Sgender , Sdob, Sgmail, Sstart, Sk  from Student"
+                    + " where Srollnumber =?";
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setString(1, id);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
-                Classs cl = new Classs();
-                cl.setTenlop(rs.getString("Clname"));
-                Student s = new Student();
-                s.setMasv(rs.getString("Scode"));
-                s.setName(rs.getString("Sname"));
-                s.setClasss(cl);
-                students.add(s);
+                Student S = new Student();
+                S.setRollnumber(rs.getString("Srollnumber"));
+                S.setSname(rs.getString("Sname"));
+                S.setSgender(rs.getString("Sgender"));
+                S.setSdob(rs.getDate("Sdob"));
+                S.setSgmail(rs.getString("Sgmail"));
+                S.setStart(rs.getDate("Sstart"));
+                S.setSk(rs.getInt("Sk"));
+                students.add(S);
             }
         } catch (SQLException ex) {
             Logger.getLogger(ClassDBcontext.class.getName()).log(Level.SEVERE, null, ex);
@@ -74,55 +73,17 @@ public class StudentDBcontext extends DBcontext<Student> {
 
     public static void main(String[] args) {
         StudentDBcontext dao = new StudentDBcontext();
-       ArrayList<Student>  a = dao.getMarkclass();
+       ArrayList<Student>  a = dao.Pagination(1,1);
         //System.out.println(a);
-        for (Student student : a) {
+      //  for (Student student : a) {
         System.out.println(a);
-         }
+       //  }
     }
 
     @Override
-    public Student get(int id) {
-        try {
-            String sql = " select s.Sid, s.Scode,s.Sgender,s.Sname,s.Sdob,s.Sgmail,c.Clname \n"
-                    + "                    from Student s INNER JOIN Class c on s.Clname = c.Clname where s.Sid = ?";
-            PreparedStatement stm = connection.prepareStatement(sql);
-            stm.setInt(1, id);
-            ResultSet rs = stm.executeQuery();
-            while (rs.next()) {
-                Classs cl = new Classs();
-                cl.setTenlop(rs.getString("Clname"));
-                Student s = new Student();
-                s.setSid(rs.getInt("Sid"));
-                s.setMasv(rs.getString("Scode"));
-                s.setName(rs.getString("Sname"));
-                s.setClasss(cl);
-                return s;
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(ClassDBcontext.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    public Student get(int id) {  
         return null;
     }
-    
-    public ArrayList<Student>  getMarkclass() {
-        ArrayList<Student> students = new ArrayList<>();
-        try {
-            String sql = " select s.Sid ,s.Scode from Class m INNER JOIN Student s on m.Clname = s.Clname where m.Cocode = 'IOT102'  ";
-            PreparedStatement stm = connection.prepareStatement(sql);
-            ResultSet rs = stm.executeQuery();
-            while (rs.next()) {
-                Student s = new Student();
-                s.setSid(rs.getInt("Sid"));
-                s.setMasv(rs.getString("Scode"));
-                students.add(s);
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(ClassDBcontext.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return students;
-    }
-
     @Override
     public void insert(Student model) {
         ArrayList<Student> students = new ArrayList<>();
@@ -163,7 +124,7 @@ public class StudentDBcontext extends DBcontext<Student> {
     public void delete(Student model) {
         try {
             String sql = "DELETE Student"
-                    + " WHERE [Sid] = ?";
+                    + " WHERE [Srollnumber] = ?";
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setInt(1, model.getSid());
             stm.executeUpdate();
@@ -192,9 +153,8 @@ public class StudentDBcontext extends DBcontext<Student> {
     public ArrayList<Student> Pagination(int pageindex, int pagesize) {
         ArrayList<Student> students = new ArrayList<>();
         try {
-            String sql = "select s.Sid, s.Scode,s.Sgender,s.Sname,s.Sdob,s.Sgmail,c.Clname\n"
-                    + "from Student s INNER JOIN Class c on s.Clname = c.Clname\n"
-                    + "ORDER BY Sid OFFSET (?-1)* ? ROWS \n"
+            String sql = "select Srollnumber , Sname , Sgender , Sdob, Sgmail, Sstart, Sk  from Student "
+                    + "ORDER BY Srollnumber OFFSET (?-1)* ? ROWS \n"
                     + "FETCH NEXT ? ROWS ONLY;";
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setInt(1, pageindex);
@@ -202,16 +162,14 @@ public class StudentDBcontext extends DBcontext<Student> {
             stm.setInt(3, pagesize);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
-                Classs cl = new Classs();
-                cl.setTenlop(rs.getString("Clname"));
-                Student S = new Student();
-                 S.setSid(rs.getInt("Sid"));
-                S.setMasv(rs.getString("Scode"));
-                S.setName(rs.getString("Sname"));
-                S.setGender(rs.getString("Sgender"));
-                S.setDob(rs.getDate("Sdob"));
-                S.setGmail(rs.getString("Sgmail"));
-                S.setClasss(cl);
+               Student S = new Student();
+                S.setRollnumber(rs.getString("Srollnumber"));
+                S.setSname(rs.getString("Sname"));
+                S.setSgender(rs.getString("Sgender"));
+                S.setSdob(rs.getDate("Sdob"));
+                S.setSgmail(rs.getString("Sgmail"));
+                S.setStart(rs.getDate("Sstart"));
+                S.setSk(rs.getInt("Sk"));
                 students.add(S);
             }
         } catch (SQLException ex) {
