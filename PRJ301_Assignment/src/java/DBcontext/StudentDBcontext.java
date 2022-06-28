@@ -4,6 +4,7 @@
  */
 package DBcontext;
 
+import Model.AssignmentIDSTUDENT;
 import Model.Classs;
 import Model.Student;
 import Model.Subjects;
@@ -26,18 +27,13 @@ public class StudentDBcontext extends DBcontext<Student> {
     public ArrayList<Student> list() {
         ArrayList<Student> students = new ArrayList<>();
         try {
-            String sql = "select Srollnumber , Sname , Sgender , Sdob, Sgmail, Sstart, Sk  from Student ";
+            String sql = " select * from Student ";
             PreparedStatement stm = connection.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
                 Student S = new Student();
                 S.setRollnumber(rs.getString("Srollnumber"));
-                S.setSname(rs.getString("Sname"));
-                S.setSgender(rs.getString("Sgender"));
-                S.setSdob(rs.getDate("Sdob"));
-                S.setSgmail(rs.getString("Sgmail"));
-                S.setStart(rs.getDate("Sstart"));
-                S.setSk(rs.getInt("Sk"));
+              
                 students.add(S);
             }
         } catch (SQLException ex) {
@@ -49,20 +45,14 @@ public class StudentDBcontext extends DBcontext<Student> {
     public ArrayList<Student> SearchByid(String id) {
         ArrayList<Student> students = new ArrayList<>();
         try {
-            String sql = " select Srollnumber , Sname , Sgender , Sdob, Sgmail, Sstart, Sk  from Student"
-                    + " where Srollnumber =?";
+            String sql = "  select s.Srollnumber  from Student s  left JOIN  GroupClass g on g.Srollnumber = s.Srollnumber \n" +
+"				    left JOIN Class cl on g.Clid = cl.Clid where cl.Clid = ?";
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setString(1, id);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
                 Student S = new Student();
-                S.setRollnumber(rs.getString("Srollnumber"));
-                S.setSname(rs.getString("Sname"));
-                S.setSgender(rs.getString("Sgender"));
-                S.setSdob(rs.getDate("Sdob"));
-                S.setSgmail(rs.getString("Sgmail"));
-                S.setStart(rs.getDate("Sstart"));
-                S.setSk(rs.getInt("Sk"));
+                S.setRollnumber(rs.getString("Srollnumber")); 
                 students.add(S);
             }
         } catch (SQLException ex) {
@@ -71,19 +61,21 @@ public class StudentDBcontext extends DBcontext<Student> {
         return students;
     }
 
+
     public static void main(String[] args) {
         StudentDBcontext dao = new StudentDBcontext();
-       ArrayList<Student>  a = dao.Pagination(1,1);
+        ArrayList<Student> a = dao.list();
         //System.out.println(a);
-      //  for (Student student : a) {
+        //  for (Student student : a) {
         System.out.println(a);
-       //  }
+        //  }
     }
 
     @Override
-    public Student get(int id) {  
+    public Student get(int id) {
         return null;
     }
+
     @Override
     public void insert(Student model) {
         ArrayList<Student> students = new ArrayList<>();
@@ -162,7 +154,7 @@ public class StudentDBcontext extends DBcontext<Student> {
             stm.setInt(3, pagesize);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
-               Student S = new Student();
+                Student S = new Student();
                 S.setRollnumber(rs.getString("Srollnumber"));
                 S.setSname(rs.getString("Sname"));
                 S.setSgender(rs.getString("Sgender"));
@@ -177,5 +169,5 @@ public class StudentDBcontext extends DBcontext<Student> {
         }
         return students;
     }
-    
+
 }

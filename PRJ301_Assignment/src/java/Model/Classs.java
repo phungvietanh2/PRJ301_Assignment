@@ -17,16 +17,7 @@ public class Classs {
     private Date clstart;
     private Date clend;
     private Subjects subjectss;
-    ArrayList<Student> Students = new ArrayList<>();
-
-    public ArrayList<Student> getGroupClasss() {
-        return Students;
-    }
-
-    public void setGroupClasss(ArrayList<Student> GroupClasss) {
-        this.Students = GroupClasss;
-    }
-
+    
     public String getCid() {
         return cid;
     }

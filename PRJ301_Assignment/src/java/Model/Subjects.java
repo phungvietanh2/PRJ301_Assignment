@@ -17,41 +17,16 @@ public class Subjects {
     private String suname;
     private int credit;
     private int term;
-    ArrayList<IOT102> IOT102S = new ArrayList<>();
-    ArrayList<Classs> Classss = new ArrayList<>();
-    ArrayList<PRJ301> PRJ301S = new ArrayList<>();
+    ArrayList<Assignment> Assignments = new ArrayList<>();
 
-    public ArrayList<IOT102> getIOT102S() {
-        return IOT102S;
+    public ArrayList<Assignment> getAssignments() {
+        return Assignments;
     }
 
-    public void setIOT102S(ArrayList<IOT102> IOT102S) {
-        this.IOT102S = IOT102S;
+    public void setAssignments(ArrayList<Assignment> Assignments) {
+        this.Assignments = Assignments;
     }
-
-    public ArrayList<PRJ301> getPRJ301S() {
-        return PRJ301S;
-    }
-
-    public void setPRJ301S(ArrayList<PRJ301> PRJ301S) {
-        this.PRJ301S = PRJ301S;
-    }
-
-    public ArrayList<Classs> getClassss() {
-        return Classss;
-    }
-
-    public void setClassss(ArrayList<Classs> Classss) {
-        this.Classss = Classss;
-    }
-
-    public ArrayList<IOT102> getAssessments() {
-        return IOT102S;
-    }
-
-    public void setAssessments(ArrayList<IOT102> Assessments) {
-        this.IOT102S = Assessments;
-    }
+    
 
     public String getSuid() {
         return suid;
@@ -84,5 +59,5 @@ public class Subjects {
     public void setTerm(int term) {
         this.term = term;
     }
-
+  
 }

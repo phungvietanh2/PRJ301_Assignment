@@ -21,47 +21,25 @@ public class Student {
     private Date start;
     private int sk;
     private Classs Clas;
-    ArrayList<IOT102> IOT102S = new ArrayList<>();
-    ArrayList<PRJ301> PRJ301S = new ArrayList<>();
+    private ArrayList<demo> demos = new ArrayList<>();
 
-    public ArrayList<PRJ301> getPRJ301S() {
-        return PRJ301S;
+    public ArrayList<demo> getDemos() {
+        return demos;
     }
 
-    public void setPRJ301S(ArrayList<PRJ301> PRJ301S) {
-        this.PRJ301S = PRJ301S;
+    public void setDemos(ArrayList<demo> demos) {
+        this.demos = demos;
+    }
+    private ArrayList<AssignmentIDSTUDENT> AssignmentIDSTUDENTs = new ArrayList<>();
+
+    public ArrayList<AssignmentIDSTUDENT> getAssignmentIDSTUDENTs() {
+        return AssignmentIDSTUDENTs;
     }
 
-    public Classs getClas() {
-        return Clas;
+    public void setAssignmentIDSTUDENTs(ArrayList<AssignmentIDSTUDENT> AssignmentIDSTUDENTs) {
+        this.AssignmentIDSTUDENTs = AssignmentIDSTUDENTs;
     }
-
-    public void setClas(Classs Clas) {
-        this.Clas = Clas;
-    }
-
-    
-    
-
-    public ArrayList<IOT102> getIOT102S() {
-        return IOT102S;
-    }
-
-    public void setIOT102S(ArrayList<IOT102> IOT102S) {
-        this.IOT102S = IOT102S;
-    }
-    
-
-    
-
-    public ArrayList<IOT102> getAssessmentIDStudents() {
-        return IOT102S;
-    }
-
-    public void setAssessmentIDStudents(ArrayList<IOT102> AssessmentIDStudents) {
-        this.IOT102S = AssessmentIDStudents;
-    }
-
+  
     public String getRollnumber() {
         return rollnumber;
     }
@@ -118,4 +96,17 @@ public class Student {
         this.sk = sk;
     }
 
+    public Classs getClas() {
+        return Clas;
+    }
+
+    public void setClas(Classs Clas) {
+        this.Clas = Clas;
+    }
+
+    @Override
+    public String toString() {
+        return "Student{" + "rollnumber=" + rollnumber + ", sname=" + sname + ", sgender=" + sgender + ", sdob=" + sdob + ", sgmail=" + sgmail + ", start=" + start + ", sk=" + sk + ", Clas=" + Clas + ", demos=" + demos + ", AssignmentIDSTUDENTs=" + AssignmentIDSTUDENTs + '}';
+    }
+    
 }
