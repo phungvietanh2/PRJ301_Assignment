@@ -87,7 +87,6 @@
                             font-size: 3rem; " data-toggle="collapse" data-target="#demo">List</button>
                     <div id="demo" class="collapse">
                         <li style="text-decoration: none;font-size: 3rem" ><a href="AdminListStudent">List Student</a></li>
-                        <li style="text-decoration: none;font-size: 3rem"><a href="AdminListMark"> List Mark</a></li>
                         <li style="text-decoration: none;font-size: 3rem" ><a href="AdminListClass">List Class</a></li>
                     </div>
 

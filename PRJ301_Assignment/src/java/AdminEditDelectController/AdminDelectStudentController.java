@@ -30,11 +30,11 @@ public class AdminDelectStudentController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-         int id = Integer.parseInt(request.getParameter("id"));
+         String id =request.getParameter("id");
          StudentDBcontext dbstudent = new StudentDBcontext();
-         Student s = dbstudent.get(id);
+         Student s = dbstudent.getid(id);
          dbstudent.delete(s);
-        request.getRequestDispatcher("AdminListStudent").forward(request, response);
+         request.getRequestDispatcher("AdminListStudent").forward(request, response);
    
     } 
 

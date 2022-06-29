@@ -1,8 +1,9 @@
 <%-- 
-    Document   : admin
-    Created on : Jun 1, 2022, 11:41:36 AM
+    Document   : AdminListClass
+    Created on : Jun 14, 2022, 9:53:37 AM
     Author     : phung
 --%>
+
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -16,7 +17,9 @@
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
         <link href="css/admin.css" rel="stylesheet" type="text/css"/>
-        <link href="css/adminInser.css" rel="stylesheet" type="text/css"/>
+        <link href="css/mark.css" rel="stylesheet" type="text/css"/>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+              rel="stylesheet">
         <title>JSP Page</title>
     </head>
     <body>
@@ -76,48 +79,67 @@
             <div class="col-md-10 content">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h4> INSERT STUDENT</h4>  
+                        <h3>List Class/ 
+                            <a style="color: black;font-size: 20p" href="Admin">Back</a> 
+                            <span class="material-icons">
+                                keyboard_return
+                            </span></h3>
                     </div>
-                    ${requestScope.action}
-                    <form action="AdminInsertMarkIot102" method="post" class="a">
-                        <label for="fname">ID</label><br>
-                        <select style="border-radius: 54px;
-                                width: 10rem;
-                                height: 4rem;
-                                text-align: center;" name="ID">
-                            <c:forEach  items="${requestScope.students}" var="d">
-                                
-                                <option  
-                                    <c:if  test="${param.ID eq d.sid}">selected="selected"</c:if>
-                                    value="${d.sid}" >${d.masv}
-                                </option>
-                            </c:forEach>
-                        </select> <br/>
-               
-                        
-                        <label for="fname">Active learning</label>
-                        <input type="number"  name="Active">
-                        <label for="fname">Exercise 1</label>
-                        <input type="number"  name="Exercise1">
-                        <label for="fname">Exercise 2</label>
-                        <input type="number"  name="Exercise2">
-                        <label for="fname">Presentation</label>
-                        <input type="number"  name="Presentation">
-                        <label for="fname">Project</label>
-                        <input type="number"  name="Project">
-                        <label for="fname">Final Exam</label>
-                        <input type="number"  name="FinalExam">
-                        <label for="fname">Final Exam Resit</label>
-                        <input type="number"  name="FinalExamResit">
-
-                        <input style="margin-top: 20px;border-radius:  10px ;width: 10rem; height: 5rem;" type="submit" value="Save" />
-
+                    <form action="AdminListClass" method="POST">
+                        <div class="panel-body">
+                            <div class="container"><h1>Class</h1> </div> 
+                            <select style="border-radius: 10px ; height: 4rem;
+                                    text-align: center; "  name="id">
+                                <c:forEach items="${requestScope.classs}" var="c">
+                                    <option <c:if test="${param.id == c.cid}" >selected="selected" </c:if>  value="${c.cid}" >
+                                        ${c.cid}
+                                    </option>
+                                </c:forEach>
+                            </select>
+                            <br>
+                            <input style="border-radius: 10px ;
+                                   height: 4rem;
+                                   width: 10rem;
+                                   font-size: 20px;
+                                   margin-top: 15px;
+                                   margin-left: 0px;" type="submit" value="Search" /> 
+                        </div>
                     </form>
+                    <c:if test="${requestScope.Assignments !=null }">
+                        <table  class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <td></td>
+                                    <c:forEach  items="${requestScope.Assignments}" var="v">
+                                        <td>${v.aname}</td>
+                                    </c:forEach>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <c:forEach  items="${requestScope.Students}" var="a">
+                                    <tr> <td>${a.rollnumber}</td>
+
+                                        <c:forEach items="${requestScope.Assignments}" var="b">
+                                            <td>
+                                                <input name="a${a.rollnumber}_${b.aid}" class="hight" type="text"
+                                                       <c:forEach items="${requestScope.AssignmentIDSTUDENTs}" var="c">   
+                                                           <c:if test="${c.students.rollnumber eq a.rollnumber and c.assignments.aid eq b.aid}">
+                                                               value="${c.asmarkk}"
+                                                           </c:if>
+                                                       </c:forEach>
+                                                       />
 
 
+                                            </td> 
+                                        </c:forEach>
+
+                                    </tr>
+                                </c:forEach>
+                            </tbody>
+                        </table>
+                    </c:if>
                 </div>
             </div>
-
         </div>
     </body>
 </html>

@@ -17,6 +17,8 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
         <link href="css/admin.css" rel="stylesheet" type="text/css"/>
         <link href="css/adminInser.css" rel="stylesheet" type="text/css"/>
+        <script src="js/inster student.js" type="text/javascript"></script>
+        
         <title>JSP Page</title>
     </head>
     <body>
@@ -78,31 +80,38 @@
                     <div class="panel-heading">
                         <h4> INSERT STUDENT</h4>  
                     </div>
-                    ${requestScope.action}
-                    <form action="AdminInsertStudent" method="post" class="a">
-                        <label for="fname">MaSV</label>
-                        <input type="text" name="MaSV">
-                        <label for="fname">TenSV</label>
-                        <input type="text"  name="TenSV">
-                        <label for="fname">Gmail</label>
-                        <input type="text"  name="gmail">
-                        <label for="fname">Gender</label><br>                      
-                        <input class="Gender1" checked="checked"type="radio"name="gender"value="male"/> Male
-                        <input  class="Gender1" type="radio" name="gender" value="female" /> Female <br/>
-                        <label for="fname">Dob</label><br>
-                        <input type="date" name="dob" /> <br/>
-                        <label for="fname">Class</label><br>
-                        <select style="border-radius: 54px;
-                                width: 10rem;
-                                height: 4rem;
-                                text-align: center;" name="nameclass">
-                            <c:forEach  items="${requestScope.classs}" var="d">
-                                <option  
-                                    <c:if  test="${param.nameclass eq d.tenlop}">selected="selected"</c:if>
-                                    value="${d.tenlop}" >${d.tenlop}
-                                </option>
-                            </c:forEach>
-                        </select> <br/>
+
+                    <form action="AdminInsertStudent" method="POST" class="a">
+
+                        <div>
+                            <label for="fname">ID </label>
+                            <input type="text" name="Srollnumbers"/> <br/>
+
+                            <label for="fname"> Name </label>
+                            <input type="text" name="Sname">
+
+                            <label for="fname">Gender</label><br>   
+                            <input <c:if test="${requestScope.student.sgender}">checked="checked"</c:if>
+                                                                                class="Gender1" checked="checked"type="radio"name="Sgender"value="male"/> Male
+                                <input <c:if test="${!requestScope.student.sgender}">checked="checked"</c:if>
+                                                                                     class="Gender1" checked="checked"type="radio"name="Sgender"value="male"/> Female <br>
+
+                                <label for="fname">Dob</label><br>
+                                <input type="date" name="Sdob"  value="${requestScope.student.sdob}"/> <br/>
+
+                            <label for="fname">Gmail </label>
+                            <input type="text"  name="Sgmail" value="${requestScope.student.sgmail}" />
+
+                            <label for="fname">TERM</label><br>
+                            <input type="text" name="Sstart"  value="${requestScope.student.start}"/> <br/>
+
+                            <label for="fname">K</label><br>
+                            <input type="number" name="Sk"  value="${requestScope.student.sk}" /> <br/>
+
+                            <input style="margin-top: 20px;border-radius:  10px ;width: 100%; height: 5rem; font-size: 2rem " type="button" value="Add Student" onclick="addstudent()" />
+                        </div>
+                        <div id="container">      
+                        </div>
                         <input style="margin-top: 20px;border-radius:  10px ;width: 10rem; height: 5rem;" type="submit" value="Save" />
 
                     </form>
@@ -112,5 +121,6 @@
             </div>
 
         </div>
+                           
     </body>
 </html>

@@ -18,7 +18,7 @@ public class Student {
     private String sgender;
     private Date sdob;
     private String sgmail;
-    private Date start;
+    private String start;
     private int sk;
     private Classs Clas;
     private ArrayList<demo> demos = new ArrayList<>();
@@ -80,13 +80,15 @@ public class Student {
         this.sgmail = sgmail;
     }
 
-    public Date getStart() {
+    public String getStart() {
         return start;
     }
 
-    public void setStart(Date start) {
+    public void setStart(String start) {
         this.start = start;
     }
+
+   
 
     public int getSk() {
         return sk;

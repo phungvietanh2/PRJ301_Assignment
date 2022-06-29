@@ -23,7 +23,6 @@ public class AdminListStudent extends HttpServlet {
 protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException { 
       StudentDBcontext dbstudent = new StudentDBcontext();
-     //  ArrayList<Student> students = dbstudent.list();
      String raw_page = request.getParameter("page");
        if(raw_page ==null)
        {
@@ -34,11 +33,11 @@ protected void processRequest(HttpServletRequest request, HttpServletResponse re
         int pagesize =  Integer.parseInt(getServletContext().getInitParameter("pagesize"));
          ArrayList<Student> students = dbstudent.Pagination(pageindex, pagesize);
         int totalRecords = dbstudent.count();
-       int totalpage = (totalRecords%pagesize==0)?totalRecords/pagesize
+        int totalpage = (totalRecords%pagesize==0)?totalRecords/pagesize
                                 :(totalRecords/pagesize)+1;
        request.setAttribute("pageindex", pageindex);
        request.setAttribute("totalpage", totalpage);
-      request.setAttribute("students", students);
+       request.setAttribute("students", students);
        request.getRequestDispatcher("admin/AdminListStudent.jsp").forward(request, response);
     } 
    @Override

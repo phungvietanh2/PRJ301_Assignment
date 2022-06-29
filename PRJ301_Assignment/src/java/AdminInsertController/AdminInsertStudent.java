@@ -61,48 +61,41 @@ public class AdminInsertStudent extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        ClassDBcontext dbclass = new ClassDBcontext();
-        ArrayList<Classs> classs = dbclass.list();
-        request.setAttribute("classs", classs);
+
         request.getRequestDispatcher("admin/AdminInsertStudent.jsp").forward(request, response);
     }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+    StudentDBcontext dbstudent = new StudentDBcontext();
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String raw_rollnumber = request.getParameter("MaSV");
-        String raw_Namesv = request.getParameter("TenSV");
-        String raw_dob = request.getParameter("dob");
-        String raw_gmail = request.getParameter("gmail");
-        String raw_gender = request.getParameter("gender");
-        String raw_Nameclass = request.getParameter("nameclass");
 
-//        check 
-        //validate inputs
         Student s = new Student();
-        s.setMasv(raw_rollnumber);
-        s.setName(raw_Namesv);
-        s.setDob(Date.valueOf(raw_dob));
-        s.setGmail(raw_gmail);
-        s.setGender(raw_gender);
-        Classs c = new Classs();
-        c.setTenlop(raw_Nameclass);
-        s.setClasss(c);
-        StudentDBcontext dbstudent = new StudentDBcontext();   
-        dbstudent.insert(s);
-        request.setAttribute("action", "Insert Successfully");
-        request.getRequestDispatcher("admin/successfully.jsp").forward(request, response);
-        }   
 
-    
+        s.setRollnumber(request.getParameter("Srollnumbers"));
+        s.setSname(request.getParameter("Sname"));
+        s.setSgender(request.getParameter("Sgender"));
+        s.setSdob(Date.valueOf(request.getParameter("Sdob")));
+        s.setSgmail(request.getParameter("Sgmail"));
+        s.setStart(request.getParameter("Sstart"));
+        s.setSk(Integer.parseInt(request.getParameter("Sk")));
+
+//       String[] indexs = request.getParameterValues("index");
+//        for (String index : indexs) {
+//            s.setRollnumber(request.getParameter("Srollnumbers" + index));
+//            s.setSname(request.getParameter("Sname" + index));
+//            s.setSgender(request.getParameter("Sgender" + index));
+//            s.setSdob(Date.valueOf(request.getParameter("Sdob" + index)));
+//            s.setSgmail(request.getParameter("Sgmail" + index));
+//            s.setStart(request.getParameter("Sstart" + index));
+//            s.setSk(Integer.parseInt(request.getParameter("Sk" + index)));
+//        }
+
+        dbstudent.insert(s);
+
+        response.getWriter().println("done!");
+    }
 
     /**
      * Returns a short description of the servlet.

@@ -99,7 +99,7 @@
                                         <td>Gmail</td>
                                         <td>Start</td>
                                         <td>Sk</td>
-                                        <td>Edit</td>
+                                        <td>Update</td>
                                         <td>Delete</td>
                                     </tr>
                                 </thead>
@@ -113,7 +113,7 @@
                                             <td>${e.sgmail}</td>
                                             <td>${e.start}</td>
                                             <td>${e.sk}</td>
-                                            <td><a class="btn btn-primary" href="AdminEditStudent?id=${e.rollnumber}">Edit</a></td>
+                                            <td><a class="btn btn-primary" href="AdminEditStudent?id=${e.rollnumber}">Update</a></td>
                                             <td><input class="btn btn-primary"  type="button" value="Delete" onclick="removeEmp(${e.rollnumber})"/></td>
                                         </tr>   
                                     </c:forEach>

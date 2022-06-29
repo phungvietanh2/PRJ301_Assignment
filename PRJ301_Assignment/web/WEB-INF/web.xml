@@ -54,7 +54,7 @@
     </servlet>
     <servlet>
         <servlet-name>AdminListClass</servlet-name>
-        <servlet-class>AdminListController.AdminListClass</servlet-class>
+        <servlet-class>AdminListController.AdminListClassMark</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>AdminInsertStudent</servlet-name>
