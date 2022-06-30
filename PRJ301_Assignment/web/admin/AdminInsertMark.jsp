@@ -65,9 +65,8 @@
                             <div class="side-menu-container">
                                 <ul class="nav navbar-nav">
                                     <li><a href="Admin"><span class="glyphicon "></span>Home</a></li>
-                                    <li class="active" ><a href="AdminInsertStudent"><span class="glyphicon  "></span> INSERT STUDENT</a></li>
-                                    <li><a href="#"><span class="glyphicon "></span> Class</a></li>
-                                    <li><a href="#"><span class="glyphicon "></span> Student</a></li>
+                                    <li  ><a href="AdminInsertStudent"><span class="glyphicon  "></span> INSERT STUDENT</a></li>
+                                    <li class="active"><a href="AdminInsertMarkController"><span class="glyphicon "></span> INSERT MARK</a></li>
                                     <li><a href="login.jsp"><span class="glyphicon  glyphicon-log-out"></span> Log out</a></li>
                                 </ul>
                             </div>
@@ -79,13 +78,13 @@
             <div class="col-md-10 content">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h3>List Class/ 
+                        <h3>Mark/ 
                             <a style="color: black;font-size: 20p" href="Admin">Back</a> 
                             <span class="material-icons">
                                 keyboard_return
                             </span></h3>
                     </div>
-                    <form action="AdminListClass" method="POST">
+                    <form action="AdminInsertMarkController" method="POST">
                         <div class="panel-body">
                             <div class="container"><h1>Class</h1> </div> 
                             <select style="border-radius: 10px ; height: 4rem;
@@ -105,42 +104,56 @@
                                    margin-left: 0px;" type="submit" value="Search" /> 
                         </div>
                     </form>
-                    <c:if test="${requestScope.Assignments !=null }">
-                        <table  class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <td></td>
-                                    <c:forEach  items="${requestScope.Assignments}" var="v">
-                                        <td>${v.aname}</td>
-                                    </c:forEach>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <c:forEach  items="${requestScope.Students}" var="a">
-                                    <tr> <td>${a.rollnumber}</td>
-
-                                        <c:forEach items="${requestScope.Assignments}" var="b">
-                                            <td>
-                                                <input readonly="true" name="a${a.rollnumber}_${b.aid}" class="hight" type="text"
-                                                       <c:forEach items="${requestScope.AssignmentIDSTUDENTs}" var="c">   
-                                                           <c:if test="${c.students.rollnumber eq a.rollnumber and c.assignments.aid eq b.aid}">
-                                                               value="${c.asmarkk}"
-                                                           </c:if>
-                                                       </c:forEach>
-                                                       />
-
-
-                                            </td> 
+                    <form action="insertMark" method="POST">
+                        <c:if test="${requestScope.Assignments !=null }">
+                            <table  class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <td></td>
+                                        <c:forEach  items="${requestScope.Assignments}" var="v">
+                                            <td>${v.aname}</td>
                                         </c:forEach>
-
                                     </tr>
-                                    
-                                </c:forEach>
-                                   
-                            </tbody>
-                        </table>
-                       
-                    </c:if>
+                                </thead>
+                                <tbody>
+                                    <c:forEach  items="${requestScope.Students}" var="a">
+                                        <tr> <td>${a.rollnumber}</td>
+
+                                            <c:forEach items="${requestScope.Assignments}" var="b">
+                                                <td>
+                                                    <input name="score${a.rollnumber}_${b.aid}" class="hight" type="text"
+                                                           <c:forEach items="${requestScope.AssignmentIDSTUDENTs}" var="c">   
+                                                               <c:if test="${c.students.rollnumber eq a.rollnumber and c.assignments.aid eq b.aid}">
+                                                                   value="${c.asmarkk}"
+                                                               </c:if>
+                                                           </c:forEach>
+                                                           />
+                                                    <input name="eid${a.rollnumber}_${b.aid}" class="hight" type="hidden"
+                                                           <c:forEach items="${requestScope.AssignmentIDSTUDENTs}" var="c">   
+                                                               <c:if test="${c.students.rollnumber eq a.rollnumber and c.assignments.aid eq b.aid}">
+                                                                   value="${c.asid}"
+                                                               </c:if>
+                                                           </c:forEach>
+                                                           />
+                                                    <input name="component" value="${a.rollnumber}_${b.aid}" type="hidden"
+                                                           
+                                                           /> 
+                                                </td> 
+                                            </c:forEach>
+
+                                        </tr>
+                                    </c:forEach>
+                                </tbody>
+                            </table>
+                            <input  style="border-radius: 10px ;
+                                    height: 4rem;
+                                    width: 10rem;
+                                    font-size: 20px;
+                                    margin-top: 15px;
+                                    margin-left: 0px;"  type="submit" value="Save"/>
+                        </c:if>
+                    </form>
+
                 </div>
             </div>
         </div>

@@ -32,7 +32,7 @@ public class StudentDBcontext extends DBcontext<Student> {
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
                 Student S = new Student();
-                 
+                S.setSid(rs.getInt("Sid"));
                 S.setRollnumber(rs.getString("Srollnumber"));
                 S.setSname(rs.getString("Sname"));
                 S.setSgender(rs.getString("Sgender"));
@@ -48,16 +48,17 @@ public class StudentDBcontext extends DBcontext<Student> {
         return students;
     }
 
-    public ArrayList<Student> SearchByid(String id) {
+    public ArrayList<Student> SearchByidClass(String id) {
         ArrayList<Student> students = new ArrayList<>();
         try {
-            String sql = "  select s.Srollnumber  from Student s  left JOIN  GroupClass g on g.Srollnumber = s.Srollnumber \n"
-                    + "				    left JOIN Class cl on g.Clid = cl.Clid where cl.Clid = ?";
+            String sql = "  select s.Sid , s.Srollnumber  from Student s  left JOIN  GroupClass g on g.Sid = s.Sid \n"
+                    + "                                        		 left JOIN Class cl on g.Clid = cl.Clid where cl.Clid = ?";
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setString(1, id);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
                 Student S = new Student();
+                S.setSid(rs.getInt("Sid"));
                 S.setRollnumber(rs.getString("Srollnumber"));
                 students.add(S);
             }
@@ -68,22 +69,24 @@ public class StudentDBcontext extends DBcontext<Student> {
     }
 
     public static void main(String[] args) {
-        StudentDBcontext dao = new StudentDBcontext();
-        ArrayList<Student> a = dao.list();
+//        StudentDBcontext dao = new StudentDBcontext();
+//        ArrayList<Student> a = dao.liststudent();
         //System.out.println(a);
         //  for (Student student : a) {
-         System.out.println(a);
+        // System.out.println(a);
         //  }
     }
 
-    public Student getid(String id) {
+    @Override
+    public Student get(int id) {
         try {
-            String sql = " select  Srollnumber , Sname , Sgender, Sdob , Sgmail ,Sstart , Sk from Student  where Srollnumber = ? ";
+            String sql = " 										   select Sid Srollnumber , Sname , Sgender, Sdob , Sgmail ,Sstart , Sk from Student  where Sid = ?";
             PreparedStatement stm = connection.prepareStatement(sql);
-            stm.setString(1, id);
+            stm.setInt(1, id);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
                 Student S = new Student();
+                S.setSid(rs.getInt("Sid"));
                 S.setRollnumber(rs.getString("Srollnumber"));
                 S.setSname(rs.getString("Sname"));
                 S.setSgender(rs.getString("Sgender"));
@@ -96,11 +99,6 @@ public class StudentDBcontext extends DBcontext<Student> {
         } catch (SQLException ex) {
             Logger.getLogger(ClassDBcontext.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return null;
-    }
-
-    @Override
-    public Student get(int id) {
         return null;
     }
 
@@ -126,19 +124,18 @@ public class StudentDBcontext extends DBcontext<Student> {
                     + "           ,?\n"
                     + "           ,?)";
             PreparedStatement stm = connection.prepareStatement(sql);
-            
-              
-                stm.setString(1, model.getRollnumber());
-                stm.setString(2, model.getSname());
-                stm.setString(3, model.getSgender());
-                stm.setDate(4, model.getSdob());
-                stm.setString(5, model.getSgmail());
-                stm.setString(6, model.getStart());
-                stm.setInt(7, model.getSk());
-                stm.executeUpdate();
-            
-             connection.commit();
-        }  catch (SQLException ex) {
+
+            stm.setString(1, model.getRollnumber());
+            stm.setString(2, model.getSname());
+            stm.setString(3, model.getSgender());
+            stm.setDate(4, model.getSdob());
+            stm.setString(5, model.getSgmail());
+            stm.setString(6, model.getStart());
+            stm.setInt(7, model.getSk());
+            stm.executeUpdate();
+
+            connection.commit();
+        } catch (SQLException ex) {
             Logger.getLogger(StudentDBcontext.class.getName()).log(Level.SEVERE, null, ex);
             try {
                 connection.rollback();
@@ -183,9 +180,9 @@ public class StudentDBcontext extends DBcontext<Student> {
     public void delete(Student model) {
         try {
             String sql = "DELETE Student"
-                    + " WHERE [Srollnumber] = ?";
+                    + " WHERE [Sid] = ?";
             PreparedStatement stm = connection.prepareStatement(sql);
-            stm.setString(1, model.getRollnumber());
+            stm.setInt(1, model.getSid());
             stm.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(StudentDBcontext.class.getName()).log(Level.SEVERE, null, ex);

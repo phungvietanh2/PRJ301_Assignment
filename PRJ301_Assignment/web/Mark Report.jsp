@@ -26,21 +26,24 @@
                     <thead>
                         <tr>                     
                             <th class="selec1">TERM</th>
-                            <th class="selec1">COURSE </th>                            
+                            <th class="selec1">COURSE </th>
+
                         </tr>
                     </thead>
                     <tbody>
 
                         <tr>
-                            <td>Summer2022</td>
-                            <td class="weekly">
-                            
-                        <li><a href="ListMark/IOT.jsp">IOT102</a></li>
-                    <li><a href="#">JPD123</a></li>
-                    <li><a href="#">MAS291</a></li>
-                    <li><a href="#">PRJ301</a></li>
-                    <li><a href="#">SWE201c</a></li>
-                
+                            <td>
+                            <c:forEach items="${requestScope.Terms}" var="c">
+                    <li>${c.tname}</li>
+                    </c:forEach> 
+                </td>
+                <td class="weekly">
+                    
+                <c:forEach items="${requestScope.classs}" var="a">
+                    <a href="${a.getSubjectss1()}">${a.getSubjectss1()}</a>
+                </c:forEach>
+
                 </td>
                 </tr>
                 </tbody>

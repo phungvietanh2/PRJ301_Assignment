@@ -2,30 +2,25 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package AdminListController;
+
+package AdminInsertController;
 
 import DBcontext.AssignmentDBcontext;
 import DBcontext.AssignmentIDSTUDENTDBcontext;
 import DBcontext.ClassDBcontext;
 import DBcontext.StudentDBcontext;
-import Model.Assignment;
-import Model.AssignmentIDSTUDENT;
-import Model.Classs;
-import Model.Student;
-import Model.Subjects;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
 
 /**
  *
  * @author phung
  */
-public class AdminListClassMark extends HttpServlet {
+public class AdminInsertMarkController extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -41,7 +36,7 @@ public class AdminListClassMark extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.setAttribute("classs", dbclass.list());
-        request.getRequestDispatcher("admin/AdminListClassMark.jsp").forward(request, response);
+        request.getRequestDispatcher("admin/AdminInsertMark.jsp").forward(request, response);
     }
 
     /**
@@ -60,11 +55,11 @@ public class AdminListClassMark extends HttpServlet {
 
         request.setAttribute("classs", dbclass.list());
 
-        request.setAttribute("Students", dbstudent.SearchByidClass(id));
+        request.setAttribute("Students", dbstudent.SearchByid(id));
         
         request.setAttribute("AssignmentIDSTUDENTs", dbasidstudent.getbymark(id));
 
-        request.getRequestDispatcher("admin/AdminListClassMark.jsp").forward(request, response);
+        request.getRequestDispatcher("admin/AdminInsertMark.jsp").forward(request, response);
 
     }
     @Override

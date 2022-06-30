@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * @author phung
  */
 public class Student {
-
+    private int sid ;
     private String rollnumber;
     private String sname;
     private String sgender;
@@ -42,6 +42,14 @@ public class Student {
   
     public String getRollnumber() {
         return rollnumber;
+    }
+
+    public int getSid() {
+        return sid;
+    }
+
+    public void setSid(int sid) {
+        this.sid = sid;
     }
 
     public void setRollnumber(String rollnumber) {

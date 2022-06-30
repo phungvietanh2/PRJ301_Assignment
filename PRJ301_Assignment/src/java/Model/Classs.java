@@ -49,5 +49,13 @@ public class Classs {
     public void setSubjectss(Subjects subjectss) {
         this.subjectss = subjectss;
     }
+     public String getSubjectss1() {
+        return subjectss.getSuname();
+    }
+
+    @Override
+    public String toString() {
+        return "Classs{" + "cid=" + cid + ", clstart=" + clstart + ", clend=" + clend + ", subjectss=" + subjectss + '}';
+    }
 
 }

@@ -40,6 +40,7 @@ public class AssignmentIDSTUDENTDBcontext extends DBcontext<AssignmentIDSTUDENT>
                 Assignment a = new Assignment();
                 a.setAid(rs.getInt("Aid"));
                 AssignmentIDSTUDENT as = new AssignmentIDSTUDENT();
+                as.setAsid(rs.getInt("Asid"));
                 as.setAsmarkk(rs.getFloat("Mark"));
                 as.setAsdate(rs.getDate("Asdate"));
                 as.setStudents(s);
@@ -85,6 +86,66 @@ public class AssignmentIDSTUDENTDBcontext extends DBcontext<AssignmentIDSTUDENT>
     @Override
     public void delete(AssignmentIDSTUDENT model) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public void save(ArrayList<AssignmentIDSTUDENT> AssignmentIDSTUDENTs) {
+
+        try {
+            connection.setAutoCommit(false);
+            for (AssignmentIDSTUDENT o : AssignmentIDSTUDENTs) {
+                //insert 
+                if (o.getAsid() == -1 && o.getAsmarkk() != -1) {
+                    String insert = "INSERT INTO [AssessmentIDStudent]\n"
+                            + "           ([Aid]\n"
+                            + "           ,[Srollnumber]\n"
+                            + "           ,[Mark]\n"
+                            + "           ,[Asdate])\n"
+                            + "     VALUES\n"
+                            + "           (?\n"
+                            + "           ,?\n"
+                            + "           ,?\n"
+                            + "           ,GETDATE())";
+                    PreparedStatement stm = connection.prepareStatement(insert);
+                    stm.setInt(1,o.getAssignments().getAid() );
+                    stm.setString(2, o.getStudents().getRollnumber());
+                    stm.setFloat(3,o.getAsmarkk() );
+                    stm.executeUpdate();
+                }
+                //update 
+                if (o.getAsid() != -1 && o.getAsmarkk() != -1) {
+                    String update = "UPDATE [AssessmentIDStudent]\n"
+                            + "   SET [Mark] =?\n"
+                            + "   \n"
+                            + " WHERE Asid = ?";
+                     PreparedStatement stm = connection.prepareStatement(update);
+                     stm.setFloat(1,o.getAsmarkk());
+                     stm.setInt(2,o.getAsid() );
+                     stm.executeUpdate();
+                }
+                //delete 
+                if (o.getAsid() != -1 && o.getAsmarkk() == -1) {
+                    String delete = "DELETE [AssessmentIDStudent] WHERE Asid = ? ";
+                     PreparedStatement stm = connection.prepareStatement(delete);
+                     stm.setInt(1,o.getAsid() );
+                     stm.executeUpdate();
+                }
+            }
+            
+            connection.commit();
+        } catch (SQLException ex) {
+            Logger.getLogger(StudentDBcontext.class.getName()).log(Level.SEVERE, null, ex);
+            try {
+                connection.rollback();
+            } catch (SQLException ex1) {
+                Logger.getLogger(StudentDBcontext.class.getName()).log(Level.SEVERE, null, ex1);
+            }
+        } finally {
+            try {
+                connection.setAutoCommit(true);
+            } catch (SQLException ex) {
+                Logger.getLogger(StudentDBcontext.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
 
 }

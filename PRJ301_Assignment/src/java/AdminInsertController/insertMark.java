@@ -4,24 +4,25 @@
  */
 package AdminInsertController;
 
-import DBcontext.ClassDBcontext;
-import DBcontext.StudentDBcontext;
-import Model.Classs;
+import DBcontext.AssignmentIDSTUDENTDBcontext;
+import Model.Assignment;
+import Model.AssignmentIDSTUDENT;
 import Model.Student;
+import Model.Subjects;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.sql.Date;
 import java.util.ArrayList;
+import sun.security.util.Length;
 
 /**
  *
  * @author phung
  */
-public class AdminInsertStudent extends HttpServlet {
+public class insertMark extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,10 +41,10 @@ public class AdminInsertStudent extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet AdminInsertStudent</title>");
+            out.println("<title>Servlet insertMark</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet AdminInsertStudent at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet insertMark at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -61,41 +62,40 @@ public class AdminInsertStudent extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        request.getRequestDispatcher("admin/AdminInsertStudent.jsp").forward(request, response);
+        processRequest(request, response);
     }
-
-    StudentDBcontext dbstudent = new StudentDBcontext();
+    AssignmentIDSTUDENTDBcontext dbass = new AssignmentIDSTUDENTDBcontext();
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-       Student s = new Student();
-//
-//        s.setRollnumber(request.getParameter("Srollnumbers"));
-//        s.setSname(request.getParameter("Sname"));
-//        s.setSgender(request.getParameter("Sgender"));
-//        s.setSdob(Date.valueOf(request.getParameter("Sdob")));
-//        s.setSgmail(request.getParameter("Sgmail"));
-//        s.setStart(request.getParameter("Sstart"));
-//        s.setSk(Integer.parseInt(request.getParameter("Sk")));
-
-       String[] indexs = request.getParameterValues("index");
-        for (String index : indexs) {
-          s.setRollnumber(request.getParameter("Srollnumbers" + index));
-            s.setSname(request.getParameter("Sname" + index));
-          s.setSgender(request.getParameter("Sgender" + index));
-          s.setSdob(Date.valueOf(request.getParameter("Sdob" + index)));
-           s.setSgmail(request.getParameter("Sgmail" + index));
-           s.setStart(request.getParameter("Sstart" + index));
-          s.setSk(Integer.parseInt(request.getParameter("Sk" + index)));
-          dbstudent.insert(s);
+        String[] components = request.getParameterValues("component");
+        ArrayList<AssignmentIDSTUDENT> AssignmentIDSTUDENTs = new ArrayList<>();
+        for (String component : components) {
+            String sid = request.getParameter(component.split("_")[0]);
+            int  aid = Integer.parseInt(component.split("_")[1]);
+            AssignmentIDSTUDENT as = new AssignmentIDSTUDENT();
+            String eid = request.getParameter("eid"+sid+"_"+aid);
+            System.out.println(sid);
+            if (eid.length() > 0) 
+                as.setAsid(Integer.parseInt(eid));
+             else 
+                as.setAsid(-1);           
+            String score = request.getParameter("score" + sid + "_" + aid);
+            if (score.length() > 0) 
+                as.setAsmarkk(Float.parseFloat(score));
+             else 
+                as.setAsmarkk(-1);    
+            Student s = new Student();
+            s.setRollnumber(sid);
+            Assignment a = new Assignment();
+            a.setAid(aid);
+            as.setAssignments(a);
+            as.setStudents(s);
+            AssignmentIDSTUDENTs.add(as);
         }
-
-        
-
-        response.getWriter().println("done!");
+        dbass.save(AssignmentIDSTUDENTs);
+        request.getRequestDispatcher("AdminInsertMarkController").forward(request, response);
     }
 
     /**

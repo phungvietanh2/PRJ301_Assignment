@@ -59,5 +59,10 @@ public class Subjects {
     public void setTerm(int term) {
         this.term = term;
     }
+
+    @Override
+    public String toString() {
+        return "Subjects{" + "suid=" + suid + ", suname=" + suname + ", credit=" + credit + ", term=" + term + ", Assignments=" + Assignments + '}';
+    }
   
 }

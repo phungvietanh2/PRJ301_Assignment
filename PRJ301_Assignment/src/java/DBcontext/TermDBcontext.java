@@ -4,12 +4,12 @@
  */
 package DBcontext;
 
-import Model.Subjects;
+import Model.Student;
+import Model.Term;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -17,55 +17,47 @@ import java.util.logging.Logger;
  *
  * @author phung
  */
-public class CourseDBcontext extends DBcontext<Subjects>{
+public class TermDBcontext extends DBcontext<Term> {
 
     @Override
-    public ArrayList<Subjects> list() {
-      ArrayList<Subjects> subjectss = new ArrayList<>();
+    public ArrayList<Term> list() {
+        ArrayList<Term> Terms = new ArrayList<>();
         try {
-            String sql= "select Coid , Coname , Cocredit   from Course";
+            String sql = " select DISTINCT t.Tname  from Term t  left JOIN Course c on t.Tid = c.Tid\n"
+                    + "					                      left JOIN   Class cl on c.Coid = cl.Coid\n"
+                    + "										  left JOIN GroupClass g on cl.Clid = g.Clid\n"
+                    + "										  left JOIN   Student s on s.Srollnumber = g.Srollnumber ";
             PreparedStatement stm = connection.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
-               Subjects s = new Subjects();
-               s.setSuid(rs.getString("Coid"));
-               s.setSuname(rs.getString("Coname"));
-               s.setCredit(rs.getInt("Cocredit"));
-               
-               subjectss.add(s);
+                Term t = new Term();
+                t.setTname(rs.getString("Tname"));
+                Terms.add(t);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(CourseDBcontext.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TermDBcontext.class.getName()).log(Level.SEVERE, null, ex);
         }
-    return subjectss;
+        return Terms;
     }
- public static void main(String[] args) {
-        CourseDBcontext dao = new CourseDBcontext();
-        List<Subjects> a = dao.list();
-        //System.out.println(a);
-        for (Subjects student : a) {
-           System.out.println(a);
-        }
-    }
+
     @Override
-    public Subjects get(int id) {
+    public Term get(int id) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public void insert(Subjects model) {
+    public void insert(Term model) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public void update(Subjects model) {
+    public void update(Term model) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public void delete(Subjects model) {
+    public void delete(Term model) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
-    
+
 }

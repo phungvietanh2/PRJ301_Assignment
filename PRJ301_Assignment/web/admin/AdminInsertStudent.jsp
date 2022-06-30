@@ -84,30 +84,7 @@
                     <form action="AdminInsertStudent" method="POST" class="a">
 
                         <div>
-                            <label for="fname">ID </label>
-                            <input type="text" name="Srollnumbers"/> <br/>
-
-                            <label for="fname"> Name </label>
-                            <input type="text" name="Sname">
-
-                            <label for="fname">Gender</label><br>   
-                            <input <c:if test="${requestScope.student.sgender}">checked="checked"</c:if>
-                                                                                class="Gender1" checked="checked"type="radio"name="Sgender"value="male"/> Male
-                                <input <c:if test="${!requestScope.student.sgender}">checked="checked"</c:if>
-                                                                                     class="Gender1" checked="checked"type="radio"name="Sgender"value="male"/> Female <br>
-
-                                <label for="fname">Dob</label><br>
-                                <input type="date" name="Sdob"  value="${requestScope.student.sdob}"/> <br/>
-
-                            <label for="fname">Gmail </label>
-                            <input type="text"  name="Sgmail" value="${requestScope.student.sgmail}" />
-
-                            <label for="fname">TERM</label><br>
-                            <input type="text" name="Sstart"  value="${requestScope.student.start}"/> <br/>
-
-                            <label for="fname">K</label><br>
-                            <input type="number" name="Sk"  value="${requestScope.student.sk}" /> <br/>
-
+                            
                             <input style="margin-top: 20px;border-radius:  10px ;width: 100%; height: 5rem; font-size: 2rem " type="button" value="Add Student" onclick="addstudent()" />
                         </div>
                         <div id="container">      

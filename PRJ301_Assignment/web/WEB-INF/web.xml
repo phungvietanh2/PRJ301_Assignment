@@ -104,6 +104,14 @@
         <servlet-name>AdminEditStudentController</servlet-name>
         <servlet-class>AdminEditDelectController.AdminEditStudentController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AdminInsertMarkController</servlet-name>
+        <servlet-class>AdminInsertController.AdminInsertMarkController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>insertMark</servlet-name>
+        <servlet-class>AdminInsertController.insertMark</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>DEMOcontroller</servlet-name>
         <url-pattern>/demo</url-pattern>
@@ -203,6 +211,14 @@
     <servlet-mapping>
         <servlet-name>AdminEditStudentController</servlet-name>
         <url-pattern>/AdminEditStudent</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminInsertMarkController</servlet-name>
+        <url-pattern>/AdminInsertMarkController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>insertMark</servlet-name>
+        <url-pattern>/insertMark</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
