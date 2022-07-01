@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package controller;
+package HomeSinhVienController;
 
 import DBcontext.ClassDBcontext;
 import DBcontext.CourseDBcontext;
@@ -59,7 +59,7 @@ public class MarkReportController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
        request.setAttribute("Terms", dbterm.list());
-       request.setAttribute("classs", dbclass.listclass());
+       //request.setAttribute("classs", dbclass.listclass());
         request.getRequestDispatcher("Mark Report.jsp").forward(request, response);
     }
 

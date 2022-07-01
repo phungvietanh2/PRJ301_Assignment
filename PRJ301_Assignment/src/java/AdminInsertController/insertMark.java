@@ -72,7 +72,7 @@ public class insertMark extends HttpServlet {
         String[] components = request.getParameterValues("component");
         ArrayList<AssignmentIDSTUDENT> AssignmentIDSTUDENTs = new ArrayList<>();
         for (String component : components) {
-            String sid = request.getParameter(component.split("_")[0]);
+            int sid =Integer.parseInt(component.split("_")[0]);
             int  aid = Integer.parseInt(component.split("_")[1]);
             AssignmentIDSTUDENT as = new AssignmentIDSTUDENT();
             String eid = request.getParameter("eid"+sid+"_"+aid);
@@ -87,7 +87,7 @@ public class insertMark extends HttpServlet {
              else 
                 as.setAsmarkk(-1);    
             Student s = new Student();
-            s.setRollnumber(sid);
+            s.setSid(sid);
             Assignment a = new Assignment();
             a.setAid(aid);
             as.setAssignments(a);

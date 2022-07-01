@@ -80,8 +80,8 @@
                     </div>
 
                     <form action="AdminEditStudent" method="POST" class="a">
-                        <label for="fname">ID : ${requestScope.student.rollnumber}</label>
-                        <input type="hidden" name="Srollnumbers"  value="${requestScope.student.rollnumber}"/> <br/>
+                        <label for="fname">ID : ${requestScope.student.sid}</label>
+                        <input type="hidden" name="Sid"  value="${requestScope.student.sid}"/> <br/>
 
                         <label for="fname"> Name </label>
                         <input type="text" name="Sname" value="${requestScope.student.sname}">
@@ -101,8 +101,7 @@
                         <label for="fname">TERM</label><br>
                         <input type="text" name="Sstart"  value="${requestScope.student.start}"/> <br/>
 
-                        <label for="fname">K</label><br>
-                        <input type="number" name="Sk"  value="${requestScope.student.sk}" /> <br/>
+                        
 
                         <input style="margin-top: 20px;border-radius:  10px ;width: 10rem; height: 5rem;" type="submit" value="Save" />
 

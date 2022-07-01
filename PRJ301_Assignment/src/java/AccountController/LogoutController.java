@@ -3,31 +3,21 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
-package controller;
+package AccountController;
 
-import DBcontext.AssignmentDBcontext;
-import DBcontext.CourseDBcontext;
-import DBcontext.StudentDBcontext;
-import DBcontext.demoa;
-import Model.Assignment;
-import Model.Student;
-import Model.Subjects;
-import Model.demo;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
+import jakarta.servlet.http.HttpSession;
 
 /**
  *
  * @author phung
  */
-@WebServlet(name="demoa", urlPatterns={"/demoa"})
-public class de extends HttpServlet {
+public class LogoutController extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -38,19 +28,10 @@ public class de extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-         StudentDBcontext dbstudent = new StudentDBcontext();
-        ArrayList<Student> Students = dbstudent.list();
-        request.setAttribute("Students", Students);
-        AssignmentDBcontext dbas = new AssignmentDBcontext();
-        ArrayList<Assignment> Assignments = dbas.list();
-          request.setAttribute("Assignments", Assignments);
-          
-          demoa dba = new demoa();
-           ArrayList<demo> d = dba.list();
-          request.setAttribute("d", d);
-          
-        request.getRequestDispatcher("manage.jsp").forward(request, response);
+      HttpSession session =request.getSession();
+       session.removeAttribute("accounts");
+       request.removeAttribute("listlogstudentt");
+      request.getRequestDispatcher("Home").forward(request, response);
     } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -88,7 +69,5 @@ public class de extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
- 
 
 }

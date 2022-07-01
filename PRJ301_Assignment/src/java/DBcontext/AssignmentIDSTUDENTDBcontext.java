@@ -24,19 +24,20 @@ public class AssignmentIDSTUDENTDBcontext extends DBcontext<AssignmentIDSTUDENT>
     public ArrayList<AssignmentIDSTUDENT> getbymark(String id) {
         ArrayList<AssignmentIDSTUDENT> AssignmentIDSTUDENTs = new ArrayList<>();
         try {
-            String sql = " 					 select a.* from \n"
-                    + "					(select * from AssessmentIDStudent) a \n"
-                    + "					INNER JOIN\n"
-                    + "					 ( select Srollnumber , Aid , MAX(Asdate) as Asdate from AssessmentIDStudent  group by Aid ,Srollnumber) b  on a.Srollnumber = b.Srollnumber and a.Aid=b.Aid and a.Asdate = b.Asdate  \n"
-                    + "					left JOIN Student s on s.Srollnumber = b.Srollnumber\n"
-                    + "				    left JOIN  GroupClass g on g.Srollnumber = s.Srollnumber \n"
-                    + "				    left JOIN Class cl on g.Clid = cl.Clid where cl.Clid = ? ";
+            String sql = "select s.Sname, a.* from \n"
+                    + "(select * from AssessmentIDStudent) a \n"
+                    + "INNER JOIN\n"
+                    + " ( select Sid , Aid , MAX(Asdate) as Asdate from AssessmentIDStudent  group by Aid ,Sid) b  on a.Sid = b.Sid and a.Aid=b.Aid and a.Asdate = b.Asdate  \n"
+                    + " left JOIN Student s on s.Sid = b.Sid\n"
+                    + " left JOIN  GroupStudent g on g.Sid = s.Sid \n"
+                    + "  left JOIN [Group] gr on gr.Gid = g.Gid where gr.Gid = ?";
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setString(1, id);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
                 Student s = new Student();
-                s.setRollnumber(rs.getString("Srollnumber"));
+                s.setSid(rs.getInt("Sid"));
+                s.setSname(rs.getString("Sname"));
                 Assignment a = new Assignment();
                 a.setAid(rs.getInt("Aid"));
                 AssignmentIDSTUDENT as = new AssignmentIDSTUDENT();
@@ -55,7 +56,7 @@ public class AssignmentIDSTUDENTDBcontext extends DBcontext<AssignmentIDSTUDENT>
 
     public static void main(String[] args) {
         AssignmentIDSTUDENTDBcontext dao = new AssignmentIDSTUDENTDBcontext();
-        ArrayList<AssignmentIDSTUDENT> a = dao.getbymark("SE1501");
+        ArrayList<AssignmentIDSTUDENT> a = dao.getbymark("se1");
         //System.out.println(a);
         for (AssignmentIDSTUDENT student : a) {
             System.out.println(a);
@@ -97,7 +98,7 @@ public class AssignmentIDSTUDENTDBcontext extends DBcontext<AssignmentIDSTUDENT>
                 if (o.getAsid() == -1 && o.getAsmarkk() != -1) {
                     String insert = "INSERT INTO [AssessmentIDStudent]\n"
                             + "           ([Aid]\n"
-                            + "           ,[Srollnumber]\n"
+                            + "           ,[Sid]\n"
                             + "           ,[Mark]\n"
                             + "           ,[Asdate])\n"
                             + "     VALUES\n"
@@ -106,9 +107,9 @@ public class AssignmentIDSTUDENTDBcontext extends DBcontext<AssignmentIDSTUDENT>
                             + "           ,?\n"
                             + "           ,GETDATE())";
                     PreparedStatement stm = connection.prepareStatement(insert);
-                    stm.setInt(1,o.getAssignments().getAid() );
-                    stm.setString(2, o.getStudents().getRollnumber());
-                    stm.setFloat(3,o.getAsmarkk() );
+                    stm.setInt(1, o.getAssignments().getAid());
+                    stm.setInt(2, o.getStudents().getSid());
+                    stm.setFloat(3, o.getAsmarkk());
                     stm.executeUpdate();
                 }
                 //update 
@@ -117,20 +118,20 @@ public class AssignmentIDSTUDENTDBcontext extends DBcontext<AssignmentIDSTUDENT>
                             + "   SET [Mark] =?\n"
                             + "   \n"
                             + " WHERE Asid = ?";
-                     PreparedStatement stm = connection.prepareStatement(update);
-                     stm.setFloat(1,o.getAsmarkk());
-                     stm.setInt(2,o.getAsid() );
-                     stm.executeUpdate();
+                    PreparedStatement stm = connection.prepareStatement(update);
+                    stm.setFloat(1, o.getAsmarkk());
+                    stm.setInt(2, o.getAsid());
+                    stm.executeUpdate();
                 }
                 //delete 
                 if (o.getAsid() != -1 && o.getAsmarkk() == -1) {
                     String delete = "DELETE [AssessmentIDStudent] WHERE Asid = ? ";
-                     PreparedStatement stm = connection.prepareStatement(delete);
-                     stm.setInt(1,o.getAsid() );
-                     stm.executeUpdate();
+                    PreparedStatement stm = connection.prepareStatement(delete);
+                    stm.setInt(1, o.getAsid());
+                    stm.executeUpdate();
                 }
             }
-            
+
             connection.commit();
         } catch (SQLException ex) {
             Logger.getLogger(StudentDBcontext.class.getName()).log(Level.SEVERE, null, ex);

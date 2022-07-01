@@ -7,6 +7,8 @@ package DBcontext;
 import Model.Classs;
 import Model.Student;
 import Model.Subjects;
+import Model.Teacher;
+import Model.Term;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -25,17 +27,20 @@ public class ClassDBcontext extends DBcontext<Classs> {
     public ArrayList<Classs> list() {
         ArrayList<Classs> classes = new ArrayList<>();
         try {
-            String sql = "select Clid , Coid, Clstart,Clend from Class";
+            String sql = "select Gid, Coid , Teid , Gstart , Gend from [Group]";
             PreparedStatement stm = connection.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
+                Teacher t = new Teacher();
+                t.setTeid(rs.getInt("Teid"));
                 Subjects s = new Subjects();
                 s.setSuid(rs.getString("Coid"));
                 Classs cl = new Classs();
-                cl.setCid(rs.getString("Clid"));
-                cl.setClstart(rs.getDate("Clstart"));
-                cl.setClend(rs.getDate("Clend"));
+                cl.setCid(rs.getString("Gid"));
+                cl.setClstart(rs.getDate("Gstart"));
+                cl.setClend(rs.getDate("Gend"));
                 cl.setSubjectss(s);
+                cl.setTeachers(t);
                 classes.add(cl);
             }
         } catch (SQLException ex) {
@@ -44,34 +49,10 @@ public class ClassDBcontext extends DBcontext<Classs> {
         return classes;
     }
 
-    public ArrayList<Classs> listclass() {
-        ArrayList<Classs> classes = new ArrayList<>();
-        try {
-            String sql = "select c.Coname ,cl.Clstart,cl.Clend ,cl.Clid ,s.Srollnumber from Term t  left JOIN Course c on t.Tid = c.Tid\n"
-                    + "					                      left JOIN   Class cl on c.Coid = cl.Coid\n"
-                    + "										  left JOIN GroupClass g on cl.Clid = g.Clid\n"
-                    + "										  left JOIN   Student s on s.Srollnumber = g.Srollnumber where s.Srollnumber = 'HE153712'";
-            PreparedStatement stm = connection.prepareStatement(sql);
-            ResultSet rs = stm.executeQuery();
-            while (rs.next()) {
-                Subjects s = new Subjects();
-                s.setSuname(rs.getString("Coname"));
-                Classs cl = new Classs();
-                cl.setCid(rs.getString("Clid"));
-                cl.setClstart(rs.getDate("Clstart"));
-                cl.setClend(rs.getDate("Clend"));
-                cl.setSubjectss(s);
-                classes.add(cl);
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(ClassDBcontext.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return classes;
-    }
-
+   
     public static void main(String[] args) {
         ClassDBcontext dao = new ClassDBcontext();
-        List<Classs> a = dao.listclass();
+        List<Classs> a = dao.list();
         for (Classs o : a) {
             System.out.println(o);
         }

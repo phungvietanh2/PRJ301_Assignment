@@ -65,7 +65,7 @@
                             <div class="side-menu-container">
                                 <ul class="nav navbar-nav">
                                     <li><a href="Admin"><span class="glyphicon "></span>Home</a></li>
-                                    <li  ><a href="AdminInsertStudent"><span class="glyphicon  "></span> INSERT STUDENT</a></li>
+                                    <li ><a href="AdminInsertStudent"><span class="glyphicon "></span> INSERT STUDENT</a></li>
                                     <li class="active"><a href="AdminInsertMarkController"><span class="glyphicon "></span> INSERT MARK</a></li>
                                     <li><a href="login.jsp"><span class="glyphicon  glyphicon-log-out"></span> Log out</a></li>
                                 </ul>
@@ -117,26 +117,26 @@
                                 </thead>
                                 <tbody>
                                     <c:forEach  items="${requestScope.Students}" var="a">
-                                        <tr> <td>${a.rollnumber}</td>
+                                        <tr> <td>${a.sid}</td>
 
                                             <c:forEach items="${requestScope.Assignments}" var="b">
                                                 <td>
-                                                    <input name="score${a.rollnumber}_${b.aid}" class="hight" type="text"
+                                                    <input name="score${a.sid}_${b.aid}" class="hight" type="text"
                                                            <c:forEach items="${requestScope.AssignmentIDSTUDENTs}" var="c">   
-                                                               <c:if test="${c.students.rollnumber eq a.rollnumber and c.assignments.aid eq b.aid}">
+                                                               <c:if test="${c.students.sid eq a.sid and c.assignments.aid eq b.aid}">
                                                                    value="${c.asmarkk}"
                                                                </c:if>
                                                            </c:forEach>
                                                            />
-                                                    <input name="eid${a.rollnumber}_${b.aid}" class="hight" type="hidden"
+                                                    <input name="eid${a.sid}_${b.aid}" class="hight" type="hidden"
                                                            <c:forEach items="${requestScope.AssignmentIDSTUDENTs}" var="c">   
-                                                               <c:if test="${c.students.rollnumber eq a.rollnumber and c.assignments.aid eq b.aid}">
+                                                               <c:if test="${c.students.sid eq a.sid and c.assignments.aid eq b.aid}">
                                                                    value="${c.asid}"
                                                                </c:if>
                                                            </c:forEach>
                                                            />
-                                                    <input name="component" value="${a.rollnumber}_${b.aid}" type="hidden"
-                                                           
+                                                    <input name="component" value="${a.sid}_${b.aid}" type="hidden"
+
                                                            /> 
                                                 </td> 
                                             </c:forEach>

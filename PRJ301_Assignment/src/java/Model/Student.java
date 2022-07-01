@@ -13,23 +13,11 @@ import java.util.ArrayList;
  */
 public class Student {
     private int sid ;
-    private String rollnumber;
     private String sname;
     private String sgender;
     private Date sdob;
     private String sgmail;
-    private String start;
-    private int sk;
-    private Classs Clas;
-    private ArrayList<demo> demos = new ArrayList<>();
-
-    public ArrayList<demo> getDemos() {
-        return demos;
-    }
-
-    public void setDemos(ArrayList<demo> demos) {
-        this.demos = demos;
-    }
+    private String start; 
     private ArrayList<AssignmentIDSTUDENT> AssignmentIDSTUDENTs = new ArrayList<>();
 
     public ArrayList<AssignmentIDSTUDENT> getAssignmentIDSTUDENTs() {
@@ -40,10 +28,7 @@ public class Student {
         this.AssignmentIDSTUDENTs = AssignmentIDSTUDENTs;
     }
   
-    public String getRollnumber() {
-        return rollnumber;
-    }
-
+ 
     public int getSid() {
         return sid;
     }
@@ -52,10 +37,7 @@ public class Student {
         this.sid = sid;
     }
 
-    public void setRollnumber(String rollnumber) {
-        this.rollnumber = rollnumber;
-    }
-
+   
     public String getSname() {
         return sname;
     }
@@ -96,27 +78,11 @@ public class Student {
         this.start = start;
     }
 
-   
-
-    public int getSk() {
-        return sk;
-    }
-
-    public void setSk(int sk) {
-        this.sk = sk;
-    }
-
-    public Classs getClas() {
-        return Clas;
-    }
-
-    public void setClas(Classs Clas) {
-        this.Clas = Clas;
-    }
-
     @Override
     public String toString() {
-        return "Student{" + "rollnumber=" + rollnumber + ", sname=" + sname + ", sgender=" + sgender + ", sdob=" + sdob + ", sgmail=" + sgmail + ", start=" + start + ", sk=" + sk + ", Clas=" + Clas + ", demos=" + demos + ", AssignmentIDSTUDENTs=" + AssignmentIDSTUDENTs + '}';
+        return "Student{" + "sid=" + sid + ", sname=" + sname + ", sgender=" + sgender + ", sdob=" + sdob + ", sgmail=" + sgmail + ", start=" + start + ", AssignmentIDSTUDENTs=" + AssignmentIDSTUDENTs + '}';
     }
+
+  
     
 }

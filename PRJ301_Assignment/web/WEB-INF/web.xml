@@ -26,7 +26,7 @@
     </servlet>
     <servlet>
         <servlet-name>AcountController</servlet-name>
-        <servlet-class>controller.AcountController</servlet-class>
+        <servlet-class>AccountController.AcountController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>demo</servlet-name>
@@ -34,7 +34,7 @@
     </servlet>
     <servlet>
         <servlet-name>Logout</servlet-name>
-        <servlet-class>controller.LogoutController</servlet-class>
+        <servlet-class>AccountController.LogoutController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>HomeController</servlet-name>
@@ -74,7 +74,7 @@
     </servlet>
     <servlet>
         <servlet-name>MarkReportController</servlet-name>
-        <servlet-class>controller.MarkReportController</servlet-class>
+        <servlet-class>HomeSinhVienController.MarkReportController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ViewmarkController</servlet-name>

@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
-package controller;
+package AccountController;
 
 import DBcontext.AcountDBcontext;
 import DBcontext.ClassDBcontext;
@@ -68,7 +68,7 @@ public class AcountController extends HttpServlet {
         String user=request.getParameter("user");
         String Pass=request.getParameter("pass");
         AcountDBcontext dbaccount = new AcountDBcontext();
-        Account accounts = dbaccount.AccountLogin(user, Pass); 
+        Account accounts = dbaccount.getAccountbyuserpass(user, Pass); 
         if(accounts == null)
         {
             request.setAttribute("error", "error");
@@ -76,19 +76,9 @@ public class AcountController extends HttpServlet {
         }
         else
         {   
-            HttpSession session = request.getSession();   
-            if(accounts.getRole()==0){  
-               session.setAttribute("accounts", accounts);    
-           request.getRequestDispatcher("admin/AdminHome.jsp").forward(request, response);
-            }
-            else {
-               session.setAttribute("accounts", accounts);
-           request.getRequestDispatcher("Home.jsp").forward(request, response);  
-            
-                    }
-        }
-        
-    }
+             request.getSession().setAttribute("account", accounts);
+            response.getWriter().println("hello " + accounts.getDisplayname());
+    }}
 
     /** 
      * Returns a short description of the servlet.

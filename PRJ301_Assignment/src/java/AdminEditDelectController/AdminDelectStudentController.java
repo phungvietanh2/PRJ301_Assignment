@@ -32,7 +32,7 @@ public class AdminDelectStudentController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
          String id =request.getParameter("id");
          StudentDBcontext dbstudent = new StudentDBcontext();
-         Student s = dbstudent.getid(id);
+         Student s = dbstudent.get(id);
          dbstudent.delete(s);
          request.getRequestDispatcher("AdminListStudent").forward(request, response);
    

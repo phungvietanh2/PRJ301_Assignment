@@ -22,9 +22,9 @@ public class AssignmentDBcontext extends DBcontext<Assignment> {
     public ArrayList<Assignment> SearchByclass(String id) {
         ArrayList<Assignment> Assignments = new ArrayList<>();
         try {
-            String sql = "					select a.Aname , a.Aid from Assessment a left join Course c on  a.Coid = c.Coid left join Class cl on cl.Coid\n"
-                    + "					= c.Coid\n"
-                    + "					where cl.Clid = ?";
+            String sql = "select a.Aname , a.Aid from Assessment a left join Course c on  a.Coid = c.Coid\n" +
+"	 left join [Group] g on g.Coid= c.Coid\n" +
+"		where g.Gid= ?";
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setString(1, id);
             ResultSet rs = stm.executeQuery();

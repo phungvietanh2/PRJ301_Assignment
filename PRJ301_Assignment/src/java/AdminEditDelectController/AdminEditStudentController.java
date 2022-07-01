@@ -53,8 +53,10 @@ public class AdminEditStudentController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+     
         String id = request.getParameter("id");
-        request.setAttribute("student", dbstudent.getid(id));
+//       int id = Integer.parseInt("id");
+        request.setAttribute("student", dbstudent.get(id));
         request.getRequestDispatcher("admin/AdminEditStudent.jsp").forward(request, response);
     }
 
@@ -70,22 +72,20 @@ public class AdminEditStudentController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String raw_Srollnumber = request.getParameter("Srollnumbers");
+        String raw_Srollnumber = request.getParameter("Sid");
         String raw_Sname = request.getParameter("Sname");
         String raw_Sgender = request.getParameter("Sgender");
         String raw_Sdob = request.getParameter("Sdob");
         String raw_Sgmail = request.getParameter("Sgmail");
         String raw_Sstart = request.getParameter("Sstart");
-        String raw_Sk = request.getParameter("Sk");
 
         Student s = new Student();
-        s.setRollnumber(raw_Srollnumber);
+        s.setSid(Integer.parseInt(raw_Srollnumber));
         s.setSname(raw_Sname);
         s.setSgender(raw_Sgender);
         s.setSdob(Date.valueOf(raw_Sdob));
         s.setSgmail(raw_Sgmail);
         s.setStart(raw_Sstart);
-        s.setSk(Integer.parseInt(raw_Sk));
 
         dbstudent.update(s);
 

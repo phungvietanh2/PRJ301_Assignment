@@ -16,7 +16,7 @@ public class Subjects {
     private String suid;
     private String suname;
     private int credit;
-    private int term;
+    private Term terms;
     ArrayList<Assignment> Assignments = new ArrayList<>();
 
     public ArrayList<Assignment> getAssignments() {
@@ -52,17 +52,19 @@ public class Subjects {
         this.credit = credit;
     }
 
-    public int getTerm() {
-        return term;
+    public Term getTerms() {
+        return terms;
     }
 
-    public void setTerm(int term) {
-        this.term = term;
+    public void setTerms(Term terms) {
+        this.terms = terms;
     }
 
     @Override
     public String toString() {
-        return "Subjects{" + "suid=" + suid + ", suname=" + suname + ", credit=" + credit + ", term=" + term + ", Assignments=" + Assignments + '}';
+        return "Subjects{" + "suid=" + suid + ", suname=" + suname + ", credit=" + credit + ", terms=" + terms + ", Assignments=" + Assignments + '}';
     }
+
+    
   
 }

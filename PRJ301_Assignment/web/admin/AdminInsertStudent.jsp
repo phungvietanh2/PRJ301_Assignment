@@ -18,7 +18,7 @@
         <link href="css/admin.css" rel="stylesheet" type="text/css"/>
         <link href="css/adminInser.css" rel="stylesheet" type="text/css"/>
         <script src="js/inster student.js" type="text/javascript"></script>
-        
+
         <title>JSP Page</title>
     </head>
     <body>
@@ -64,9 +64,8 @@
                             <div class="side-menu-container">
                                 <ul class="nav navbar-nav">
                                     <li><a href="Admin"><span class="glyphicon "></span>Home</a></li>
-                                    <li class="active" ><a href="AdminInsertStudent"><span class="glyphicon  "></span> INSERT STUDENT</a></li>
-                                    <li><a href="#"><span class="glyphicon "></span> Class</a></li>
-                                    <li><a href="#"><span class="glyphicon "></span> Student</a></li>
+                                    <li class="active" ><a href="AdminInsertStudent"><span class="glyphicon "></span> INSERT STUDENT</a></li>
+                                    <li ><a href="AdminInsertMarkController"><span class="glyphicon "></span> INSERT MARK</a></li>
                                     <li><a href="login.jsp"><span class="glyphicon  glyphicon-log-out"></span> Log out</a></li>
                                 </ul>
                             </div>
@@ -84,7 +83,7 @@
                     <form action="AdminInsertStudent" method="POST" class="a">
 
                         <div>
-                            
+
                             <input style="margin-top: 20px;border-radius:  10px ;width: 100%; height: 5rem; font-size: 2rem " type="button" value="Add Student" onclick="addstudent()" />
                         </div>
                         <div id="container">      
@@ -98,6 +97,6 @@
             </div>
 
         </div>
-                           
+
     </body>
 </html>

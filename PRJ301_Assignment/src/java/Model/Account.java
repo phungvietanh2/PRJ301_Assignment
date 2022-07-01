@@ -4,24 +4,26 @@
  */
 package Model;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author phung
  */
 public class Account {
-    private int id;
     private String user;
     private String pass;
-    private int role;
+    private String displayname;
+    ArrayList<Role> Roles = new ArrayList<>();
 
-    public int getId() {
-        return id;
+    public ArrayList<Role> getRoles() {
+        return Roles;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setRoles(ArrayList<Role> Roles) {
+        this.Roles = Roles;
     }
-
+    
     public String getUser() {
         return user;
     }
@@ -38,12 +40,19 @@ public class Account {
         this.pass = pass;
     }
 
-    public int getRole() {
-        return role;
+    public String getDisplayname() {
+        return displayname;
     }
 
-    public void setRole(int role) {
-        this.role = role;
+    public void setDisplayname(String displayname) {
+        this.displayname = displayname;
     }
+
+    @Override
+    public String toString() {
+        return "Account{" + "user=" + user + ", pass=" + pass + ", displayname=" + displayname + ", Roles=" + Roles + '}';
+    }
+
    
+    
 }

@@ -55,7 +55,7 @@ public class AdminInsertMarkController extends HttpServlet {
 
         request.setAttribute("classs", dbclass.list());
 
-        request.setAttribute("Students", dbstudent.SearchByid(id));
+        request.setAttribute("Students", dbstudent.SearchByidClass(id));
         
         request.setAttribute("AssignmentIDSTUDENTs", dbasidstudent.getbymark(id));
 

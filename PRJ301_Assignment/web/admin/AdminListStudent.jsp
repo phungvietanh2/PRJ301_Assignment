@@ -66,9 +66,8 @@
                             <div class="side-menu-container">
                                 <ul class="nav navbar-nav">
                                     <li><a href="Admin"><span class="glyphicon "></span>Home</a></li>
-                                    <li><a href="AdminInsertStudent"><span class="glyphicon  "></span> INSERT STUDENT</a></li>
-                                    <li><a href="#"><span class="glyphicon "></span> Class</a></li>
-                                    <li><a href="#"><span class="glyphicon "></span> Student</a></li>
+                                    <li ><a href="AdminInsertStudent"><span class="glyphicon "></span> INSERT STUDENT</a></li>
+                                    <li ><a href="AdminInsertMarkController"><span class="glyphicon "></span> INSERT MARK</a></li>
                                     <li><a href="login.jsp"><span class="glyphicon  glyphicon-log-out"></span> Log out</a></li>
                                 </ul>
                             </div>
@@ -98,7 +97,6 @@
                                         <td>Dob</td>  
                                         <td>Gmail</td>
                                         <td>Start</td>
-                                        <td>Sk</td>
                                         <td>Update</td>
                                         <td>Delete</td>
                                     </tr>
@@ -106,15 +104,14 @@
                                 <tbody>
                                     <c:forEach items="${requestScope.students}" var="e">
                                         <tr>                                     
-                                            <td>${e.rollnumber}</td>
+                                            <td>${e.sid}</td>
                                             <td>${e.sname}</td>
                                             <td>${e.sgender}</td>
                                             <td>${e.sdob}</td>
                                             <td>${e.sgmail}</td>
                                             <td>${e.start}</td>
-                                            <td>${e.sk}</td>
-                                            <td><a class="btn btn-primary" href="AdminEditStudent?id=${e.rollnumber}">Update</a></td>
-                                            <td><input class="btn btn-primary"  type="button" value="Delete" onclick="removeEmp(${e.rollnumber})"/></td>
+                                            <td><a class="btn btn-primary" href="AdminEditStudent?id=${e.sid}">Update</a></td>
+                                            <td><input class="btn btn-primary"  type="button" value="Delete" onclick="removeEmp(${e.sid})"/></td>
                                         </tr>   
                                     </c:forEach>
 

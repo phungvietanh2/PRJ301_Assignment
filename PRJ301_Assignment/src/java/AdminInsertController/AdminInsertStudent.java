@@ -83,18 +83,16 @@ public class AdminInsertStudent extends HttpServlet {
 
        String[] indexs = request.getParameterValues("index");
         for (String index : indexs) {
-          s.setRollnumber(request.getParameter("Srollnumbers" + index));
+          
+            s.setSid(Integer.parseInt(request.getParameter("Sid" + index)));
+
             s.setSname(request.getParameter("Sname" + index));
           s.setSgender(request.getParameter("Sgender" + index));
           s.setSdob(Date.valueOf(request.getParameter("Sdob" + index)));
            s.setSgmail(request.getParameter("Sgmail" + index));
            s.setStart(request.getParameter("Sstart" + index));
-          s.setSk(Integer.parseInt(request.getParameter("Sk" + index)));
           dbstudent.insert(s);
         }
-
-        
-
         response.getWriter().println("done!");
     }
 

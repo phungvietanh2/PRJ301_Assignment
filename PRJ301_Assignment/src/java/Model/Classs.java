@@ -16,6 +16,7 @@ public class Classs {
     private String cid;
     private Date clstart;
     private Date clend;
+    private Teacher teachers;
     private Subjects subjectss;
     
     public String getCid() {
@@ -53,9 +54,18 @@ public class Classs {
         return subjectss.getSuname();
     }
 
-    @Override
-    public String toString() {
-        return "Classs{" + "cid=" + cid + ", clstart=" + clstart + ", clend=" + clend + ", subjectss=" + subjectss + '}';
+    public Teacher getTeachers() {
+        return teachers;
     }
 
+    public void setTeachers(Teacher teachers) {
+        this.teachers = teachers;
+    }
+
+    @Override
+    public String toString() {
+        return "Classs{" + "cid=" + cid + ", clstart=" + clstart + ", clend=" + clend + ", teachers=" + teachers + ", subjectss=" + subjectss + '}';
+    }
+
+    
 }
