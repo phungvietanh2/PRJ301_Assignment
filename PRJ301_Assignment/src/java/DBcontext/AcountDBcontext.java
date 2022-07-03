@@ -45,7 +45,7 @@ public class AcountDBcontext extends DBcontext<Account> {
                     account.setUser(rs.getString("username"));
                     account.setPass(rs.getString("password"));
                     account.setDisplayname(rs.getString("displayname"));
-                    
+                   
                 }
                 int rid = rs.getInt("Rid");
                 if (rid != -1) {
@@ -64,6 +64,7 @@ public class AcountDBcontext extends DBcontext<Account> {
                         features.setFid(fid);
                         features.setFname(rs.getString("Fname"));
                         features.setFurl(rs.getString("Furl"));
+                        roles.getFeatures().add(features);
                     }
                 }
             }
@@ -82,10 +83,10 @@ public class AcountDBcontext extends DBcontext<Account> {
     
     public static void main(String[] args) {
         AcountDBcontext dao = new AcountDBcontext();
-        //  Account a = dao.AccountLogin("admin", "admin");
+         Account a = dao.getAccountbyuserpass("admin", "admin");
         //for (Account o : a) {
-        //    System.out.println(a);
-        //}
+           System.out.println(a);
+      // }
     }
     
     @Override

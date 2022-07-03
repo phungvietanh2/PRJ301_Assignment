@@ -25,12 +25,14 @@
                         <img class="logoimg" src="img/logofpt.png">
                     </div>
                     <div class="col-sm-2 name1">
-                      <c:if test="${sessionScope.accounts == null}">
+                      <c:if test="${sessionScope.account == null}">
                             <a style="font-size: 25px ; display: flex ;margin-top: 10px ;text-decoration: none" href="login.jsp">Login</a>
                        </c:if>                 
-                        <c:if test="${sessionScope.accounts != null}">
+                        <c:if test="${sessionScope.account != null}">
                             <div style="font-size: 25px ; display: flex ;">
-                             <p>  ${sessionScope.accounts.user} </p> 
+                              
+                             <p>   ${sessionScope.account.displayname} </p> 
+                             <p><a style="margin-top: 10px ;text-decoration: none" href="Home">Home</a></p>
                              <a style="margin-top: 10px ;text-decoration: none" href="Logout">Logout</a>
                             </div>       
                         </c:if>

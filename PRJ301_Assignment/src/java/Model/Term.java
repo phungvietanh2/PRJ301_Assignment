@@ -27,5 +27,10 @@ public class Term {
     public void setTname(String tname) {
         this.tname = tname;
     }
+
+    @Override
+    public String toString() {
+        return "Term{" + "tid=" + tid + ", tname=" + tname + '}';
+    }
     
 }

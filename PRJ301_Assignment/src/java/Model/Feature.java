@@ -47,5 +47,10 @@ public class Feature {
     public void setRoles(ArrayList<Role> Roles) {
         this.Roles = Roles;
     }
+
+    @Override
+    public String toString() {
+        return "Feature{" + "fid=" + fid + ", fname=" + fname + ", furl=" + furl + ", Roles=" + Roles + '}';
+    }
      
 }

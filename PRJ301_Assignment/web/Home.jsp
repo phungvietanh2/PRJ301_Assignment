@@ -34,14 +34,6 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                <c:forEach items="${requestScope.listlogstudentt}" var="c">
-                                      <tr>
-                                          <td>${c.username}</td>
-                                          <td>${c.fullname}</td>
-                                          <td>${c.fullname} <td>
-                                    </tr>
-                                </c:forEach>
-                                    
                                 </tbody>
                             </table>
                         </div>
@@ -49,7 +41,9 @@
                 
                 <div class="col-sm-4">
                     <div><ul>
-                            <li><a href="MarkReport">Mark Report (Báo cáo điểm)</a></li>
+                    
+                            <li><a href="MarkReport?iduser=${sessionScope.account.user } " >Mark Report (Báo cáo điểm)</a></li>
+                           
                     </ul></div>
                 </div>
                     </div>

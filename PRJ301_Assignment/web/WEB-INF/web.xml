@@ -112,6 +112,10 @@
         <servlet-name>insertMark</servlet-name>
         <servlet-class>AdminInsertController.insertMark</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>MarkReport2Controller</servlet-name>
+        <servlet-class>HomeSinhVienController.MarkReport2Controller</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>DEMOcontroller</servlet-name>
         <url-pattern>/demo</url-pattern>
@@ -219,6 +223,10 @@
     <servlet-mapping>
         <servlet-name>insertMark</servlet-name>
         <url-pattern>/insertMark</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MarkReport2Controller</servlet-name>
+        <url-pattern>/MarkReport2Controller</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

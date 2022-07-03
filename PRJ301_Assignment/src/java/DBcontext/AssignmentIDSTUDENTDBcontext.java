@@ -54,13 +54,41 @@ public class AssignmentIDSTUDENTDBcontext extends DBcontext<AssignmentIDSTUDENT>
         return AssignmentIDSTUDENTs;
     }
 
+    public ArrayList<AssignmentIDSTUDENT> getidstudentmark(String id , String userid) {
+        ArrayList<AssignmentIDSTUDENT> AssignmentIDSTUDENTs = new ArrayList<>();
+        try {
+            String sql = " select a.Aweight , a.Aname ,ass.Mark from  Course c \n"
+                    + "  left JOIN   [Group] cl on c.Coid = cl.Coid\n"
+                    + "   left JOIN GroupStudent g on cl.Gid = g.Gid\n"
+                    + "   left JOIN   Student s on s.Sid = g.Sid \n"
+                    + "   left join AssessmentIDStudent ass on ass.Sid = s.Sid \n"
+                    + "   left join Assessment a on a.Aid = ass.Aid\n"
+                    + "   left join Account ac on ac.Sid = s.Sid\n"
+                    + "   where cl.Gid = ? and  ac.username=? ";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setString(1, id);
+            stm.setString(2, userid);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                Assignment a = new Assignment();
+                a.setAweight(rs.getInt("Aweight"));
+                a.setAname(rs.getString("Aname"));
+                AssignmentIDSTUDENT as = new AssignmentIDSTUDENT();
+                as.setAsmarkk(rs.getFloat("Mark"));
+                as.setAssignments(a);
+                AssignmentIDSTUDENTs.add(as);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AssignmentIDSTUDENTDBcontext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return AssignmentIDSTUDENTs;
+    }
+
     public static void main(String[] args) {
         AssignmentIDSTUDENTDBcontext dao = new AssignmentIDSTUDENTDBcontext();
-        ArrayList<AssignmentIDSTUDENT> a = dao.getbymark("se1");
-        //System.out.println(a);
-        for (AssignmentIDSTUDENT student : a) {
-            System.out.println(a);
-        }
+        ArrayList<AssignmentIDSTUDENT> a = dao.getidstudentmark("SE1","anh");
+        System.out.println(a);
+        
     }
 
     @Override

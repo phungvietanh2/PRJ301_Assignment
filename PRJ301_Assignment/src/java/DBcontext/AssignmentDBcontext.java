@@ -22,9 +22,30 @@ public class AssignmentDBcontext extends DBcontext<Assignment> {
     public ArrayList<Assignment> SearchByclass(String id) {
         ArrayList<Assignment> Assignments = new ArrayList<>();
         try {
-            String sql = "select a.Aname , a.Aid from Assessment a left join Course c on  a.Coid = c.Coid\n" +
-"	 left join [Group] g on g.Coid= c.Coid\n" +
-"		where g.Gid= ?";
+            String sql = "select a.Aname , a.Aid from Assessment a left join Course c on  a.Coid = c.Coid\n"
+                    + "	 left join [Group] g on g.Coid= c.Coid\n"
+                    + "		where g.Gid= ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setString(1, id);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                Assignment S = new Assignment();
+                S.setAid(rs.getInt("Aid"));
+                S.setAname(rs.getString("Aname"));
+                Assignments.add(S);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ClassDBcontext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return Assignments;
+    }
+
+    public ArrayList<Assignment> SearchBycours(String id) {
+        ArrayList<Assignment> Assignments = new ArrayList<>();
+        try {
+            String sql = " select a.Aname , a.Aid from Assessment a left join Course c on  a.Coid = c.Coid\n"
+                    + "	 left join [Group] g on g.Coid= c.Coid\n"
+                    + "	where g.Coid=?";
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setString(1, id);
             ResultSet rs = stm.executeQuery();
@@ -62,7 +83,7 @@ public class AssignmentDBcontext extends DBcontext<Assignment> {
 
     public static void main(String[] args) {
         AssignmentDBcontext dao = new AssignmentDBcontext();
-        ArrayList<Assignment> a = dao.SearchByclass("SE1501");
+        ArrayList<Assignment> a = dao.SearchBycours("IOT102");
 
         //System.out.println(a);
         //  for (Assignment student : a) {

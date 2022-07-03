@@ -1,30 +1,27 @@
+package HomeSinhVienController;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package HomeSinhVienController;
-
+import DBcontext.AssignmentDBcontext;
 import DBcontext.AssignmentIDSTUDENTDBcontext;
 import DBcontext.ClassDBcontext;
 import DBcontext.CourseDBcontext;
 import DBcontext.StudentDBcontext;
 import DBcontext.TermDBcontext;
-
-import Model.Classs;
-import Model.Subjects;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
 
 /**
  *
  * @author phung
  */
-public class MarkReportController extends HttpServlet {
+public class MarkReport2Controller extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,7 +35,18 @@ public class MarkReportController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-
+        try ( PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet MarkReport2Controller</title>");
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet MarkReport2Controller at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
+        }
     }
 
     TermDBcontext dbterm = new TermDBcontext();
@@ -46,17 +54,24 @@ public class MarkReportController extends HttpServlet {
     ClassDBcontext dbclass = new ClassDBcontext();
     CourseDBcontext dbcourse = new CourseDBcontext();
     AssignmentIDSTUDENTDBcontext dbass = new AssignmentIDSTUDENTDBcontext();
+    AssignmentDBcontext dba = new AssignmentDBcontext();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String iduser = request.getParameter("iduser");
         String id = request.getParameter("id");
+        String sid = request.getParameter("ssid");
+        String ssid = request.getParameter("sssid");
         request.setAttribute("students", dbstudent.list());
         request.setAttribute("Terms", dbterm.getid(iduser));
-        
+
         request.setAttribute("classs", dbclass.getid(id, iduser));
-        request.getRequestDispatcher("Mark Report.jsp").forward(request, response);
+       request.setAttribute("assstudent", dbass.getidstudentmark(sid, iduser));
+       
+        request.setAttribute("as", dba.SearchBycours(ssid));
+        System.out.println( dba.SearchBycours(ssid));
+        request.getRequestDispatcher("Mark Report 2.jsp").forward(request, response);
     }
 
     /**
@@ -70,7 +85,7 @@ public class MarkReportController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        processRequest(request, response);
     }
 
     /**

@@ -25,7 +25,7 @@ public abstract class CheckacountController extends HttpServlet {
             return false;
         else
         {
-            String visitingUrl = request.getServletPath();
+            String visitingUrl  = request.getServletPath();
             for (Role role : Accounts.getRoles()) {
                 for (Feature feature : role.getFeatures()) {
                     if(feature.getFurl().equals(visitingUrl))
@@ -42,7 +42,7 @@ public abstract class CheckacountController extends HttpServlet {
         if (isauthenticated(request)) {
             processget(request, response);
         } else {
-            response.getWriter().println("oke");
+             response.getWriter().println("access denied!");
         }
     }
 
@@ -58,7 +58,7 @@ public abstract class CheckacountController extends HttpServlet {
         if (isauthenticated(request)) {
             processget(request, response);
         } else {
-            response.getWriter().println("oke");
+             response.getWriter().println("access denied!");
         }
     }
 }

@@ -17,10 +17,12 @@
 <body>
     <jsp:include page="menu.jsp"></jsp:include>
         <nav class="container">
-            <h1>View attendance for</h1>
-            <h5 style="text-align: center ; font-size: 2rem ; line-height: 50px" > 
-                Select a campus/program, term, course ...
-            </h5>
+            <h1>View attendance for ${sessionScope.account.user } </h1>
+        <h5 style="text-align: center ; font-size: 2rem ; line-height: 50px" > 
+            Select a campus/program, term, course ...
+        </h5>
+        <did class="container" >
+
             <div class="table-responsive ">          
                 <table class="table">
                     <thead>
@@ -31,24 +33,31 @@
                         </tr>
                     </thead>
                     <tbody>
-
                         <tr>
-                            <td>
-                            <c:forEach items="${requestScope.Terms}" var="c">
-                    <li>${c.tname}</li>
+                            <td> 
+                                <c:forEach items="${requestScope.Terms}" var="c">
+                        <li>
+                            <a href="MarkReport?id=${c.tid}&iduser=${sessionScope.account.user}" 
+                               > 
+                                ${c.tname}</a>
+                        </li>
                     </c:forEach> 
-                </td>
-                <td class="weekly">
-                    
-                <c:forEach items="${requestScope.classs}" var="a">
-                    <a href="${a.getSubjectss1()}">${a.getSubjectss1()}</a>
-                </c:forEach>
 
-                </td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
+                    </td>
+                    <td class="weekly">  
+                        <c:forEach items="${requestScope.classs}" var="a">
+                        <li> <a href="MarkReport2Controller?ssid=${a.cid}&iduser=${sessionScope.account.user}&sssid=${a.subjectss.suid} " >
+                                ${a.subjectss.suid}(${a.cid} , ${a.clstart} ,${a.clend})</a></li>
+                            </c:forEach>  
+
+                    </td>
+                    </tr>  
+                    </tbody>
+                </table>
+
+            </div>
+
+        </did>
     </nav>
 </body>
 </html>

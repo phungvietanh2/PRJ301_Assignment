@@ -71,13 +71,14 @@ public class AcountController extends HttpServlet {
         Account accounts = dbaccount.getAccountbyuserpass(user, Pass); 
         if(accounts == null)
         {
-            request.setAttribute("error", "error");
+           request.setAttribute("error", "error");
             request.getRequestDispatcher("login.jsp").forward(request, response);
+           
         }
         else
         {   
              request.getSession().setAttribute("account", accounts);
-            response.getWriter().println("hello " + accounts.getDisplayname());
+            request.getRequestDispatcher("Home").forward(request, response);
     }}
 
     /** 

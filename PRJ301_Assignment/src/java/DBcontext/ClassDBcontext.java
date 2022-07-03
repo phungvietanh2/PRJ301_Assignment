@@ -49,13 +49,44 @@ public class ClassDBcontext extends DBcontext<Classs> {
         return classes;
     }
 
-   
+    public ArrayList<Classs> getid(String id , String userid  ) {
+        try {
+             ArrayList<Classs> classes = new ArrayList<>();
+            String sql = "  select c.Coid, c.Coname, g.Gid,cl.Gstart,cl.Gend from Term t  \n"
+                    + "  left JOIN Course c on t.Tid = c.Tid\n"
+                    + "  left JOIN   [Group] cl on c.Coid = cl.Coid\n"
+                    + "   left JOIN GroupStudent g on cl.Gid = g.Gid\n"
+                    + "   left JOIN   Student s on s.Sid = g.Sid \n"
+                    + "   left join Account a on a.Sid = s.Sid \n"
+                    + "   where t.Tid =? and a.username=? ";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setString(1, id);
+          stm.setString(2, userid);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                Subjects s = new Subjects();
+                s.setSuid(rs.getString("Coid"));
+                s.setSuname(rs.getString("Coname"));
+                Classs c = new Classs();
+                c.setCid(rs.getString("Gid"));
+                c.setClstart(rs.getDate("Gstart"));
+                c.setClend(rs.getDate("Gend"));
+                c.setSubjectss(s);
+                classes.add(c);
+            }
+             return classes;     
+        } catch (SQLException ex) {
+            Logger.getLogger(ClassDBcontext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
     public static void main(String[] args) {
         ClassDBcontext dao = new ClassDBcontext();
-        List<Classs> a = dao.list();
-        for (Classs o : a) {
-            System.out.println(o);
-        }
+        ArrayList<Classs> a = dao.getid("1","anh");
+        //    for (Classs o : a) {
+        System.out.println(a);
+        //  }
     }
 
     @Override

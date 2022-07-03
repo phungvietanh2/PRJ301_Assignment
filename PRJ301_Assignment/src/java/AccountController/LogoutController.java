@@ -17,7 +17,7 @@ import jakarta.servlet.http.HttpSession;
  *
  * @author phung
  */
-public class LogoutController extends HttpServlet {
+public class LogoutController extends CheckacountController {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -28,10 +28,7 @@ public class LogoutController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-      HttpSession session =request.getSession();
-       session.removeAttribute("accounts");
-       request.removeAttribute("listlogstudentt");
-      request.getRequestDispatcher("Home").forward(request, response);
+     
     } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -43,9 +40,11 @@ public class LogoutController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void processget(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+         HttpSession session =request.getSession();
+       session.removeAttribute("account");
+      request.getRequestDispatcher("Home.jsp").forward(request, response);
     } 
 
     /** 
@@ -56,7 +55,7 @@ public class LogoutController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void processpost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         processRequest(request, response);
     }

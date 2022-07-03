@@ -4,7 +4,9 @@
  */
 package DBcontext;
 
+import Model.Classs;
 import Model.Subjects;
+import Model.Term;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -39,13 +41,14 @@ public class CourseDBcontext extends DBcontext<Subjects>{
         }
     return subjectss;
     }
+   
  public static void main(String[] args) {
         CourseDBcontext dao = new CourseDBcontext();
-        List<Subjects> a = dao.list();
-        //System.out.println(a);
-        for (Subjects student : a) {
-           System.out.println(a);
-        }
+      ArrayList<Subjects> a = dao.list();
+        System.out.println(a);
+//      for (Subjects student : a) {
+//           System.out.println(a);
+//        }
     }
     @Override
     public Subjects get(int id) {

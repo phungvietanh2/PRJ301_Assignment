@@ -67,11 +67,11 @@ public class StudentDBcontext extends DBcontext<Student> {
     
     public static void main(String[] args) {
         StudentDBcontext dao = new StudentDBcontext();
-        Student a = dao.get(1);
-        //System.out.println(a);
-        //for (Student student : a) {
+        ArrayList<Student> a = dao.list();
+        System.out.println(a);
+        for (Student student : a) {
             System.out.println(a);
-        //}
+        }
     }
       public Student get(String id) {
         try {

@@ -5,6 +5,11 @@
 
 package controller;
 
+import AccountController.CheckacountController;
+import DBcontext.ClassDBcontext;
+import DBcontext.CourseDBcontext;
+import DBcontext.StudentDBcontext;
+import DBcontext.TermDBcontext;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -16,7 +21,7 @@ import jakarta.servlet.http.HttpServletResponse;
  *
  * @author phung
  */
-public class AdminHomeController extends HttpServlet {
+public class AdminHomeController  extends CheckacountController  {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -30,17 +35,10 @@ public class AdminHomeController extends HttpServlet {
        
            } 
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /** 
-     * Handles the HTTP <code>GET</code> method.
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void processget(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
+       
         request.getRequestDispatcher("admin/AdminHome.jsp").forward(request, response);
 
     } 
@@ -53,7 +51,7 @@ public class AdminHomeController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void processpost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         processRequest(request, response);
     }
