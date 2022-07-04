@@ -5,6 +5,7 @@
 package DBcontext;
 
 import Model.Assignment;
+import Model.AssignmentStudent;
 import Model.Subjects;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -43,7 +44,7 @@ public class AssignmentDBcontext extends DBcontext<Assignment> {
     public ArrayList<Assignment> SearchBycours(String id) {
         ArrayList<Assignment> Assignments = new ArrayList<>();
         try {
-            String sql = " select a.Aname , a.Aid from Assessment a left join Course c on  a.Coid = c.Coid\n"
+            String sql = " select a.Aweight, a.Aname , a.Aid from Assessment a left join Course c on  a.Coid = c.Coid\n"
                     + "	 left join [Group] g on g.Coid= c.Coid\n"
                     + "	where g.Coid=?";
             PreparedStatement stm = connection.prepareStatement(sql);
@@ -53,6 +54,8 @@ public class AssignmentDBcontext extends DBcontext<Assignment> {
                 Assignment S = new Assignment();
                 S.setAid(rs.getInt("Aid"));
                 S.setAname(rs.getString("Aname"));
+                S.setAweight(rs.getFloat("Aweight"));
+               
                 Assignments.add(S);
             }
         } catch (SQLException ex) {

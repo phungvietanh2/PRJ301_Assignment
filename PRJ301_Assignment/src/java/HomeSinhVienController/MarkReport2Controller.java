@@ -5,7 +5,7 @@ package HomeSinhVienController;
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 import DBcontext.AssignmentDBcontext;
-import DBcontext.AssignmentIDSTUDENTDBcontext;
+import DBcontext.AssignmentStudentcontext;
 import DBcontext.ClassDBcontext;
 import DBcontext.CourseDBcontext;
 import DBcontext.StudentDBcontext;
@@ -53,7 +53,7 @@ public class MarkReport2Controller extends HttpServlet {
     StudentDBcontext dbstudent = new StudentDBcontext();
     ClassDBcontext dbclass = new ClassDBcontext();
     CourseDBcontext dbcourse = new CourseDBcontext();
-    AssignmentIDSTUDENTDBcontext dbass = new AssignmentIDSTUDENTDBcontext();
+    AssignmentStudentcontext dbass = new AssignmentStudentcontext();
     AssignmentDBcontext dba = new AssignmentDBcontext();
 
     @Override
@@ -68,7 +68,8 @@ public class MarkReport2Controller extends HttpServlet {
 
         request.setAttribute("classs", dbclass.getid(id, iduser));
        request.setAttribute("assstudent", dbass.getidstudentmark(sid, iduser));
-       
+       request.setAttribute("assstudent1", dbass.getidstudentmark1(sid, iduser));
+       request.setAttribute("assstudent2", dbass.getidstudentmark2(sid, iduser,ssid));
         request.setAttribute("as", dba.SearchBycours(ssid));
         System.out.println( dba.SearchBycours(ssid));
         request.getRequestDispatcher("Mark Report 2.jsp").forward(request, response);

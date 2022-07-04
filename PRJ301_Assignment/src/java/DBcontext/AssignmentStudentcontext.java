@@ -5,7 +5,7 @@
 package DBcontext;
 
 import Model.Assignment;
-import Model.AssignmentIDSTUDENT;
+import Model.AssignmentStudent;
 import Model.Student;
 import Model.Subjects;
 import java.sql.PreparedStatement;
@@ -19,10 +19,10 @@ import java.util.logging.Logger;
  *
  * @author phung
  */
-public class AssignmentIDSTUDENTDBcontext extends DBcontext<AssignmentIDSTUDENT> {
+public class AssignmentStudentcontext extends DBcontext<AssignmentStudent> {
 
-    public ArrayList<AssignmentIDSTUDENT> getbymark(String id) {
-        ArrayList<AssignmentIDSTUDENT> AssignmentIDSTUDENTs = new ArrayList<>();
+    public ArrayList<AssignmentStudent> getbymark(String id) {
+        ArrayList<AssignmentStudent> AssignmentIDSTUDENTs = new ArrayList<>();
         try {
             String sql = "select s.Sname, a.* from \n"
                     + "(select * from AssessmentIDStudent) a \n"
@@ -40,7 +40,7 @@ public class AssignmentIDSTUDENTDBcontext extends DBcontext<AssignmentIDSTUDENT>
                 s.setSname(rs.getString("Sname"));
                 Assignment a = new Assignment();
                 a.setAid(rs.getInt("Aid"));
-                AssignmentIDSTUDENT as = new AssignmentIDSTUDENT();
+                AssignmentStudent as = new AssignmentStudent();
                 as.setAsid(rs.getInt("Asid"));
                 as.setAsmarkk(rs.getFloat("Mark"));
                 as.setAsdate(rs.getDate("Asdate"));
@@ -49,79 +49,145 @@ public class AssignmentIDSTUDENTDBcontext extends DBcontext<AssignmentIDSTUDENT>
                 AssignmentIDSTUDENTs.add(as);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(AssignmentIDSTUDENTDBcontext.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AssignmentStudentcontext.class.getName()).log(Level.SEVERE, null, ex);
         }
         return AssignmentIDSTUDENTs;
     }
 
-    public ArrayList<AssignmentIDSTUDENT> getidstudentmark(String id , String userid) {
-        ArrayList<AssignmentIDSTUDENT> AssignmentIDSTUDENTs = new ArrayList<>();
+    public ArrayList<AssignmentStudent> getidstudentmark(String id, String userid) {
+        ArrayList<AssignmentStudent> AssignmentIDSTUDENTs = new ArrayList<>();
         try {
-            String sql = " select a.Aweight , a.Aname ,ass.Mark from  Course c \n"
-                    + "  left JOIN   [Group] cl on c.Coid = cl.Coid\n"
-                    + "   left JOIN GroupStudent g on cl.Gid = g.Gid\n"
-                    + "   left JOIN   Student s on s.Sid = g.Sid \n"
-                    + "   left join AssessmentIDStudent ass on ass.Sid = s.Sid \n"
-                    + "   left join Assessment a on a.Aid = ass.Aid\n"
-                    + "   left join Account ac on ac.Sid = s.Sid\n"
-                    + "   where cl.Gid = ? and  ac.username=? ";
+            String sql = " select a.Aid,a.Aweight,a.Aname, ass.Mark ,sum(a.Aweight *ass.Mark)/100 as [VALUE] from  Course c \n"
+                    + "        left JOIN   [Group] cl on c.Coid = cl.Coid\n"
+                    + "      left JOIN GroupStudent g on cl.Gid = g.Gid\n"
+                    + "         left JOIN   Student s on s.Sid = g.Sid \n"
+                    + "           left join AssessmentIDStudent ass on ass.Sid = s.Sid \n"
+                    + "             left join Assessment a on a.Aid = ass.Aid\n"
+                    + "          left join Account ac on ac.Sid = s.Sid\n"
+                    + "       where cl.Gid = ? and  ac.username= ?\n"
+                    + "	    group by a.Aid,a.Aweight,a.Aname, ass.Mark";
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setString(1, id);
             stm.setString(2, userid);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
                 Assignment a = new Assignment();
+                a.setAid(rs.getInt("Aid"));
                 a.setAweight(rs.getInt("Aweight"));
                 a.setAname(rs.getString("Aname"));
-                AssignmentIDSTUDENT as = new AssignmentIDSTUDENT();
+                AssignmentStudent as = new AssignmentStudent();
                 as.setAsmarkk(rs.getFloat("Mark"));
+                as.setAsmarkk2(rs.getFloat("VALUE"));
                 as.setAssignments(a);
                 AssignmentIDSTUDENTs.add(as);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(AssignmentIDSTUDENTDBcontext.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AssignmentStudentcontext.class.getName()).log(Level.SEVERE, null, ex);
         }
         return AssignmentIDSTUDENTs;
     }
 
+    public ArrayList<AssignmentStudent> getidstudentmark1(String id, String userid) {
+        ArrayList<AssignmentStudent> AssignmentIDSTUDENTs = new ArrayList<>();
+        try {
+            String sql = " select  sum(a.summ) as [STATUS] from \n"
+                    + "  ( select  a.Aid, a.Aweight , a.Aname ,ass.Mark, cl.Gid,\n"
+                    + "    a.Coid, ac.username, sum(a.Aweight *ass.Mark)/100 as summ  from  Course c \n"
+                    + "   left JOIN   [Group] cl on c.Coid = cl.Coid\n"
+                    + "   left JOIN GroupStudent g on cl.Gid = g.Gid\n"
+                    + "   left JOIN   Student s on s.Sid = g.Sid \n"
+                    + "   left join AssessmentIDStudent ass on ass.Sid = s.Sid \n"
+                    + "   left join Assessment a on a.Aid = ass.Aid\n"
+                    + "   left join Account ac on ac.Sid = s.Sid\n"
+                    + "   group by a.Aid, a.Aweight , a.Aname ,ass.Mark,cl.Gid,\n"
+                    + "    a.Coid, ac.username) a  where a.Gid = ? and a.username=? ";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setString(1, id);
+
+            stm.setString(2, userid);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                AssignmentStudent as = new AssignmentStudent();
+                as.setAsmarkk1(rs.getFloat("STATUS"));
+
+                AssignmentIDSTUDENTs.add(as);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AssignmentStudentcontext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return AssignmentIDSTUDENTs;
+    }
+
+   public ArrayList<AssignmentStudent> getidstudentmark2(String id, String userid ,String coid) {
+        ArrayList<AssignmentStudent> AssignmentIDSTUDENTs = new ArrayList<>();
+        try {
+            String sql = " select  sum(a.summ) as [STATUS] from \n"
+                    + "  ( select  a.Aid, a.Aweight , a.Aname ,ass.Mark, cl.Gid,\n"
+                    + "    a.Coid, ac.username, sum(a.Aweight *ass.Mark)/100 as summ  from  Course c \n"
+                    + "   left JOIN   [Group] cl on c.Coid = cl.Coid\n"
+                    + "   left JOIN GroupStudent g on cl.Gid = g.Gid\n"
+                    + "   left JOIN   Student s on s.Sid = g.Sid \n"
+                    + "   left join AssessmentIDStudent ass on ass.Sid = s.Sid \n"
+                    + "   left join Assessment a on a.Aid = ass.Aid\n"
+                    + "   left join Account ac on ac.Sid = s.Sid\n"
+                    + "   group by a.Aid, a.Aweight , a.Aname ,ass.Mark,cl.Gid,\n"
+                    + "    a.Coid, ac.username) a  where a.Gid = ? and a.username=? and a.Coid=?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setString(1, id);
+            stm.setString(2, userid);
+            stm.setString(3, coid);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                AssignmentStudent as = new AssignmentStudent();
+                as.setAsmarkk1(rs.getFloat("STATUS"));
+
+                AssignmentIDSTUDENTs.add(as);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AssignmentStudentcontext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return AssignmentIDSTUDENTs;
+    }
+
+    
     public static void main(String[] args) {
-        AssignmentIDSTUDENTDBcontext dao = new AssignmentIDSTUDENTDBcontext();
-        ArrayList<AssignmentIDSTUDENT> a = dao.getidstudentmark("SE1","anh");
+        AssignmentStudentcontext dao = new AssignmentStudentcontext();
+        ArrayList<AssignmentStudent> a = dao.getidstudentmark("SE1", "anh");
         System.out.println(a);
-        
+
     }
 
     @Override
-    public ArrayList<AssignmentIDSTUDENT> list() {
+    public ArrayList<AssignmentStudent> list() {
 
         return null;
     }
 
     @Override
-    public AssignmentIDSTUDENT get(int id) {
+    public AssignmentStudent get(int id) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public void insert(AssignmentIDSTUDENT model) {
+    public void insert(AssignmentStudent model) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public void update(AssignmentIDSTUDENT model) {
+    public void update(AssignmentStudent model) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public void delete(AssignmentIDSTUDENT model) {
+    public void delete(AssignmentStudent model) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-    public void save(ArrayList<AssignmentIDSTUDENT> AssignmentIDSTUDENTs) {
+    public void save(ArrayList<AssignmentStudent> AssignmentIDSTUDENTs) {
 
         try {
             connection.setAutoCommit(false);
-            for (AssignmentIDSTUDENT o : AssignmentIDSTUDENTs) {
+            for (AssignmentStudent o : AssignmentIDSTUDENTs) {
                 //insert 
                 if (o.getAsid() == -1 && o.getAsmarkk() != -1) {
                     String insert = "INSERT INTO [AssessmentIDStudent]\n"

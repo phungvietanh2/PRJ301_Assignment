@@ -5,11 +5,11 @@
 package AdminListController;
 
 import DBcontext.AssignmentDBcontext;
-import DBcontext.AssignmentIDSTUDENTDBcontext;
+import DBcontext.AssignmentStudentcontext;
 import DBcontext.ClassDBcontext;
 import DBcontext.StudentDBcontext;
 import Model.Assignment;
-import Model.AssignmentIDSTUDENT;
+import Model.AssignmentStudent;
 import Model.Classs;
 import Model.Student;
 import Model.Subjects;
@@ -34,7 +34,7 @@ public class AdminListClassMark extends HttpServlet {
 
     AssignmentDBcontext dbas = new AssignmentDBcontext();
     ClassDBcontext dbclass = new ClassDBcontext();
-    AssignmentIDSTUDENTDBcontext dbasidstudent = new AssignmentIDSTUDENTDBcontext();
+    AssignmentStudentcontext dbasidstudent = new AssignmentStudentcontext();
     StudentDBcontext dbstudent = new StudentDBcontext();
 
     @Override

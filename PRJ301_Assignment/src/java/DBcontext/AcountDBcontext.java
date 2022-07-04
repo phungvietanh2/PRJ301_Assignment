@@ -25,7 +25,7 @@ public class AcountDBcontext extends DBcontext<Account> {
     
     public Account getAccountbyuserpass(String user, String Pass) {
         try {
-            String sql = "select a.username , a.password , a.displayname , ISNULL (r.Rid,-1) as Rid,r.Rname, ISNULL(f.Fid,-1) as Fid , f.Fname ,f.Furl\n"
+            String sql = "select a.username, a.sid , a.password , a.displayname , ISNULL (r.Rid,-1) as Rid,r.Rname, ISNULL(f.Fid,-1) as Fid , f.Fname ,f.Furl\n"
                     + "from Account a left join [Role Acount ] ra on a.username = ra.username\n"
                     + "                       left join Role r on ra.Rid = r.Rid\n"
                     + "					   left join [Role Feature ] rf on rf.Rid = r.Rid \n"
@@ -40,12 +40,12 @@ public class AcountDBcontext extends DBcontext<Account> {
             Feature features = new Feature();
             features.setFid(-1);
             while (rs.next()) {
-                if (account == null) {
+                if (account == null  ) {
                     account = new Account();
                     account.setUser(rs.getString("username"));
                     account.setPass(rs.getString("password"));
-                    account.setDisplayname(rs.getString("displayname"));
-                   
+                    account.setDisplayname(rs.getString("displayname")); 
+                    account.setStudents(rs.getInt("sid")); 
                 }
                 int rid = rs.getInt("Rid");
                 if (rid != -1) {

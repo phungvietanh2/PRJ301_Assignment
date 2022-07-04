@@ -15,17 +15,11 @@ public class Assignment {
     private String aname;
     private float aweight;
     private Subjects Subjectss ;
- 
-
-   private ArrayList<AssignmentIDSTUDENT> assignmentIDSTUDENTs=new ArrayList<>();
-
-    
-
-    public ArrayList<AssignmentIDSTUDENT> getAssignmentIDSTUDENTs() {
+   private ArrayList<AssignmentStudent> assignmentIDSTUDENTs=new ArrayList<>();
+    public ArrayList<AssignmentStudent> getAssignmentIDSTUDENTs() {
         return assignmentIDSTUDENTs;
     }
-
-    public void setAssignmentIDSTUDENTs(ArrayList<AssignmentIDSTUDENT> assignmentIDSTUDENTs) {
+    public void setAssignmentIDSTUDENTs(ArrayList<AssignmentStudent> assignmentIDSTUDENTs) {
         this.assignmentIDSTUDENTs = assignmentIDSTUDENTs;
     }
 

@@ -4,7 +4,7 @@
  */
 package HomeSinhVienController;
 
-import DBcontext.AssignmentIDSTUDENTDBcontext;
+import DBcontext.AssignmentStudentcontext;
 import DBcontext.ClassDBcontext;
 import DBcontext.CourseDBcontext;
 import DBcontext.StudentDBcontext;
@@ -45,7 +45,7 @@ public class MarkReportController extends HttpServlet {
     StudentDBcontext dbstudent = new StudentDBcontext();
     ClassDBcontext dbclass = new ClassDBcontext();
     CourseDBcontext dbcourse = new CourseDBcontext();
-    AssignmentIDSTUDENTDBcontext dbass = new AssignmentIDSTUDENTDBcontext();
+    AssignmentStudentcontext dbass = new AssignmentStudentcontext();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)

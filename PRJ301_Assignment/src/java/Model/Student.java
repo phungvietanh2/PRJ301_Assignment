@@ -18,16 +18,14 @@ public class Student {
     private Date sdob;
     private String sgmail;
     private String start; 
-    private ArrayList<AssignmentIDSTUDENT> AssignmentIDSTUDENTs = new ArrayList<>();
-
-    public ArrayList<AssignmentIDSTUDENT> getAssignmentIDSTUDENTs() {
+    private ArrayList<AssignmentStudent> AssignmentIDSTUDENTs = new ArrayList<>();
+    public ArrayList<AssignmentStudent> getAssignmentIDSTUDENTs() {
         return AssignmentIDSTUDENTs;
     }
-
-    public void setAssignmentIDSTUDENTs(ArrayList<AssignmentIDSTUDENT> AssignmentIDSTUDENTs) {
+    public void setAssignmentIDSTUDENTs(ArrayList<AssignmentStudent> AssignmentIDSTUDENTs) {
         this.AssignmentIDSTUDENTs = AssignmentIDSTUDENTs;
     }
-  
+
  
     public int getSid() {
         return sid;
@@ -78,11 +76,8 @@ public class Student {
         this.start = start;
     }
 
-    @Override
-    public String toString() {
-        return "Student{" + "sid=" + sid + ", sname=" + sname + ", sgender=" + sgender + ", sdob=" + sdob + ", sgmail=" + sgmail + ", start=" + start + ", AssignmentIDSTUDENTs=" + AssignmentIDSTUDENTs + '}';
-    }
-
+  
+  
   
     
 }

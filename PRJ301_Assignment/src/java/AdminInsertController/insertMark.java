@@ -4,9 +4,9 @@
  */
 package AdminInsertController;
 
-import DBcontext.AssignmentIDSTUDENTDBcontext;
+import DBcontext.AssignmentStudentcontext;
 import Model.Assignment;
-import Model.AssignmentIDSTUDENT;
+import Model.AssignmentStudent;
 import Model.Student;
 import Model.Subjects;
 import java.io.IOException;
@@ -64,17 +64,17 @@ public class insertMark extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
     }
-    AssignmentIDSTUDENTDBcontext dbass = new AssignmentIDSTUDENTDBcontext();
+    AssignmentStudentcontext dbass = new AssignmentStudentcontext();
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String[] components = request.getParameterValues("component");
-        ArrayList<AssignmentIDSTUDENT> AssignmentIDSTUDENTs = new ArrayList<>();
+        ArrayList<AssignmentStudent> AssignmentIDSTUDENTs = new ArrayList<>();
         for (String component : components) {
             int sid =Integer.parseInt(component.split("_")[0]);
             int  aid = Integer.parseInt(component.split("_")[1]);
-            AssignmentIDSTUDENT as = new AssignmentIDSTUDENT();
+            AssignmentStudent as = new AssignmentStudent();
             String eid = request.getParameter("eid"+sid+"_"+aid);
             System.out.println(sid);
             if (eid.length() > 0) 

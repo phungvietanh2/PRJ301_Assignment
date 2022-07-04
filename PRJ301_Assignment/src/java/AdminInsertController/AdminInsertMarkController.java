@@ -6,7 +6,7 @@
 package AdminInsertController;
 
 import DBcontext.AssignmentDBcontext;
-import DBcontext.AssignmentIDSTUDENTDBcontext;
+import DBcontext.AssignmentStudentcontext;
 import DBcontext.ClassDBcontext;
 import DBcontext.StudentDBcontext;
 import java.io.IOException;
@@ -29,7 +29,7 @@ public class AdminInsertMarkController extends HttpServlet {
 
     AssignmentDBcontext dbas = new AssignmentDBcontext();
     ClassDBcontext dbclass = new ClassDBcontext();
-    AssignmentIDSTUDENTDBcontext dbasidstudent = new AssignmentIDSTUDENTDBcontext();
+    AssignmentStudentcontext dbasidstudent = new AssignmentStudentcontext();
     StudentDBcontext dbstudent = new StudentDBcontext();
 
     @Override

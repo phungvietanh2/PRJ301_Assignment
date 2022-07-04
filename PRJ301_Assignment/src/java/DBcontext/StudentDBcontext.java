@@ -4,7 +4,7 @@
  */
 package DBcontext;
 
-import Model.AssignmentIDSTUDENT;
+import Model.AssignmentStudent;
 import Model.Classs;
 import Model.Student;
 import Model.Subjects;

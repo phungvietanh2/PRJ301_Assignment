@@ -19,37 +19,19 @@
     </head>
     <body>
         <jsp:include page="menu.jsp"></jsp:include>
-        <br>
-        <nav>
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-8">
-                        <div class="table-responsive">          
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th>Login</th>
-                                        <th>Full name</th>                                      
-                                        <th>Email</th> 
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                
-                <div class="col-sm-4">
+            <br>
+            <nav>
+                <div class="container">
+
                     <div><ul>
-                    
+
                             <li><a href="MarkReport?iduser=${sessionScope.account.user } " >Mark Report (Báo cáo điểm)</a></li>
-                           
+
                     </ul></div>
-                </div>
-                    </div>
+
             </div>
-        </div>
-    </nav>
+
+        </nav>
         <jsp:include page="footer.jsp" ></jsp:include>
-</body>
+    </body>
 </html>
