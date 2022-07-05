@@ -25,7 +25,7 @@ public class AcountDBcontext extends DBcontext<Account> {
     
     public Account getAccountbyuserpass(String user, String Pass) {
         try {
-            String sql = "select a.username, a.sid , a.password , a.displayname , ISNULL (r.Rid,-1) as Rid,r.Rname, ISNULL(f.Fid,-1) as Fid , f.Fname ,f.Furl\n"
+            String sql = "select a.username,a.Arole , a.sid , a.password , a.displayname , ISNULL (r.Rid,-1) as Rid,r.Rname, ISNULL(f.Fid,-1) as Fid , f.Fname ,f.Furl\n"
                     + "from Account a left join [Role Acount ] ra on a.username = ra.username\n"
                     + "                       left join Role r on ra.Rid = r.Rid\n"
                     + "					   left join [Role Feature ] rf on rf.Rid = r.Rid \n"
@@ -42,6 +42,7 @@ public class AcountDBcontext extends DBcontext<Account> {
             while (rs.next()) {
                 if (account == null  ) {
                     account = new Account();
+                    account.setRoless(rs.getInt("Arole"));
                     account.setUser(rs.getString("username"));
                     account.setPass(rs.getString("password"));
                     account.setDisplayname(rs.getString("displayname")); 
@@ -84,9 +85,9 @@ public class AcountDBcontext extends DBcontext<Account> {
     public static void main(String[] args) {
         AcountDBcontext dao = new AcountDBcontext();
          Account a = dao.getAccountbyuserpass("admin", "admin");
-        //for (Account o : a) {
-           System.out.println(a);
-      // }
+      //  for (Account o : a) {
+           System.out.println(0);
+       //}
     }
     
     @Override

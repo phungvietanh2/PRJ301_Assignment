@@ -22,7 +22,7 @@ import java.util.logging.Logger;
  * @author phung
  */
 public class StudentDBcontext extends DBcontext<Student> {
-    
+
     @Override
     public ArrayList<Student> list() {
         ArrayList<Student> students = new ArrayList<>();
@@ -45,7 +45,7 @@ public class StudentDBcontext extends DBcontext<Student> {
         }
         return students;
     }
-    
+
     public ArrayList<Student> SearchByidClass(String id) {
         ArrayList<Student> students = new ArrayList<>();
         try {
@@ -64,16 +64,17 @@ public class StudentDBcontext extends DBcontext<Student> {
         }
         return students;
     }
-    
+
     public static void main(String[] args) {
         StudentDBcontext dao = new StudentDBcontext();
-        ArrayList<Student> a = dao.list();
+        ArrayList<Student> a = dao.searchid("anh");
         System.out.println(a);
         for (Student student : a) {
             System.out.println(a);
         }
     }
-      public Student get(String id) {
+
+    public Student get(String id) {
         try {
             String sql = "  select Sid  , Sname , Sgender, Sdob , Sgmail ,Sstart  from Student  where Sid = ?";
             PreparedStatement stm = connection.prepareStatement(sql);
@@ -86,7 +87,7 @@ public class StudentDBcontext extends DBcontext<Student> {
                 S.setSgender(rs.getString("Sgender"));
                 S.setSdob(rs.getDate("Sdob"));
                 S.setSgmail(rs.getString("Sgmail"));
-                S.setStart(rs.getString("Sstart"));    
+                S.setStart(rs.getString("Sstart"));
                 return S;
             }
         } catch (SQLException ex) {
@@ -94,8 +95,30 @@ public class StudentDBcontext extends DBcontext<Student> {
         }
         return null;
     }
-    
-    
+
+    public ArrayList<Student> searchid(String id) {
+        ArrayList<Student> students = new ArrayList<>();
+        try {
+            String sql = "   select * from Student WHERE Sid like ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setString(1, "%" + id + "%");
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                Student S = new Student();
+                S.setSid(rs.getInt("Sid"));
+                S.setSname(rs.getString("Sname"));
+                S.setSgender(rs.getString("Sgender"));
+                S.setSdob(rs.getDate("Sdob"));
+                S.setSgmail(rs.getString("Sgmail"));
+                S.setStart(rs.getString("Sstart"));
+                students.add(S);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ClassDBcontext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return students;
+    }
+
     @Override
     public Student get(int id) {
         try {
@@ -110,7 +133,7 @@ public class StudentDBcontext extends DBcontext<Student> {
                 S.setSgender(rs.getString("Sgender"));
                 S.setSdob(rs.getDate("Sdob"));
                 S.setSgmail(rs.getString("Sgmail"));
-                S.setStart(rs.getString("Sstart"));    
+                S.setStart(rs.getString("Sstart"));
                 return S;
             }
         } catch (SQLException ex) {
@@ -118,10 +141,10 @@ public class StudentDBcontext extends DBcontext<Student> {
         }
         return null;
     }
-    
+
     @Override
     public void insert(Student model) {
-        
+
         try {
             connection.setAutoCommit(false);
             String sql = "INSERT INTO [Student]\n"
@@ -145,9 +168,9 @@ public class StudentDBcontext extends DBcontext<Student> {
             stm.setDate(4, model.getSdob());
             stm.setString(5, model.getSgmail());
             stm.setString(6, model.getStart());
-            
+
             stm.executeUpdate();
-            
+
             connection.commit();
         } catch (SQLException ex) {
             Logger.getLogger(StudentDBcontext.class.getName()).log(Level.SEVERE, null, ex);
@@ -164,7 +187,7 @@ public class StudentDBcontext extends DBcontext<Student> {
             }
         }
     }
-    
+
     @Override
     public void update(Student model) {
         try {
@@ -187,7 +210,7 @@ public class StudentDBcontext extends DBcontext<Student> {
             Logger.getLogger(StudentDBcontext.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     @Override
     public void delete(Student model) {
         try {
@@ -203,21 +226,21 @@ public class StudentDBcontext extends DBcontext<Student> {
 
     //Basic Pagination : Phân trang cơ bản 
     public int count() {
-        
+
         try {
             String sql = "SELECT COUNT(*) as [sum] FROM Student";
             PreparedStatement stm = connection.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
                 return rs.getInt("sum");
-                
+
             }
         } catch (SQLException ex) {
             Logger.getLogger(StudentDBcontext.class.getName()).log(Level.SEVERE, null, ex);
         }
         return -1;
     }
-    
+
     public ArrayList<Student> Pagination(int pageindex, int pagesize) {
         ArrayList<Student> students = new ArrayList<>();
         try {
@@ -237,7 +260,7 @@ public class StudentDBcontext extends DBcontext<Student> {
                 S.setSdob(rs.getDate("Sdob"));
                 S.setSgmail(rs.getString("Sgmail"));
                 S.setStart(rs.getString("Sstart"));
-                
+
                 students.add(S);
             }
         } catch (SQLException ex) {
@@ -245,5 +268,5 @@ public class StudentDBcontext extends DBcontext<Student> {
         }
         return students;
     }
-    
+
 }

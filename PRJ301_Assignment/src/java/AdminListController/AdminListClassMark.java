@@ -41,6 +41,7 @@ public class AdminListClassMark extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.setAttribute("classs", dbclass.list());
+
         request.getRequestDispatcher("admin/AdminListClassMark.jsp").forward(request, response);
     }
 
@@ -61,12 +62,15 @@ public class AdminListClassMark extends HttpServlet {
         request.setAttribute("classs", dbclass.list());
 
         request.setAttribute("Students", dbstudent.SearchByidClass(id));
-        
+
         request.setAttribute("AssignmentIDSTUDENTs", dbasidstudent.getbymark(id));
+
+        
 
         request.getRequestDispatcher("admin/AdminListClassMark.jsp").forward(request, response);
 
     }
+
     @Override
     public String getServletInfo() {
         return "Short description";

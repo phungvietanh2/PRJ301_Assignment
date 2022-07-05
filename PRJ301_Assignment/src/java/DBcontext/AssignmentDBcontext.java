@@ -86,7 +86,7 @@ public class AssignmentDBcontext extends DBcontext<Assignment> {
 
     public static void main(String[] args) {
         AssignmentDBcontext dao = new AssignmentDBcontext();
-        ArrayList<Assignment> a = dao.SearchBycours("IOT102");
+        ArrayList<Assignment> a = dao.list();
 
         //System.out.println(a);
         //  for (Assignment student : a) {

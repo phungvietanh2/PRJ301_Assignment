@@ -41,7 +41,7 @@
                     </p>
                 </div>
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">      
-                    <form class="navbar-form navbar-left" method="GET" role="search">
+                    <form class="navbar-form navbar-left" method="GET" action="Search" role="search">
                         <div class="form-group">
                             <input type="text" name="q" class="form-control" placeholder="Search">
                         </div>

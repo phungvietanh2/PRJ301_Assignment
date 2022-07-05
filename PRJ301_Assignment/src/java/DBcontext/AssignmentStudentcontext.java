@@ -87,6 +87,7 @@ public class AssignmentStudentcontext extends DBcontext<AssignmentStudent> {
         return AssignmentIDSTUDENTs;
     }
 
+  
     public ArrayList<AssignmentStudent> getidstudentmark1(String id, String userid) {
         ArrayList<AssignmentStudent> AssignmentIDSTUDENTs = new ArrayList<>();
         try {
@@ -118,7 +119,7 @@ public class AssignmentStudentcontext extends DBcontext<AssignmentStudent> {
         return AssignmentIDSTUDENTs;
     }
 
-   public ArrayList<AssignmentStudent> getidstudentmark2(String id, String userid ,String coid) {
+    public ArrayList<AssignmentStudent> getidstudentmark2(String id, String userid, String coid) {
         ArrayList<AssignmentStudent> AssignmentIDSTUDENTs = new ArrayList<>();
         try {
             String sql = " select  sum(a.summ) as [STATUS] from \n"
@@ -140,7 +141,6 @@ public class AssignmentStudentcontext extends DBcontext<AssignmentStudent> {
             while (rs.next()) {
                 AssignmentStudent as = new AssignmentStudent();
                 as.setAsmarkk1(rs.getFloat("STATUS"));
-
                 AssignmentIDSTUDENTs.add(as);
             }
         } catch (SQLException ex) {
@@ -149,11 +149,10 @@ public class AssignmentStudentcontext extends DBcontext<AssignmentStudent> {
         return AssignmentIDSTUDENTs;
     }
 
-    
     public static void main(String[] args) {
         AssignmentStudentcontext dao = new AssignmentStudentcontext();
-        ArrayList<AssignmentStudent> a = dao.getidstudentmark("SE1", "anh");
-        System.out.println(a);
+       // ArrayList<AssignmentStudent> a = dao.getidadminmark("SE1");
+     //   System.out.println(a);
 
     }
 

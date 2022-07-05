@@ -24,6 +24,7 @@ protected void processRequest(HttpServletRequest request, HttpServletResponse re
     throws ServletException, IOException { 
       StudentDBcontext dbstudent = new StudentDBcontext();
      String raw_page = request.getParameter("page");
+   
        if(raw_page ==null)
        {
            raw_page = "1";

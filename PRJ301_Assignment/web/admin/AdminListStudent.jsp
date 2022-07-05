@@ -19,6 +19,8 @@
         <link href="css/admin.css" rel="stylesheet" type="text/css"/>
         <script src="js/Basic Pagination.js" type="text/javascript"></script>
         <link href="css/Pagination.css" rel="stylesheet" type="text/css"/>
+        <link href="css/search.css" rel="stylesheet" type="text/css"/>
+        <script src="js/search.js" type="text/javascript"></script>
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
               rel="stylesheet">
         <title>JSP Page</title>
@@ -80,12 +82,15 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h3>List Class/ 
-                            <a style="color: black;font-size: 20p" href="Admin">Back</a> 
+                            <a style="color: black;font-size: 20p;" href="Admin">Back</a> 
                             <span class="material-icons">
                                 keyboard_return
                             </span></h3>
                     </div>
-                    <form >
+
+                    
+
+                    <form>
                         <div class="panel-body">
                             <div class="container"><h1>Student</h1> </div> 
                             <table  class="table table-bordered">

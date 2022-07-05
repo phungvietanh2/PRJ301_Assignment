@@ -116,6 +116,10 @@
         <servlet-name>MarkReport2Controller</servlet-name>
         <servlet-class>HomeSinhVienController.MarkReport2Controller</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SearchController</servlet-name>
+        <servlet-class>AdminEditDelectController.SearchController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>DEMOcontroller</servlet-name>
         <url-pattern>/demo</url-pattern>
@@ -227,6 +231,10 @@
     <servlet-mapping>
         <servlet-name>MarkReport2Controller</servlet-name>
         <url-pattern>/MarkReport2Controller</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchController</servlet-name>
+        <url-pattern>/Search</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

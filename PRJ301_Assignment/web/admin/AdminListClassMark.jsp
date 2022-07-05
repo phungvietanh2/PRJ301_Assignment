@@ -91,7 +91,7 @@
                                     text-align: center; "  name="id">
                                 <c:forEach items="${requestScope.classs}" var="c">
                                     <option <c:if test="${param.id == c.cid}" >selected="selected" </c:if>  value="${c.cid}" >
-                                        ${c.cid}
+                                        ${c.cid}(${c.subjectss.suid})
                                     </option>
                                 </c:forEach>
                             </select>
@@ -108,15 +108,16 @@
                         <table  class="table table-bordered">
                             <thead>
                                 <tr>
-                                    <td></td>
-                                    <c:forEach  items="${requestScope.Assignments}" var="v">
-                                        <td>${v.aname}</td>
-                                    </c:forEach>
+                                    <th></th>
+                                        <c:forEach  items="${requestScope.Assignments}" var="v">
+                                        <th>${v.aname}</th>
+                                        </c:forEach>
+                                   
                                 </tr>
                             </thead>
                             <tbody>
                                 <c:forEach  items="${requestScope.Students}" var="a">
-                                    <tr> <td>${a.sid}</td>
+                                    <tr> <th>${a.sid}</th>
 
                                         <c:forEach items="${requestScope.Assignments}" var="b">
                                             <td>
@@ -131,7 +132,6 @@
 
                                             </td> 
                                         </c:forEach>
-
                                     </tr>
 
                                 </c:forEach>
