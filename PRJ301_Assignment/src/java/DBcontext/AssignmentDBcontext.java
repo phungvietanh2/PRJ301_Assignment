@@ -54,8 +54,7 @@ public class AssignmentDBcontext extends DBcontext<Assignment> {
                 Assignment S = new Assignment();
                 S.setAid(rs.getInt("Aid"));
                 S.setAname(rs.getString("Aname"));
-                S.setAweight(rs.getFloat("Aweight"));
-               
+                S.setAweight(rs.getFloat("Aweight"));    
                 Assignments.add(S);
             }
         } catch (SQLException ex) {

@@ -67,11 +67,14 @@ public class MarkReport2Controller extends HttpServlet {
         request.setAttribute("Terms", dbterm.getid(iduser));
 
         request.setAttribute("classs", dbclass.getid(id, iduser));
+        
        request.setAttribute("assstudent", dbass.getidstudentmark(sid, iduser));
+       
+       
        request.setAttribute("assstudent1", dbass.getidstudentmark1(sid, iduser));
        request.setAttribute("assstudent2", dbass.getidstudentmark2(sid, iduser,ssid));
         request.setAttribute("as", dba.SearchBycours(ssid));
-        System.out.println( dba.SearchBycours(ssid));
+       
         request.getRequestDispatcher("Mark Report 2.jsp").forward(request, response);
     }
 

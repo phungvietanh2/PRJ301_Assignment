@@ -17,31 +17,6 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <div class="container">
-            <h2>Bordered Table</h2>
-            <p>The .table-bordered class adds borders on all sides of the table and the cells:</p>            
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <c:forEach items="${requestScope.Assignment}" var="c">
-                            <th>${c.aname}</th>
-                </c:forEach>
-                    </tr>
-                </thead>
-                <tbody>
-                    
-                        <c:forEach items="${requestScope.Students}" var="a">
-                            <tr> 
-                              <td>${a.rollnumber}</td> 
-                                 <c:forEach items="${requestScope.AssignmentIDSTUDENT}" var="ca">
-                                     <td>${ca.mark}</td>
-                                         </c:forEach>
-                            </tr>
-                        </c:forEach>
-                           
-                    
-                </tbody>
-            </table>
-        </div>
+        ${requestScope.mess}
     </body>
 </html>

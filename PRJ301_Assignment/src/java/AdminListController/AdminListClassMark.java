@@ -11,6 +11,7 @@ import DBcontext.StudentDBcontext;
 import Model.Assignment;
 import Model.AssignmentStudent;
 import Model.Classs;
+import Model.Mark;
 import Model.Student;
 import Model.Subjects;
 import java.io.IOException;
@@ -57,15 +58,38 @@ public class AdminListClassMark extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String id = request.getParameter("id");
-        request.setAttribute("Assignments", dbas.SearchByclass(id));
+        String[] sub = id.split("_");
+        
+        request.setAttribute("Assignments", dbas.SearchByclass(sub[0]));
 
         request.setAttribute("classs", dbclass.list());
 
-        request.setAttribute("Students", dbstudent.SearchByidClass(id));
+        ArrayList<Student> listS = dbstudent.SearchByidClass(sub[0]);
+        int pass = 0;
+        for (Student student : listS) {
 
-        request.setAttribute("AssignmentIDSTUDENTs", dbasidstudent.getbymark(id));
+            ArrayList<Mark> listMark = new ArrayList<>(dbstudent.countAvg(student.getSid(),sub[1]));
+            double avg = 0;
 
-        
+            for (Mark mark : listMark) {
+                if ((mark.getWeight() == 30 && mark.getMark() < 4) || (mark.getWeight() == 40 && mark.getMark() < 4) || (mark.getWeight() == 50 && mark.getMark() < 4) ) {
+                    
+                    student.setStatus(0);
+                }
+                avg += mark.getMark() * mark.getWeight() / 100;
+            }
+            if (avg >= 5) {
+                pass++;
+                student.setStatus(1);
+            } else {
+                student.setStatus(0);
+            }
+        }
+        request.setAttribute("pass", pass);
+        request.setAttribute("fail", listS.size() - pass);
+        request.setAttribute("Students", listS);
+
+        request.setAttribute("AssignmentIDSTUDENTs", dbasidstudent.getbymark(sub[0]));
 
         request.getRequestDispatcher("admin/AdminListClassMark.jsp").forward(request, response);
 

@@ -90,9 +90,10 @@
                             <select style="border-radius: 10px ; height: 4rem;
                                     text-align: center; "  name="id">
                                 <c:forEach items="${requestScope.classs}" var="c">
-                                    <option <c:if test="${param.id == c.cid}" >selected="selected" </c:if>  value="${c.cid}" >
+                                    <option <c:if test="${param.id == c.cid}" >selected="selected" </c:if>  value="${c.cid}_${c.subjectss.suid}" >
                                         ${c.cid}(${c.subjectss.suid})
                                     </option>
+                                    
                                 </c:forEach>
                             </select>
                             <br>
@@ -112,6 +113,7 @@
                                         <c:forEach  items="${requestScope.Assignments}" var="v">
                                         <th>${v.aname}</th>
                                         </c:forEach>
+                                        <th>Status</th>
                                    
                                 </tr>
                             </thead>
@@ -128,13 +130,23 @@
                                                            </c:if>
                                                        </c:forEach>
                                                        />
-
-
+                                                
                                             </td> 
+                                            
                                         </c:forEach>
+                                        <c:if test="${a.status == 1}">
+                                            <td><h3 style="color: green">Pass</h3></td>
+                                        </c:if>
+                                    <c:if test="${a.status == 0}">
+                                        <td><h3 style="color: red">Fail</h3></td>
+                                        </c:if>
+                                            
                                     </tr>
 
                                 </c:forEach>
+                                    
+                                    
+                                                
 
                             </tbody>
                         </table>
@@ -143,5 +155,9 @@
                 </div>
             </div>
         </div>
+                        
+                        <div style="text-align: center">Number pass:${pass}</div>
+                         <div style="text-align: center">Number fail:${fail}</div>
+                        
     </body>
 </html>

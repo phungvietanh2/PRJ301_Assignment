@@ -18,12 +18,21 @@ public class Student {
     private Date sdob;
     private String sgmail;
     private String start; 
+    private int status;
     private ArrayList<AssignmentStudent> AssignmentIDSTUDENTs = new ArrayList<>();
     public ArrayList<AssignmentStudent> getAssignmentIDSTUDENTs() {
         return AssignmentIDSTUDENTs;
     }
     public void setAssignmentIDSTUDENTs(ArrayList<AssignmentStudent> AssignmentIDSTUDENTs) {
         this.AssignmentIDSTUDENTs = AssignmentIDSTUDENTs;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 
  

@@ -22,7 +22,7 @@ import java.util.logging.Logger;
  * @author phung
  */
 public class AcountDBcontext extends DBcontext<Account> {
-    
+
     public Account getAccountbyuserpass(String user, String Pass) {
         try {
             String sql = "select a.username,a.Arole , a.sid , a.password , a.displayname , ISNULL (r.Rid,-1) as Rid,r.Rname, ISNULL(f.Fid,-1) as Fid , f.Fname ,f.Furl\n"
@@ -40,13 +40,13 @@ public class AcountDBcontext extends DBcontext<Account> {
             Feature features = new Feature();
             features.setFid(-1);
             while (rs.next()) {
-                if (account == null  ) {
+                if (account == null) {
                     account = new Account();
                     account.setRoless(rs.getInt("Arole"));
                     account.setUser(rs.getString("username"));
                     account.setPass(rs.getString("password"));
-                    account.setDisplayname(rs.getString("displayname")); 
-                    account.setStudents(rs.getInt("sid")); 
+                    account.setDisplayname(rs.getString("displayname"));
+                    account.setStudents(rs.getInt("sid"));
                 }
                 int rid = rs.getInt("Rid");
                 if (rid != -1) {
@@ -57,10 +57,10 @@ public class AcountDBcontext extends DBcontext<Account> {
                         account.getRoles().add(roles);
                     }
                 }
-                
+
                 int fid = rs.getInt("Fid");
                 if (fid != -1) {
-                    if (features.getFid()!= fid) {
+                    if (features.getFid() != fid) {
                         features = new Feature();
                         features.setFid(fid);
                         features.setFname(rs.getString("Fname"));
@@ -69,45 +69,46 @@ public class AcountDBcontext extends DBcontext<Account> {
                     }
                 }
             }
-             return account;
+            return account;
         } catch (SQLException ex) {
             Logger.getLogger(AcountDBcontext.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
-    
+
+   
     @Override
     public ArrayList<Account> list() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
 
     }
-    
-    public static void main(String[] args) {
-        AcountDBcontext dao = new AcountDBcontext();
-         Account a = dao.getAccountbyuserpass("admin", "admin");
-      //  for (Account o : a) {
-           System.out.println(0);
-       //}
-    }
-    
+
+//    public static void main(String[] args) {
+//        AcountDBcontext dao = new AcountDBcontext();
+//        Account a = dao.getIdAgmail("phungvietanh1994@gmail.com");
+//        //  for (Account o : a) {
+//        System.out.println(a);
+//        //}
+//    }
+
     @Override
     public Account get(int id) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
+
     @Override
     public void insert(Account model) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
+
     @Override
     public void update(Account model) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
+
     @Override
     public void delete(Account model) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
+
 }

@@ -6,6 +6,7 @@ package DBcontext;
 
 import Model.AssignmentStudent;
 import Model.Classs;
+import Model.Mark;
 import Model.Student;
 import Model.Subjects;
 import jakarta.servlet.jsp.jstl.sql.Result;
@@ -22,6 +23,24 @@ import java.util.logging.Logger;
  * @author phung
  */
 public class StudentDBcontext extends DBcontext<Student> {
+
+    public ArrayList<Mark> countAvg(int id, String className) {
+        ArrayList<Mark> mark = new ArrayList<>();
+        try {
+            String sql = "select  a.Aweight,ad.Mark from AssessmentIDStudent ad,Assessment a where ad.Sid = ? and a.Aid = ad.Aid and a.Coid = ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, id);
+            stm.setString(2, className);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                Mark S = new Mark(rs.getFloat(1), rs.getFloat(2));
+                mark.add(S);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ClassDBcontext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return mark;
+    }
 
     @Override
     public ArrayList<Student> list() {

@@ -36,7 +36,6 @@
                             <tr > 
                                 <td class="selec1">	VALUE	 <br>Total</td>
                                     <c:forEach items="${requestScope.as}" var="b">
-
                                     <td  >
                                         <input readonly="true" name="${b.aid}" class="hight" type="text"
                                                <c:forEach items="${requestScope.assstudent}" var="c">   
@@ -61,6 +60,7 @@
                                 </c:forEach>
 
                                 <td>
+                                    
                                     <c:if test="${ sum<4}">
                                         <h4 style="color: red">NOT PASS</h4>
                                     </c:if>
