@@ -23,7 +23,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <nav class="navbar navbar-default navbar-static-top">
+         <nav class="navbar navbar-default navbar-static-top">
             <div class="container-fluid">
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
@@ -36,27 +36,19 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-
+                    
                     <!-----xin chao nguoi dang nhap ---->
                     <p class="navbar-brand">
-                        Hello ${sessionScope.accounts.user} 
+                        Hello ${sessionScope.account.user } 
                         <img style="width: 58px;margin-top:-13px;" src="img/hello.png">
                     </p>
                 </div>
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">      
-                    <form class="navbar-form navbar-left" method="GET" role="search">
-                        <div class="form-group">
-                            <input type="text" name="q" class="form-control" placeholder="Search">
-                        </div>
-                        <button type="submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i></button>
-                    </form>
-
-                </div>
+               
             </div>
-        </nav>  		
+        </nav>  	
         <div class="container-fluid main-container">
             <div class="col-md-2 sidebar">
-                <div class="row">
+                <div class="row">                 
                     <div class="absolute-wrapper"> </div>
                     <!-- Menu -->
                     <div class="side-menu">
@@ -65,16 +57,16 @@
                             <div class="side-menu-container">
                                 <ul class="nav navbar-nav">
                                     <li><a href="Admin"><span class="glyphicon "></span>Home</a></li>
-                                    <li ><a href="AdminInsertStudent"><span class="glyphicon "></span> INSERT STUDENT</a></li>
-                                    <li ><a href="AdminInsertMarkController"><span class="glyphicon "></span> INSERT MARK</a></li>
-                                    <li><a href="login.jsp"><span class="glyphicon  glyphicon-log-out"></span> Log out</a></li>
+                                    <li><a href="AdminInsertStudent"><span class="glyphicon "></span> INSERT STUDENT</a></li>
+                                    <li><a href="AdminInsertMarkController"><span class="glyphicon "></span> INSERT MARK</a></li>
+                                    <li><a href="Search"><span class="glyphicon "></span> Search</a></li>
+                                    <li><a href="Logout"><span class="glyphicon  glyphicon-log-out"></span> Log out</a></li>
                                 </ul>
                             </div>
                         </nav>
                     </div>
-                </div>  	
+                </div>  		
             </div>
-
             <div class="col-md-10 content">
                 <div class="panel panel-default">
                     <div class="panel-heading">
@@ -90,12 +82,18 @@
                             <select style="border-radius: 10px ; height: 4rem;
                                     text-align: center; "  name="id">
                                 <c:forEach items="${requestScope.classs}" var="c">
-                                    <option <c:if test="${param.id == c.cid}" >selected="selected" </c:if>  value="${c.cid}_${c.subjectss.suid}" >
-                                        ${c.cid}(${c.subjectss.suid})
+                                    <option <c:if test="${className eq c.cid and group eq c.subjectss.suid}" >
+                                            selected="selected" 
+                                        </c:if>  value="${c.cid}_${c.subjectss.suid}" >
+                                        ${c.cid}_${c.subjectss.suid}
+
                                     </option>
-                                    
+
                                 </c:forEach>
                             </select>
+
+
+
                             <br>
                             <input style="border-radius: 10px ;
                                    height: 4rem;
@@ -106,6 +104,13 @@
                         </div>
                     </form>
                     <c:if test="${requestScope.AssignmentIDSTUDENTs !=null }">
+                        
+                        
+                        <div style="text-align: center ;font-size: 2rem;color: green;">PASSED:${requestScope.pass}</div>
+                        <div style="text-align: center ;font-size: 2rem;color: red"> NOT PASSED:${requestScope.fail}</div>
+                      
+                        
+                        
                         <table  class="table table-bordered">
                             <thead>
                                 <tr>
@@ -113,8 +118,8 @@
                                         <c:forEach  items="${requestScope.Assignments}" var="v">
                                         <th>${v.aname}</th>
                                         </c:forEach>
-                                        <th>Status</th>
-                                   
+                                    <th>Status</th>
+
                                 </tr>
                             </thead>
                             <tbody>
@@ -130,23 +135,23 @@
                                                            </c:if>
                                                        </c:forEach>
                                                        />
-                                                
+
                                             </td> 
-                                            
+
                                         </c:forEach>
                                         <c:if test="${a.status == 1}">
-                                            <td><h3 style="color: green">Pass</h3></td>
+                                            <td><h4 style="color: green">PASSED</h4></td>
                                         </c:if>
-                                    <c:if test="${a.status == 0}">
-                                        <td><h3 style="color: red">Fail</h3></td>
+                                        <c:if test="${a.status == 0}">
+                                            <td><h4 style="color: red">NOT PASSED</h4></td>
                                         </c:if>
-                                            
+
                                     </tr>
 
                                 </c:forEach>
-                                    
-                                    
-                                                
+
+
+
 
                             </tbody>
                         </table>
@@ -155,9 +160,7 @@
                 </div>
             </div>
         </div>
-                        
-                        <div style="text-align: center">Number pass:${pass}</div>
-                         <div style="text-align: center">Number fail:${fail}</div>
-                        
+
+
     </body>
 </html>

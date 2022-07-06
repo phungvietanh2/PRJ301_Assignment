@@ -41,7 +41,7 @@ public class AssignmentDBcontext extends DBcontext<Assignment> {
         return Assignments;
     }
 
-    public ArrayList<Assignment> SearchBycours(String id) {
+    public ArrayList<Assignment> getid_course(String id) {
         ArrayList<Assignment> Assignments = new ArrayList<>();
         try {
             String sql = " select a.Aweight, a.Aname , a.Aid from Assessment a left join Course c on  a.Coid = c.Coid\n"

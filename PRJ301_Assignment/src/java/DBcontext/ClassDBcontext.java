@@ -1,19 +1,11 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package DBcontext;
-
 import Model.Classs;
-import Model.Student;
 import Model.Subjects;
 import Model.Teacher;
-import Model.Term;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -49,7 +41,7 @@ public class ClassDBcontext extends DBcontext<Classs> {
         return classes;
     }
 
-    public ArrayList<Classs> getid(String id , String userid  ) {
+    public ArrayList<Classs> getid_user(String id , String userid  ) {
         try {
              ArrayList<Classs> classes = new ArrayList<>();
             String sql = "  select c.Coid, c.Coname, g.Gid,cl.Gstart,cl.Gend from Term t  \n"
@@ -81,13 +73,13 @@ public class ClassDBcontext extends DBcontext<Classs> {
         return null;
     }
 
-    public static void main(String[] args) {
-        ClassDBcontext dao = new ClassDBcontext();
-        ArrayList<Classs> a = dao.getid("1","anh");
-        //    for (Classs o : a) {
-        System.out.println(a);
-        //  }
-    }
+//    public static void main(String[] args) {
+//        ClassDBcontext dao = new ClassDBcontext();
+//        ArrayList<Classs> a = dao.getid("1","anh");
+//        //    for (Classs o : a) {
+//        System.out.println(a);
+//        //  }
+//    }
 
     @Override
     public Classs get(int id) {

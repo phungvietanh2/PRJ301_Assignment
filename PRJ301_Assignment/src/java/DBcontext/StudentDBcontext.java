@@ -27,7 +27,7 @@ public class StudentDBcontext extends DBcontext<Student> {
     public ArrayList<Mark> countAvg(int id, String className) {
         ArrayList<Mark> mark = new ArrayList<>();
         try {
-            String sql = "select  a.Aweight,ad.Mark from AssessmentIDStudent ad,Assessment a where ad.Sid = ? and a.Aid = ad.Aid and a.Coid = ?";
+            String sql = "select  ad.Mark ,a.Aweight from AssessmentIDStudent ad,Assessment a where ad.Sid = ? and a.Aid = ad.Aid and a.Coid = ?";
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setInt(1, id);
             stm.setString(2, className);

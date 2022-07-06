@@ -7,7 +7,6 @@ package DBcontext;
 import Model.Assignment;
 import Model.AssignmentStudent;
 import Model.Student;
-import Model.Subjects;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -54,10 +53,10 @@ public class AssignmentStudentcontext extends DBcontext<AssignmentStudent> {
         return AssignmentIDSTUDENTs;
     }
 
-    public ArrayList<AssignmentStudent> getidstudentmark(String id, String userid) {
+    public ArrayList<AssignmentStudent> getid_class_user(String id, String userid) {
         ArrayList<AssignmentStudent> AssignmentIDSTUDENTs = new ArrayList<>();
         try {
-            String sql = " select a.Aid,a.Aweight,a.Aname, ass.Mark ,sum(a.Aweight *ass.Mark)/100 as [VALUE] from  Course c \n"
+            String sql = " select a.Aid,a.Aweight,a.Aname, ass.Mark ,sum(a.Aweight *ass.Mark)/100 as [total] from  Course c \n"
                     + "        left JOIN   [Group] cl on c.Coid = cl.Coid\n"
                     + "      left JOIN GroupStudent g on cl.Gid = g.Gid\n"
                     + "         left JOIN   Student s on s.Sid = g.Sid \n"
@@ -77,7 +76,7 @@ public class AssignmentStudentcontext extends DBcontext<AssignmentStudent> {
                 a.setAname(rs.getString("Aname"));
                 AssignmentStudent as = new AssignmentStudent();
                 as.setAsmarkk(rs.getFloat("Mark"));
-                as.setAsmarkk2(rs.getFloat("VALUE"));
+                as.setTotal(rs.getFloat("total"));
                 as.setAssignments(a);
                 AssignmentIDSTUDENTs.add(as);
             }
@@ -88,41 +87,41 @@ public class AssignmentStudentcontext extends DBcontext<AssignmentStudent> {
     }
 
   
-    public ArrayList<AssignmentStudent> getidstudentmark1(String id, String userid) {
+//    public ArrayList<AssignmentStudent> getidstudentmark1(String id, String userid) {
+//        ArrayList<AssignmentStudent> AssignmentIDSTUDENTs = new ArrayList<>();
+//        try {
+//            String sql = " select  sum(a.summ) as [STATUS] from \n"
+//                    + "  ( select  a.Aid, a.Aweight , a.Aname ,ass.Mark, cl.Gid,\n"
+//                    + "    a.Coid, ac.username, sum(a.Aweight *ass.Mark)/100 as summ  from  Course c \n"
+//                    + "   left JOIN   [Group] cl on c.Coid = cl.Coid\n"
+//                    + "   left JOIN GroupStudent g on cl.Gid = g.Gid\n"
+//                    + "   left JOIN   Student s on s.Sid = g.Sid \n"
+//                    + "   left join AssessmentIDStudent ass on ass.Sid = s.Sid \n"
+//                    + "   left join Assessment a on a.Aid = ass.Aid\n"
+//                    + "   left join Account ac on ac.Sid = s.Sid\n"
+//                    + "   group by a.Aid, a.Aweight , a.Aname ,ass.Mark,cl.Gid,\n"
+//                    + "    a.Coid, ac.username) a  where a.Gid = ? and a.username=? ";
+//            PreparedStatement stm = connection.prepareStatement(sql);
+//            stm.setString(1, id);
+//
+//            stm.setString(2, userid);
+//            ResultSet rs = stm.executeQuery();
+//            while (rs.next()) {
+//                AssignmentStudent as = new AssignmentStudent();
+//                as.setAsmarkk1(rs.getFloat("STATUS"));
+//
+//                AssignmentIDSTUDENTs.add(as);
+//            }
+//        } catch (SQLException ex) {
+//            Logger.getLogger(AssignmentStudentcontext.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        return AssignmentIDSTUDENTs;
+//    }
+
+    public ArrayList<AssignmentStudent> getid_average(String id, String userid, String coid) {
         ArrayList<AssignmentStudent> AssignmentIDSTUDENTs = new ArrayList<>();
         try {
-            String sql = " select  sum(a.summ) as [STATUS] from \n"
-                    + "  ( select  a.Aid, a.Aweight , a.Aname ,ass.Mark, cl.Gid,\n"
-                    + "    a.Coid, ac.username, sum(a.Aweight *ass.Mark)/100 as summ  from  Course c \n"
-                    + "   left JOIN   [Group] cl on c.Coid = cl.Coid\n"
-                    + "   left JOIN GroupStudent g on cl.Gid = g.Gid\n"
-                    + "   left JOIN   Student s on s.Sid = g.Sid \n"
-                    + "   left join AssessmentIDStudent ass on ass.Sid = s.Sid \n"
-                    + "   left join Assessment a on a.Aid = ass.Aid\n"
-                    + "   left join Account ac on ac.Sid = s.Sid\n"
-                    + "   group by a.Aid, a.Aweight , a.Aname ,ass.Mark,cl.Gid,\n"
-                    + "    a.Coid, ac.username) a  where a.Gid = ? and a.username=? ";
-            PreparedStatement stm = connection.prepareStatement(sql);
-            stm.setString(1, id);
-
-            stm.setString(2, userid);
-            ResultSet rs = stm.executeQuery();
-            while (rs.next()) {
-                AssignmentStudent as = new AssignmentStudent();
-                as.setAsmarkk1(rs.getFloat("STATUS"));
-
-                AssignmentIDSTUDENTs.add(as);
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(AssignmentStudentcontext.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return AssignmentIDSTUDENTs;
-    }
-
-    public ArrayList<AssignmentStudent> getidstudentmark2(String id, String userid, String coid) {
-        ArrayList<AssignmentStudent> AssignmentIDSTUDENTs = new ArrayList<>();
-        try {
-            String sql = " select  sum(a.summ) as [STATUS] from \n"
+            String sql = " select  sum(a.summ) as [AVERAGE] from \n"
                     + "  ( select  a.Aid, a.Aweight , a.Aname ,ass.Mark, cl.Gid,\n"
                     + "    a.Coid, ac.username, sum(a.Aweight *ass.Mark)/100 as summ  from  Course c \n"
                     + "   left JOIN   [Group] cl on c.Coid = cl.Coid\n"
@@ -140,7 +139,7 @@ public class AssignmentStudentcontext extends DBcontext<AssignmentStudent> {
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
                 AssignmentStudent as = new AssignmentStudent();
-                as.setAsmarkk1(rs.getFloat("STATUS"));
+                as.setAverage(rs.getFloat("AVERAGE"));
                 AssignmentIDSTUDENTs.add(as);
             }
         } catch (SQLException ex) {

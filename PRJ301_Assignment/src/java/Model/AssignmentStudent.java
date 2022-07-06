@@ -13,8 +13,8 @@ import java.sql.Date;
 public class AssignmentStudent {
     private int asid;
     private float asmarkk;
-    private float asmarkk1;
-    private float asmarkk2;
+    private float  average;
+    private float Total;
     private Date asdate;
     private Student Students ;
     private Assignment Assignments ;
@@ -33,22 +33,24 @@ public class AssignmentStudent {
         this.asid = asid;
     }
 
-    public float getAsmarkk1() {
-        return asmarkk1;
+    public float getAverage() {
+        return average;
     }
 
-    public void setAsmarkk1(float asmarkk1) {
-        this.asmarkk1 = asmarkk1;
+    public void setAverage(float average) {
+        this.average = average;
     }
 
-    public float getAsmarkk2() {
-        return asmarkk2;
+    
+    public float getTotal() {
+        return Total;
     }
 
-    public void setAsmarkk2(float asmarkk2) {
-        this.asmarkk2 = asmarkk2;
+    public void setTotal(float Total) {
+        this.Total = Total;
     }
 
+   
   
 
     public Date getAsdate() {
@@ -75,11 +77,6 @@ public class AssignmentStudent {
         this.Assignments = Assignments;
     }
 
-    @Override
-    public String toString() {
-        return "AssignmentIDSTUDENT{" + "asid=" + asid + ", asmarkk=" + asmarkk + ", asmarkk1=" + asmarkk1 + ", asdate=" + asdate + ", Students=" + Students + ", Assignments=" + Assignments + '}';
-    }
-
-  
+   
     
 }

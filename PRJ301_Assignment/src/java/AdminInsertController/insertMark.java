@@ -72,27 +72,30 @@ public class insertMark extends HttpServlet {
         String[] components = request.getParameterValues("component");
         ArrayList<AssignmentStudent> AssignmentIDSTUDENTs = new ArrayList<>();
         for (String component : components) {
-            int sid =Integer.parseInt(component.split("_")[0]);
-            int  aid = Integer.parseInt(component.split("_")[1]);
+            int sid = Integer.parseInt(component.split("_")[0]);
+            int aid = Integer.parseInt(component.split("_")[1]);
             AssignmentStudent as = new AssignmentStudent();
-            String eid = request.getParameter("eid"+sid+"_"+aid);
-            System.out.println(sid);
-            if (eid.length() > 0) 
-                as.setAsid(Integer.parseInt(eid));
-             else 
-                as.setAsid(-1);           
-            String score = request.getParameter("score" + sid + "_" + aid);
-            if (score.length() > 0) 
-                as.setAsmarkk(Float.parseFloat(score));
-             else 
-                as.setAsmarkk(-1);    
-            Student s = new Student();
-            s.setSid(sid);
-            Assignment a = new Assignment();
-            a.setAid(aid);
-            as.setAssignments(a);
-            as.setStudents(s);
-            AssignmentIDSTUDENTs.add(as);
+            String eid = request.getParameter("eid" + sid + "_" + aid);
+
+                if (eid.length() > 0 ) {
+                    as.setAsid(Integer.parseInt(eid));
+                } else {
+                    as.setAsid(-1);
+                }
+                String score = request.getParameter("score" + sid + "_" + aid);
+                if (score.length() > 0 ) {
+                   as.setAsmarkk(Float.parseFloat(score));
+                } else {
+                    as.setAsmarkk(-1);
+                }
+                Student s = new Student();
+                s.setSid(sid);
+                Assignment a = new Assignment();
+                a.setAid(aid);
+                as.setAssignments(a);
+                as.setStudents(s);
+                AssignmentIDSTUDENTs.add(as);
+            
         }
         dbass.save(AssignmentIDSTUDENTs);
         request.getRequestDispatcher("AdminInsertMarkController").forward(request, response);

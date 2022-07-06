@@ -16,66 +16,38 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-
-/**
- *
- * @author phung
- */
 public class MarkReport2Controller extends HttpServlet {
-
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try ( PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet MarkReport2Controller</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet MarkReport2Controller at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
     }
-
     TermDBcontext dbterm = new TermDBcontext();
     StudentDBcontext dbstudent = new StudentDBcontext();
     ClassDBcontext dbclass = new ClassDBcontext();
     CourseDBcontext dbcourse = new CourseDBcontext();
     AssignmentStudentcontext dbass = new AssignmentStudentcontext();
     AssignmentDBcontext dba = new AssignmentDBcontext();
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String iduser = request.getParameter("iduser");
-        String id = request.getParameter("id");
-        String sid = request.getParameter("ssid");
-        String ssid = request.getParameter("sssid");
+        String idterms = request.getParameter("idterms"); 
+        String idclass  = request.getParameter("idclass");
+        String idcounrse = request.getParameter("idcourse");
+        
         request.setAttribute("students", dbstudent.list());
         request.setAttribute("Terms", dbterm.getid(iduser));
 
-        request.setAttribute("classs", dbclass.getid(id, iduser));
+        request.setAttribute("classs", dbclass.getid_user(idterms, iduser));
         
-       request.setAttribute("assstudent", dbass.getidstudentmark(sid, iduser));
+       request.setAttribute("assidstudent", dbass.getid_class_user(idclass, iduser));
        
        
-       request.setAttribute("assstudent1", dbass.getidstudentmark1(sid, iduser));
-       request.setAttribute("assstudent2", dbass.getidstudentmark2(sid, iduser,ssid));
-        request.setAttribute("as", dba.SearchBycours(ssid));
+//       request.setAttribute("assstudent1", dbass.getidstudentmark1(sid, iduser));
+       request.setAttribute("average", dbass.getid_average(idclass,iduser,idcounrse));
+        request.setAttribute("asstudent", dba.getid_course(idcounrse));
        
-        request.getRequestDispatcher("Mark Report 2.jsp").forward(request, response);
+        request.getRequestDispatcher("HomeSV/Mark Report 2.jsp").forward(request, response);
     }
 
     /**

@@ -22,7 +22,7 @@
     </head>
     <body>
         <!------------------------------------------------------------------------------------------------------------------------>
-        <nav class="navbar navbar-default navbar-static-top">
+         <nav class="navbar navbar-default navbar-static-top">
             <div class="container-fluid">
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
@@ -35,22 +35,14 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-
+                    
                     <!-----xin chao nguoi dang nhap ---->
                     <p class="navbar-brand">
                         Hello ${sessionScope.account.user } 
                         <img style="width: 58px;margin-top:-13px;" src="img/hello.png">
                     </p>
                 </div>
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">      
-                    <form class="navbar-form navbar-left" method="GET" action="Search" role="search">
-                        <div class="form-group">
-                            <input type="text" name="q" class="form-control" placeholder="Search">
-                        </div>
-                        <button type="submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i></button>
-                    </form>
-
-                </div>
+               
             </div>
         </nav>  	
         <div class="container-fluid main-container">
@@ -63,17 +55,17 @@
                             <!-- Main Menu -->
                             <div class="side-menu-container">
                                 <ul class="nav navbar-nav">
-                                    <li class="active"><a href="Admin"><span class="glyphicon "></span>Home</a></li>
-                                    <li><a href="AdminInsertStudent"><span class="glyphicon "></span> INSERT STUDENT</a></li>
+                                    <li><a href="Admin"><span class="glyphicon "></span>Home</a></li>
+                                    <li ><a href="AdminInsertStudent"><span class="glyphicon "></span> INSERT STUDENT</a></li>
                                     <li><a href="AdminInsertMarkController"><span class="glyphicon "></span> INSERT MARK</a></li>
-                                    <li><a href="login.jsp"><span class="glyphicon  glyphicon-log-out"></span> Log out</a></li>
+                                    <li  class="active"><a href="Search"><span class="glyphicon "></span> Search</a></li>
+                                    <li><a href="Logout"><span class="glyphicon  glyphicon-log-out"></span> Log out</a></li>
                                 </ul>
                             </div>
                         </nav>
                     </div>
                 </div>  		
             </div>
-
             <!--start code-->
             <div class="col-md-10 content">
                 <div class="panel panel-default">

@@ -40,15 +40,7 @@
                         <img style="width: 58px;margin-top:-13px;" src="img/hello.png">
                     </p>
                 </div>
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">      
-                    <form class="navbar-form navbar-left" method="GET" action="Search" role="search">
-                        <div class="form-group">
-                            <input  type="text" name="searchsstudent" class="form-control" placeholder="Search">
-                        </div>
-                        <button type="submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i></button>
-                    </form>
-
-                </div>
+               
             </div>
         </nav>  	
         <div class="container-fluid main-container">
@@ -64,7 +56,8 @@
                                     <li class="active"><a href="Admin"><span class="glyphicon "></span>Home</a></li>
                                     <li><a href="AdminInsertStudent"><span class="glyphicon "></span> INSERT STUDENT</a></li>
                                     <li><a href="AdminInsertMarkController"><span class="glyphicon "></span> INSERT MARK</a></li>
-                                    <li><a href="login.jsp"><span class="glyphicon  glyphicon-log-out"></span> Log out</a></li>
+                                    <li><a href="Search"><span class="glyphicon "></span> Search</a></li>
+                                    <li><a href="Logout"><span class="glyphicon  glyphicon-log-out"></span> Log out</a></li>
                                 </ul>
                             </div>
                         </nav>

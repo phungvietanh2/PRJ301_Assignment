@@ -6,23 +6,12 @@
 package AccountController;
 
 import DBcontext.AcountDBcontext;
-import DBcontext.ClassDBcontext;
-import DBcontext.StudentDBcontext;
-
-
 import Model.Account;
-import Model.Classs;
-import Model.Student;
-
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import java.util.ArrayList;
-
 /**
  *
  * @author phung
@@ -52,7 +41,7 @@ public class AcountController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-    request.getRequestDispatcher("login.jsp").forward(request, response);
+    request.getRequestDispatcher("Login/login.jsp").forward(request, response);
     } 
 
     /** 
@@ -72,7 +61,7 @@ public class AcountController extends HttpServlet {
         if(accounts == null)
         {
            request.setAttribute("error", "error");
-            request.getRequestDispatcher("login.jsp").forward(request, response);
+            request.getRequestDispatcher("Login/login.jsp").forward(request, response);
            
         }
         else

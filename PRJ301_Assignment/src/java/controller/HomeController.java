@@ -45,7 +45,7 @@ public class HomeController extends CheckacountController {
     protected void processget(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         request.setAttribute("terms", dbterm.list());
-       request.getRequestDispatcher("Home.jsp").forward(request, response);
+       request.getRequestDispatcher("HomeSV/Home.jsp").forward(request, response);
     } 
 
     /** 
