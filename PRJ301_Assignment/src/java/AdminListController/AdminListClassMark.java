@@ -8,7 +8,7 @@ import DBcontext.AssignmentDBcontext;
 import DBcontext.AssignmentStudentcontext;
 import DBcontext.ClassDBcontext;
 import DBcontext.StudentDBcontext;
-import Model.Mark;
+import Model.AssignmentStudent;
 import Model.Student;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
@@ -42,28 +42,29 @@ public class AdminListClassMark extends HttpServlet {
             throws ServletException, IOException {
         String id = request.getParameter("id");
         String[] sub = id.split("_");
-
         request.setAttribute("Assignments", dbas.SearchByclass(sub[0]));
-
         request.setAttribute("classs", dbclass.list());
-        request.setAttribute("className", sub[0]);
-        request.setAttribute("group", sub[1]);
-        ArrayList<Student> listS = dbstudent.SearchByidClass(sub[0]);
-        int pass = 0;
-        
-        for (Student student : listS) {
-            boolean check = true;
-            ArrayList<Mark> listMark = new ArrayList<>(dbstudent.countAvg(student.getSid(), sub[1]));
-            double avg = 0;
 
-            for (Mark mark : listMark) {
-                if ((mark.getWeight() == 40 && mark.getMark() < 4)
-                        || (mark.getWeight() == 50 && mark.getMark() < 4)
-                        || (mark.getWeight() == 35 && mark.getMark() < 4)) {
+        request.setAttribute("className", sub[0]);
+        request.setAttribute("course", sub[1]);
+
+        ArrayList<Student> students = dbstudent.SearchByidStudent_Class(sub[0]);
+        int pass = 0;
+        double avg = 0;
+       
+        for (Student student : students) {
+            boolean check = true;
+            ArrayList<AssignmentStudent> asidstudent = dbasidstudent.countAvg(student.getSid(), sub[1]);
+           
+            
+            for (AssignmentStudent o : asidstudent) {
+                if ((o.getAssignments().getAweight() == 40 && o.getAsmarkk() < 4)
+                        || (o.getAssignments().getAweight() == 50 && o.getAsmarkk() < 4)
+                        || (o.getAssignments().getAweight() == 35 && o.getAsmarkk() < 4)) {
                     check = false;
                     student.setStatus(0);
                 }
-                avg += mark.getMark() * mark.getWeight() / 100;
+                avg += o.getAsmarkk() * o.getAssignments().getAweight() / 100;
             }
             if (avg >= 5 && check == true) {
                 pass++;
@@ -73,9 +74,9 @@ public class AdminListClassMark extends HttpServlet {
             }
         }
         request.setAttribute("pass", pass);
-        request.setAttribute("fail", listS.size() - pass);
-        request.setAttribute("Students", listS);
+        request.setAttribute("fail", students.size() - pass);
 
+        request.setAttribute("Students", students);
         request.setAttribute("AssignmentIDSTUDENTs", dbasidstudent.getbymark(sub[0]));
 
         request.getRequestDispatcher("admin/AdminListClassMark.jsp").forward(request, response);

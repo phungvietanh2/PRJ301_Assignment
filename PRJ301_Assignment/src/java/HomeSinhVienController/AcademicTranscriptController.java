@@ -2,41 +2,50 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-
-package AdminInsertController;
+package HomeSinhVienController;
 
 import DBcontext.AssignmentDBcontext;
 import DBcontext.AssignmentStudentcontext;
 import DBcontext.ClassDBcontext;
+import DBcontext.CourseDBcontext;
 import DBcontext.StudentDBcontext;
+import DBcontext.TermDBcontext;
+import Model.Subjects;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 
 /**
  *
  * @author phung
  */
-public class AdminInsertMarkController extends HttpServlet {
+public class AcademicTranscriptController extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
     }
-
-    AssignmentDBcontext dbas = new AssignmentDBcontext();
-    ClassDBcontext dbclass = new ClassDBcontext();
-    AssignmentStudentcontext dbasidstudent = new AssignmentStudentcontext();
+    TermDBcontext dbterm = new TermDBcontext();
     StudentDBcontext dbstudent = new StudentDBcontext();
+    ClassDBcontext dbclass = new ClassDBcontext();
+    CourseDBcontext dbcourse = new CourseDBcontext();
+    AssignmentStudentcontext dbass = new AssignmentStudentcontext();
+    AssignmentDBcontext dba = new AssignmentDBcontext();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.setAttribute("classs", dbclass.list());
-        request.getRequestDispatcher("admin/AdminInsertMark.jsp").forward(request, response);
+        String iduser = request.getParameter("iduser");
+        ArrayList<Subjects> courses = dbcourse.getidcourse_user(iduser);
+        
+        
+        
+        request.setAttribute("courses", courses);
+        request.getRequestDispatcher("HomeSV/Academic Transcript.jsp").forward(request, response);
     }
 
     /**
@@ -50,18 +59,14 @@ public class AdminInsertMarkController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String id = request.getParameter("id");
-        request.setAttribute("Assignments", dbas.SearchByclass(id));
-
-        request.setAttribute("classs", dbclass.list());
-
-        request.setAttribute("Students", dbstudent.SearchByidStudent_Class(id));
-        
-        request.setAttribute("AssignmentIDSTUDENTs", dbasidstudent.getbymark(id));
-
-        request.getRequestDispatcher("admin/AdminInsertMark.jsp").forward(request, response);
-
+        processRequest(request, response);
     }
+
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
     @Override
     public String getServletInfo() {
         return "Short description";

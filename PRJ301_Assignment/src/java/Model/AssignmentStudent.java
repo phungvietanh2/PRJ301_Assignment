@@ -77,6 +77,11 @@ public class AssignmentStudent {
         this.Assignments = Assignments;
     }
 
+    @Override
+    public String toString() {
+        return "AssignmentStudent{" + "asid=" + asid + ", asmarkk=" + asmarkk + ", average=" + average + ", Total=" + Total + ", asdate=" + asdate + ", Students=" + Students + ", Assignments=" + Assignments + '}';
+    }
+
    
     
 }

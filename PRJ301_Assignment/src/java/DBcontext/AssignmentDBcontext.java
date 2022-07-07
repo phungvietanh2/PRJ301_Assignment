@@ -19,11 +19,10 @@ import java.util.logging.Logger;
  * @author phung
  */
 public class AssignmentDBcontext extends DBcontext<Assignment> {
-
     public ArrayList<Assignment> SearchByclass(String id) {
         ArrayList<Assignment> Assignments = new ArrayList<>();
         try {
-            String sql = "select a.Aname , a.Aid from Assessment a left join Course c on  a.Coid = c.Coid\n"
+            String sql = "select a.Aname , a.Aid , A.Aweight from Assessment a left join Course c on  a.Coid = c.Coid\n"
                     + "	 left join [Group] g on g.Coid= c.Coid\n"
                     + "		where g.Gid= ?";
             PreparedStatement stm = connection.prepareStatement(sql);
@@ -33,6 +32,7 @@ public class AssignmentDBcontext extends DBcontext<Assignment> {
                 Assignment S = new Assignment();
                 S.setAid(rs.getInt("Aid"));
                 S.setAname(rs.getString("Aname"));
+                S.setAweight(rs.getFloat("Aweight"));
                 Assignments.add(S);
             }
         } catch (SQLException ex) {

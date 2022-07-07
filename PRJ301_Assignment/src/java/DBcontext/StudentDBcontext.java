@@ -4,17 +4,11 @@
  */
 package DBcontext;
 
-import Model.AssignmentStudent;
-import Model.Classs;
-import Model.Mark;
 import Model.Student;
-import Model.Subjects;
-import jakarta.servlet.jsp.jstl.sql.Result;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -23,24 +17,6 @@ import java.util.logging.Logger;
  * @author phung
  */
 public class StudentDBcontext extends DBcontext<Student> {
-
-    public ArrayList<Mark> countAvg(int id, String className) {
-        ArrayList<Mark> mark = new ArrayList<>();
-        try {
-            String sql = "select  ad.Mark ,a.Aweight from AssessmentIDStudent ad,Assessment a where ad.Sid = ? and a.Aid = ad.Aid and a.Coid = ?";
-            PreparedStatement stm = connection.prepareStatement(sql);
-            stm.setInt(1, id);
-            stm.setString(2, className);
-            ResultSet rs = stm.executeQuery();
-            while (rs.next()) {
-                Mark S = new Mark(rs.getFloat(1), rs.getFloat(2));
-                mark.add(S);
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(ClassDBcontext.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return mark;
-    }
 
     @Override
     public ArrayList<Student> list() {
@@ -65,11 +41,29 @@ public class StudentDBcontext extends DBcontext<Student> {
         return students;
     }
 
-    public ArrayList<Student> SearchByidClass(String id) {
+    public ArrayList<Student> SearchByidStudent_Class(String id) {
         ArrayList<Student> students = new ArrayList<>();
         try {
             String sql = "  select s.Sid   from Student s  left JOIN  GroupStudent g on g.Sid = s.Sid \n"
                     + " left JOIN [Group] cl on g.Gid = cl.Gid where g.Gid = ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setString(1, id);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                Student S = new Student();
+                S.setSid(rs.getInt("Sid"));
+                students.add(S);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ClassDBcontext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return students;
+    }
+
+    public ArrayList<Student> SearchByidStudent_user(String id) {
+        ArrayList<Student> students = new ArrayList<>();
+        try {
+            String sql = " select s.Sid   from Student s  left JOIN  Account ac on ac.Sid = s.Sid  where ac.username = ?";
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setString(1, id);
             ResultSet rs = stm.executeQuery();

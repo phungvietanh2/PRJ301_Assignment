@@ -53,4 +53,10 @@ public class Assignment {
     public void setAweight(float aweight) {
         this.aweight = aweight;
     }
+
+    @Override
+    public String toString() {
+        return "Assignment{" + "aid=" + aid + ", aname=" + aname + ", aweight=" + aweight + ", Subjectss=" + Subjectss + ", assignmentIDSTUDENTs=" + assignmentIDSTUDENTs + '}';
+    }
+    
 }

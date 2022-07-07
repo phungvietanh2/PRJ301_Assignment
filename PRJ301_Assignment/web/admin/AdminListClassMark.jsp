@@ -23,7 +23,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-         <nav class="navbar navbar-default navbar-static-top">
+        <nav class="navbar navbar-default navbar-static-top">
             <div class="container-fluid">
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
@@ -36,14 +36,14 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    
+
                     <!-----xin chao nguoi dang nhap ---->
                     <p class="navbar-brand">
                         Hello ${sessionScope.account.user } 
                         <img style="width: 58px;margin-top:-13px;" src="img/hello.png">
                     </p>
                 </div>
-               
+
             </div>
         </nav>  	
         <div class="container-fluid main-container">
@@ -82,18 +82,15 @@
                             <select style="border-radius: 10px ; height: 4rem;
                                     text-align: center; "  name="id">
                                 <c:forEach items="${requestScope.classs}" var="c">
-                                    <option <c:if test="${className eq c.cid and group eq c.subjectss.suid}" >
+                                    <option <c:if test="${className eq c.cid and course eq c.subjectss.suid}" >
                                             selected="selected" 
                                         </c:if>  value="${c.cid}_${c.subjectss.suid}" >
-                                        ${c.cid}_${c.subjectss.suid}
+                                        ${c.cid}(${c.subjectss.suid})
 
                                     </option>
 
                                 </c:forEach>
                             </select>
-
-
-
                             <br>
                             <input style="border-radius: 10px ;
                                    height: 4rem;
@@ -104,20 +101,21 @@
                         </div>
                     </form>
                     <c:if test="${requestScope.AssignmentIDSTUDENTs !=null }">
-                        
-                        
+
+
                         <div style="text-align: center ;font-size: 2rem;color: green;">PASSED:${requestScope.pass}</div>
                         <div style="text-align: center ;font-size: 2rem;color: red"> NOT PASSED:${requestScope.fail}</div>
-                      
-                        
-                        
+
+
+
                         <table  class="table table-bordered">
                             <thead>
                                 <tr>
                                     <th></th>
                                         <c:forEach  items="${requestScope.Assignments}" var="v">
-                                        <th>${v.aname}</th>
+                                        <th>${v.aname}(${v.aweight})</th>
                                         </c:forEach>
+                                
                                     <th>Status</th>
 
                                 </tr>
@@ -135,10 +133,9 @@
                                                            </c:if>
                                                        </c:forEach>
                                                        />
-
                                             </td> 
-
                                         </c:forEach>
+                                            
                                         <c:if test="${a.status == 1}">
                                             <td><h4 style="color: green">PASSED</h4></td>
                                         </c:if>

@@ -124,6 +124,10 @@
         <servlet-name>ForgotPasswordController</servlet-name>
         <servlet-class>AccountController.ForgotPasswordController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AcademicTranscriptController</servlet-name>
+        <servlet-class>HomeSinhVienController.AcademicTranscriptController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>DEMOcontroller</servlet-name>
         <url-pattern>/demo</url-pattern>
@@ -243,6 +247,10 @@
     <servlet-mapping>
         <servlet-name>ForgotPasswordController</servlet-name>
         <url-pattern>/ForgotPassword</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AcademicTranscriptController</servlet-name>
+        <url-pattern>/AcademicTranscript</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

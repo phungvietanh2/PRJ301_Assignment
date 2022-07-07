@@ -18,54 +18,69 @@
             <nav class="container">
                 <h1>View attendance for ${sessionScope.account.displayname} (${sessionScope.account.students}) </h1>
             <h5 style="text-align: center ; font-size: 2rem ; line-height: 50px" > 
-               ... then see report
+                ... then see report
             </h5>
             <did class="container" >
                 <div class="table-responsive ">          
                     <table class="table table-bordered">
+
                         <thead>
-                        <th class="selec1" ></th>
-                            <c:forEach items="${requestScope.asstudent}" var="c">
-                            <th class="selec1">${c.aname} <br> ${c.aweight}%</th>
-                            </c:forEach> 
-                        <th class="selec1">AVERAGE</th>
-                        <th class="selec1">STATUS</th>
+
+                        <th class="selec1">GRADE ITEM</th>
+                        <th class="selec1">WEIGHT</th>  
+                        <th class="selec1">VALUE</th>
+                        <th class="selec1">Total</th> 
                         </thead>
                         <tbody >
-
-                            <tr > 
-                                <td class="selec1">VALUE <br>Total</td>
-                                    <c:forEach items="${requestScope.asstudent}" var="a">
-                                    <td  >
-                                        <input readonly="true" name="${a.aid}" class="hight" type="text"
-                                               <c:forEach items="${requestScope.assidstudent}" var="c">   
-                                                   <c:if test="${c.assignments.aid eq a.aid}">
-                                                       value="${c.asmarkk}"
+                            <c:forEach items="${requestScope.asstudent}" var="c">
+                                <tr>
+                                    <td>${c.aname}</td>
+                                    <td>${c.aweight}%</td>
+                                    <td>
+                                        <input readonly="true" name="${c.aid}" class="hight" type="text"
+                                               <c:forEach items="${requestScope.assidstudent}" var="ca">   
+                                                   <c:if test="${ca.assignments.aid eq c.aid}">
+                                                       value="${ca.asmarkk}"
                                                    </c:if>
                                                </c:forEach>
                                                />
+                                    </td>
 
-                                        <input readonly="true" name="${a.aid}" class="hight" type="text"
-                                               <c:forEach items="${requestScope.assidstudent}" var="c">                       
-                                                   <c:if test="${c.assignments.aid eq a.aid}">
-                                                       value="(${c.total})"
-                                                   </c:if>
-                                               </c:forEach>
-                                               />
-                                    </td> 
-                                </c:forEach>   
-                                <c:forEach items="${requestScope.average}" var="b">   
-                                    <td> ${b.average}</td>
-                                   
-                                </c:forEach>
+                                    <td> <input readonly="true" name="${c.aid}" class="hight" type="text"
+                                                <c:forEach items="${requestScope.assidstudent}" var="ca">                       
+                                                    <c:if test="${ca.assignments.aid eq c.aid}">
+                                                        value="${ca.total}"
+                                                    </c:if>
+                                                </c:forEach>
+                                                /></td>
 
-                                <td>
-                                    
-                                  
-                                </td>
 
-                            </tr>
-                        </tbody>
+                                </tr> 
+                            </c:forEach> 
+                                <tr> 
+                                    <th rowspan="2">COURSE TOTAL</th>
+                        <c:forEach items="${requestScope.average}" var="b">   
+                        <td>Average</td>
+                        <td colspan="3">${b.average}</td>
+                        
+                        <c:set value="${b.average}" var="av"></c:set>
+                          </tr>
+                          <tr>
+                           <td>STATUS</td> 
+                               <c:forEach items="${requestScope.as}" var="avc">   
+                                <c:if test="${avc.status == 1}">
+                                    <td colspan="3"><h4 style="color: green">PASSED</h4></td>
+                                </c:if>
+                                <c:if test="${avc.status == 0}">
+                                    <td colspan="3"><h4 style="color: red">NOT PASSED</h4></td>
+                                </c:if>
+                            </c:forEach> 
+                          </tr>
+                            
+                               
+                           
+                        </c:forEach>
+                              
                     </table>
                 </div>
             </did>

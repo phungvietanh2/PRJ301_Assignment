@@ -35,7 +35,7 @@
                                 Mark Report (Báo cáo điểm)</a>
                         </li>
                         <li>
-                            <a href="MarkReport?iduser=${sessionScope.account.user } " >
+                            <a href="AcademicTranscript?iduser=${sessionScope.account.user } " >
                                 Academic Transcript (Báo cáo điểm)</a>
                         </li>
                     </ul>
