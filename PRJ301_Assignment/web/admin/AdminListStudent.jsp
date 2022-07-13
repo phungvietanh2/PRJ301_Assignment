@@ -26,7 +26,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <nav class="navbar navbar-default navbar-static-top">
+        <nav  class="navbar navbar-default navbar-static-top">
             <div class="container-fluid">
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
@@ -39,14 +39,14 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    
+
                     <!-----xin chao nguoi dang nhap ---->
                     <p class="navbar-brand">
                         Hello ${sessionScope.account.user } 
                         <img style="width: 58px;margin-top:-13px;" src="img/hello.png">
                     </p>
                 </div>
-               
+
             </div>
         </nav>  	
         <div class="container-fluid main-container">
@@ -79,53 +79,112 @@
                                 keyboard_return
                             </span></h3>
                     </div>
+                    <div class="panel-body">
+                        <div class="container"><h1>Student</h1> </div> 
+                        <table  class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th class="selec1">TERM</th>
+                                    <th class="selec1">COURSE </th>
+                                    <th class="selec1">GROUP</th>                                   
+                                </tr>
+                            </thead>
+                            <tbody >
+                                <tr>
+                                    <td >
 
-                    
+                                        <table class="table table-bordered">
+                                            <c:forEach items="${requestScope.Terms}" var="c">
+                                                <tr>
+                                                    <td>
+                                                        <a href="AdminListStudent?idterms=${c.tname}"> 
+                                                            ${c.tname}</a>
+                                                    </td>
+                                                </tr>  
+                                            </c:forEach> 
+                                        </table>
+                                    </td>
 
-                    <form>
-                        <div class="panel-body">
-                            <div class="container"><h1>Student</h1> </div> 
+                                    <td> 
+                                        <table  class="table table-bordered">
+                                            <c:forEach items="${requestScope.course}" var="a">                
+                                                <tr>
+                                                    <td>
+                                                        <a href="AdminListStudent?idcourse=${a.suid}&idterms=${a.terms.tname}"> 
+                                                            ${a.suname}</a>
+                                                    </td>
+                                                </tr>               
+                                            </c:forEach> 
+                                        </table>
+                                    </td>
+                                    <td> 
+                                        <table  class="table table-bordered">
+                                            <c:forEach items="${requestScope.classs}" var="b">                
+                                                <tr>
+                                                    <td>
+                                                        <a href="AdminListStudent?idcourse=${b.subjectss.suid}&idterms=${b.terms.tname}&idclass=${b.cid}"> 
+                                                            ${b.cid}</a>
+                                                    </td>
+                                                </tr>               
+                                            </c:forEach> 
+                                        </table>
+                                    </td>
+                                </tr> 
+
+                            </tbody>
+                        </table>
+
+                        <!--                        <div id="bot_pagger" class="Pagination"> 
+                                                </div>-->
+
+                        <c:if  test="${requestScope.students != null}">
                             <table  class="table table-bordered">
                                 <thead>
                                     <tr>
-                                        <td>RollNumber</td>
-                                        <td>Name</td>
-                                        <td>Gender</td>
-                                        <td>Dob</td>  
-                                        <td>Gmail</td>
-                                        <td>Start</td>
-                                        <td>Update</td>
-                                        <td>Delete</td>
+                                        <th class="selec1">NO</th>
+                                        <th class="selec1">MEMBER</th>
+                                        <th class="selec1">CODE </th>
+                                        <th class="selec1">NAME</th>                                   
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <c:forEach items="${requestScope.students}" var="e">
-                                        <tr>                                     
-                                            <td>${e.sid}</td>
-                                            <td>${e.sname}</td>
-                                            <td>${e.sgender}</td>
-                                            <td>${e.sdob}</td>
-                                            <td>${e.sgmail}</td>
-                                            <td>${e.start}</td>
-                                            <td><a class="btn btn-primary" href="AdminEditStudent?id=${e.sid}">Update</a></td>
-                                            <td><input class="btn btn-primary"  type="button" value="Delete" onclick="removeEmp(${e.sid})"/></td>
-                                        </tr>   
-                                    </c:forEach>
+                                <tbody >
+                                    <c:forEach items="${requestScope.students}" var="s">
+                                        <tr>
+                                            <td>
+                                                ${s.no}
+                                            </td>
+                                            <td>
+                                                ${s.sname}${s.sid}
+                                                <br>
+                                                <a href="Viewgrade?idstudent=${s.sid}&idclass=${s.classss.cid}&idcourse=${s.subjectss.suid}">View grade</a>
+                                            </td>
+                                            <td>
+                                                ${s.sid}
+                                            </td>
+                                            <td>
+                                                ${s.sname}
+                                            </td>
+                                        </tr> 
+                                    </c:forEach> 
+
+
+
 
                                 </tbody>
                             </table>
+                        </c:if>
+                    </div>
 
-                            <div id="bot_pagger" class="Pagination"> 
-                            </div>
-                        </div>
-                    </form>
 
                 </div>
+
             </div>
+
+
         </div>
-        <script>
-            render("bot_pagger",${requestScope.pageindex},${requestScope.totalpage}, 1);
-        </script>
+        <!--        <script>
+                    render("bot_pagger",${requestScope.pageindex},${requestScope.totalpage}, 1);
+                </script>-->
 
     </body>
 </html>

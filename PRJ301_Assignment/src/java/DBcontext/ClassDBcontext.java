@@ -1,7 +1,9 @@
 package DBcontext;
+
 import Model.Classs;
 import Model.Subjects;
 import Model.Teacher;
+import Model.Term;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -41,9 +43,9 @@ public class ClassDBcontext extends DBcontext<Classs> {
         return classes;
     }
 
-    public ArrayList<Classs> getid_user(String id , String userid  ) {
+    public ArrayList<Classs> getid_user(String id, String userid) {
         try {
-             ArrayList<Classs> classes = new ArrayList<>();
+            ArrayList<Classs> classes = new ArrayList<>();
             String sql = "  select c.Coid, c.Coname, g.Gid,cl.Gstart,cl.Gend from Term t  \n"
                     + "  left JOIN Course c on t.Tid = c.Tid\n"
                     + "  left JOIN   [Group] cl on c.Coid = cl.Coid\n"
@@ -53,7 +55,7 @@ public class ClassDBcontext extends DBcontext<Classs> {
                     + "   where t.Tid =? and a.username=? ";
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setString(1, id);
-          stm.setString(2, userid);
+            stm.setString(2, userid);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
                 Subjects s = new Subjects();
@@ -66,21 +68,49 @@ public class ClassDBcontext extends DBcontext<Classs> {
                 c.setSubjectss(s);
                 classes.add(c);
             }
-             return classes;     
+            return classes;
         } catch (SQLException ex) {
             Logger.getLogger(ClassDBcontext.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
 
-//    public static void main(String[] args) {
-//        ClassDBcontext dao = new ClassDBcontext();
-//        ArrayList<Classs> a = dao.getid("1","anh");
-//        //    for (Classs o : a) {
-//        System.out.println(a);
-//        //  }
-//    }
+    public ArrayList<Classs> getid_course(String id , String idterm) {
+        try {
+            ArrayList<Classs> classes = new ArrayList<>();
+            String sql = "  select t.Tname, c.coid, g.Gid from Course c\n"
+                    + "	left join Term t on c.Tid=t.Tid\n"
+                    + "	left join [Group] g on c.Coid = g.Coid"
+                    + " where c.Coid = ? and t.Tname=?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setString(1, id);
+            stm.setString(2, idterm);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                Term t = new Term();
+                t.setTname(rs.getString("Tname"));
+                Subjects s = new Subjects();
+                s.setSuid(rs.getString("coid"));
+                Classs c = new Classs();
+                c.setCid(rs.getString("Gid"));
+                c.setSubjectss(s);
+                c.setTerms(t);
+                classes.add(c);
+            }
+            return classes;
+        } catch (SQLException ex) {
+            Logger.getLogger(ClassDBcontext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
 
+    public static void main(String[] args) {
+       ClassDBcontext dao = new ClassDBcontext();
+       ArrayList<Classs> a = dao.getid_course("IOT102","Summer2022");
+//        //    for (Classs o : a) {
+       System.out.println(a);
+//        //  }
+   }
     @Override
     public Classs get(int id) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody

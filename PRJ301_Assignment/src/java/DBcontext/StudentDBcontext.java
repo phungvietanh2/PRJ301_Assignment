@@ -4,7 +4,9 @@
  */
 package DBcontext;
 
+import Model.Classs;
 import Model.Student;
+import Model.Subjects;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -33,6 +35,67 @@ public class StudentDBcontext extends DBcontext<Student> {
                 S.setSdob(rs.getDate("Sdob"));
                 S.setSgmail(rs.getString("Sgmail"));
                 S.setStart(rs.getString("Sstart"));
+                students.add(S);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(StudentDBcontext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return students;
+    }
+
+    public ArrayList<Student> list_viewmark() {
+        ArrayList<Student> students = new ArrayList<>();
+        try {
+            String sql = "select  s.Sid ,g.Gid , c.Coid from Student  s  \n"
+                    + "				 left join GroupStudent gs on s.Sid = gs.Sid\n"
+                    + "				 left join [Group] g on g.Gid = gs.Gid\n"
+                    + "				 left join Course c on c.Coid = g.Coid ";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                Classs cl = new Classs();
+                cl.setCid(rs.getString("Gid"));
+                Subjects s = new Subjects();
+                s.setSuid(rs.getString("Coid"));
+                Student S = new Student();
+                S.setSid(rs.getInt("Sid"));
+                S.setSubjectss(s);
+                S.setClassss(cl);
+                students.add(S);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(StudentDBcontext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return students;
+    }
+
+    
+
+    public ArrayList<Student> getid_list(String idcourse, String idterm, String idclass) {
+        ArrayList<Student> students = new ArrayList<>();
+        try {
+            String sql = "select ROW_NUMBER() OVER (ORDER BY t.Tname ) AS [NO] ,g.Gid , s.Sid , s.Sname ,c.Coid from Course c\n"
+                    + "	 left join Term t on c.Tid=t.Tid\n"
+                    + "	left join [Group] g on c.Coid = g.Coid\n"
+                    + "	  left join GroupStudent gs on gs.Gid = g.Gid\n"
+                    + "	left join Student s on s.Sid = gs.Sid\n"
+                    + "  where c.Coid = ? and t.Tname=? and g.Gid=?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setString(1, idcourse);
+            stm.setString(2, idterm);
+            stm.setString(3, idclass);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                Subjects s = new Subjects();
+                s.setSuid(rs.getString("Coid"));
+                Classs cl = new Classs();
+                cl.setCid(rs.getString("Gid"));
+                Student S = new Student();
+                S.setSid(rs.getInt("Sid"));
+                S.setSname(rs.getString("Sname"));
+                S.setNo(rs.getInt("NO"));
+                S.setClassss(cl);
+                S.setSubjectss(s);
                 students.add(S);
             }
         } catch (SQLException ex) {
@@ -78,9 +141,27 @@ public class StudentDBcontext extends DBcontext<Student> {
         return students;
     }
 
+    public ArrayList<Student> SearchByidStudent_student(String id) {
+        ArrayList<Student> students = new ArrayList<>();
+        try {
+            String sql = "select Sid from Student where Sid = ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setString(1, id);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                Student S = new Student();
+                S.setSid(rs.getInt("Sid"));
+                students.add(S);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ClassDBcontext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return students;
+    }
+
     public static void main(String[] args) {
         StudentDBcontext dao = new StudentDBcontext();
-        ArrayList<Student> a = dao.searchid("anh");
+        ArrayList<Student> a = dao.list_viewmark();
         System.out.println(a);
         for (Student student : a) {
             System.out.println(a);

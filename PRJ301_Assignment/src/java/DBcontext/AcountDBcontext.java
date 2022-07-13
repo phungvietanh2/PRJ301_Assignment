@@ -83,13 +83,13 @@ public class AcountDBcontext extends DBcontext<Account> {
 
     }
 
-//    public static void main(String[] args) {
-//        AcountDBcontext dao = new AcountDBcontext();
-//        Account a = dao.getIdAgmail("phungvietanh1994@gmail.com");
-//        //  for (Account o : a) {
-//        System.out.println(a);
-//        //}
-//    }
+   public static void main(String[] args) {
+        AcountDBcontext dao = new AcountDBcontext();
+      Account a = dao.getAccountbyuserpass("anh", "123");
+      // for (Account o : a) {
+       System.out.println(a);        
+    //   }
+   }
 
     @Override
     public Account get(int id) {

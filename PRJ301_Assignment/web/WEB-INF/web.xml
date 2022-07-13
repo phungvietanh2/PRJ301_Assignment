@@ -128,6 +128,14 @@
         <servlet-name>AcademicTranscriptController</servlet-name>
         <servlet-class>HomeSinhVienController.AcademicTranscriptController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AdminList</servlet-name>
+        <servlet-class>AdminListController.AdminListStudent2</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminViewgradeController</servlet-name>
+        <servlet-class>AdminListController.AdminViewgradeController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>DEMOcontroller</servlet-name>
         <url-pattern>/demo</url-pattern>
@@ -251,6 +259,14 @@
     <servlet-mapping>
         <servlet-name>AcademicTranscriptController</servlet-name>
         <url-pattern>/AcademicTranscript</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminList</servlet-name>
+        <url-pattern>/List</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminViewgradeController</servlet-name>
+        <url-pattern>/Viewgrade</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

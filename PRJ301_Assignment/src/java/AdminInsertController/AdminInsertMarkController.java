@@ -51,6 +51,9 @@ public class AdminInsertMarkController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String id = request.getParameter("id");
+        
+        
+        
         request.setAttribute("Assignments", dbas.SearchByclass(id));
 
         request.setAttribute("classs", dbclass.list());

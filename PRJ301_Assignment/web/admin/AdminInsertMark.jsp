@@ -78,10 +78,10 @@
                             </span></h3>
                     </div>
                     <form action="AdminInsertMarkController" method="POST">
-                        <div class="panel-body">
+                        <div class="panel-body" >
                             <div class="container"><h1>Class</h1> </div> 
                             <select style="border-radius: 10px ; height: 4rem;
-                                    text-align: center; "  name="id">
+                                    text-align: center; "  name="id" >
                                 <c:forEach items="${requestScope.classs}" var="c">
                                     <option <c:if test="${param.id == c.cid}" >selected="selected" </c:if>  value="${c.cid}" >
                                         ${c.cid}(${c.subjectss.suid})
@@ -94,7 +94,7 @@
                                    width: 10rem;
                                    font-size: 20px;
                                    margin-top: 15px;
-                                   margin-left: 0px;" type="submit" value="Search" /> 
+                                   margin-left: 0px;" type="submit"  value="Search" /> 
                         </div>
                     </form>
                     <form action="insertMark" method="POST">
@@ -109,6 +109,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    
                                     <c:forEach  items="${requestScope.Students}" var="a">
                                         <tr> <td>${a.sid}</td>
 
@@ -118,6 +119,8 @@
                                                            <c:forEach items="${requestScope.AssignmentIDSTUDENTs}" var="c">   
                                                                <c:if test="${c.students.sid eq a.sid and c.assignments.aid eq b.aid}">
                                                                    value="${c.asmarkk}"
+                                                            
+                                                                   
                                                                </c:if>
                                                            </c:forEach>
                                                            />

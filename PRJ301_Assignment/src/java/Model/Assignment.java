@@ -15,7 +15,18 @@ public class Assignment {
     private String aname;
     private float aweight;
     private Subjects Subjectss ;
-   private ArrayList<AssignmentStudent> assignmentIDSTUDENTs=new ArrayList<>();
+   // private Student Students ;
+    private ArrayList<Student>students = new ArrayList<>();
+
+    public ArrayList<Student> getStudents() {
+        return students;
+    }
+
+    public void setStudents(ArrayList<Student> students) {
+        this.students = students;
+    }
+    
+    private ArrayList<AssignmentStudent> assignmentIDSTUDENTs=new ArrayList<>();
     public ArrayList<AssignmentStudent> getAssignmentIDSTUDENTs() {
         return assignmentIDSTUDENTs;
     }

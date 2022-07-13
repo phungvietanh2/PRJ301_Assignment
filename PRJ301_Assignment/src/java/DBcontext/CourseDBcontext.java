@@ -59,9 +59,9 @@ public class CourseDBcontext extends DBcontext<Subjects> {
                 s.setSuid(rs.getString("Coid"));
                 s.setSuname(rs.getString("Coname"));
                 s.setCredit(rs.getInt("Cocredit"));
-                 Term t = new Term();
-                 t.setTname(rs.getString("Tname"));
-                 s.setTerms(t);
+                Term t = new Term();
+                t.setTname(rs.getString("Tname"));
+                s.setTerms(t);
                 subjectss.add(s);
             }
         } catch (SQLException ex) {
@@ -72,11 +72,33 @@ public class CourseDBcontext extends DBcontext<Subjects> {
 
     public static void main(String[] args) {
         CourseDBcontext dao = new CourseDBcontext();
-        ArrayList<Subjects> a = dao.getidcourse_user("anh");
+        ArrayList<Subjects> a = dao.getid_course("Summer2022");
         System.out.println(a);
 //      for (Subjects student : a) {
 //           System.out.println(a);
 //        }
+    }
+
+    public ArrayList<Subjects> getid_course(String id) {
+        ArrayList<Subjects> subjectss = new ArrayList<>();
+        try {
+            String sql = " select t.Tname, c.Coid , c.Coname from Course c left join Term t on c.Tid = t.Tid where t.Tname = ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setString(1, id);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                Term t = new Term();
+                t.setTname(rs.getString("Tname"));
+                Subjects s = new Subjects();
+                s.setSuid(rs.getString("Coid"));
+                s.setSuname(rs.getString("Coname"));
+                s.setTerms(t);
+                subjectss.add(s);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(CourseDBcontext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return subjectss;
     }
 
     @Override

@@ -42,7 +42,7 @@ public abstract class CheckacountController extends HttpServlet {
         if (isauthenticated(request)) {
             processget(request, response);
         } else {
-             response.getWriter().println("access denied!");
+             request.getRequestDispatcher("Login/done.jsp").forward(request, response);
         }
     }
 
@@ -58,7 +58,7 @@ public abstract class CheckacountController extends HttpServlet {
         if (isauthenticated(request)) {
             processget(request, response);
         } else {
-             response.getWriter().println("access denied!");
+             request.getRequestDispatcher("Login/done.jsp").forward(request, response);
         }
     }
 }

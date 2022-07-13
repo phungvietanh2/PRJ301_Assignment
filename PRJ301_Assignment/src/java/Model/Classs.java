@@ -18,6 +18,24 @@ public class Classs {
     private Date clend;
     private Teacher teachers;
     private Subjects subjectss;
+    private Term Terms;
+    private ArrayList<Student> students = new ArrayList<>();
+
+    public ArrayList<Student> getStudents() {
+        return students;
+    }
+
+    public void setStudents(ArrayList<Student> students) {
+        this.students = students;
+    }
+    
+    public Term getTerms() {
+        return Terms;
+    }
+
+    public void setTerms(Term Terms) {
+        this.Terms = Terms;
+    }
     
     public String getCid() {
         return cid;
@@ -64,8 +82,10 @@ public class Classs {
 
     @Override
     public String toString() {
-        return "Classs{" + "cid=" + cid + ", clstart=" + clstart + ", clend=" + clend + ", teachers=" + teachers + ", subjectss=" + subjectss + '}';
+        return "Classs{" + "cid=" + cid + ", clstart=" + clstart + ", clend=" + clend + ", teachers=" + teachers + ", subjectss=" + subjectss + ", Terms=" + Terms + '}';
     }
+
+    
 
     
 }

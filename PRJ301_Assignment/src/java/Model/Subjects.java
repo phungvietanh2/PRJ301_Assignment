@@ -17,7 +17,9 @@ public class Subjects {
     private String suname;
     private int credit;
     private Term terms;
+     ArrayList<Student> Students = new ArrayList<>();
     ArrayList<Assignment> Assignments = new ArrayList<>();
+    ArrayList<Classs> Classsss = new ArrayList<>();
 
     public ArrayList<Assignment> getAssignments() {
         return Assignments;
@@ -26,7 +28,14 @@ public class Subjects {
     public void setAssignments(ArrayList<Assignment> Assignments) {
         this.Assignments = Assignments;
     }
-    
+
+    public ArrayList<Student> getStudents() {
+        return Students;
+    }
+
+    public void setStudents(ArrayList<Student> Students) {
+        this.Students = Students;
+    }
 
     public String getSuid() {
         return suid;
@@ -60,11 +69,17 @@ public class Subjects {
         this.terms = terms;
     }
 
+    public ArrayList<Classs> getClasssss() {
+        return Classsss;
+    }
+
+    public void setClasssss(ArrayList<Classs> Classsss) {
+        this.Classsss = Classsss;
+    }
+
     @Override
     public String toString() {
         return "Subjects{" + "suid=" + suid + ", suname=" + suname + ", credit=" + credit + ", terms=" + terms + ", Assignments=" + Assignments + '}';
     }
 
-    
-  
 }

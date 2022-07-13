@@ -12,19 +12,59 @@ import java.util.ArrayList;
  * @author phung
  */
 public class Student {
-    private int sid ;
+
+    private int sid;
+    private int no;
     private String sname;
     private String sgender;
     private Date sdob;
     private String sgmail;
-    private String start; 
+    private String start;
     private int status;
+    private Classs classss;
+    private Subjects Subjectss;
+
+    public Classs getClassss() {
+        return classss;
+    }
+
+    public void setClassss(Classs classss) {
+        this.classss = classss;
+    }
+    private ArrayList<Assignment> Assignments = new ArrayList<>();
+
+    public ArrayList<Assignment> getAssignments() {
+        return Assignments;
+    }
+
+    public void setAssignments(ArrayList<Assignment> Assignments) {
+        this.Assignments = Assignments;
+    }
+
+    public Subjects getSubjectss() {
+        return Subjectss;
+    }
+
+    public void setSubjectss(Subjects Subjectss) {
+        this.Subjectss = Subjectss;
+    }
+
     private ArrayList<AssignmentStudent> AssignmentIDSTUDENTs = new ArrayList<>();
+
     public ArrayList<AssignmentStudent> getAssignmentIDSTUDENTs() {
         return AssignmentIDSTUDENTs;
     }
+
     public void setAssignmentIDSTUDENTs(ArrayList<AssignmentStudent> AssignmentIDSTUDENTs) {
         this.AssignmentIDSTUDENTs = AssignmentIDSTUDENTs;
+    }
+
+    public int getNo() {
+        return no;
+    }
+
+    public void setNo(int no) {
+        this.no = no;
     }
 
     public int getStatus() {
@@ -35,7 +75,6 @@ public class Student {
         this.status = status;
     }
 
- 
     public int getSid() {
         return sid;
     }
@@ -44,7 +83,6 @@ public class Student {
         this.sid = sid;
     }
 
-   
     public String getSname() {
         return sname;
     }
@@ -87,9 +125,7 @@ public class Student {
 
     @Override
     public String toString() {
-        return "Student{" + "status=" + status + '}';
+        return "Student{" + "sid=" + sid + ", classss=" + classss + '}';
     }
 
-   
-    
 }

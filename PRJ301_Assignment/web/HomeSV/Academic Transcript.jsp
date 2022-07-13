@@ -45,6 +45,9 @@
                                     </td>
                                     <td>${c.suname}</td>
                                     <td>${c.credit  }</td>
+                                    <td>${requestScope.student.status}</td>
+                                        
+                                    
                                 </tr> 
                             </c:forEach> 
                         </tbody>

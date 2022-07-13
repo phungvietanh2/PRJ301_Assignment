@@ -11,12 +11,9 @@
     <head>
         <link href="css/Home.css" rel="stylesheet" type="text/css"/>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Updock&display=swap" rel="stylesheet">
-
-    <a href="Home.jsp"></a>
     <title>JSP Page</title>
 </head>
 <body>

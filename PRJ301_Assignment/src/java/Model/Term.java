@@ -4,13 +4,25 @@
  */
 package Model;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author phung
  */
 public class Term {
+
     private int tid;
     private String tname;
+    private ArrayList<Classs> Classss = new ArrayList<>();
+
+    public ArrayList<Classs> getClassss() {
+        return Classss;
+    }
+
+    public void setClassss(ArrayList<Classs> Classss) {
+        this.Classss = Classss;
+    }
 
     public int getTid() {
         return tid;
@@ -32,5 +44,5 @@ public class Term {
     public String toString() {
         return "Term{" + "tid=" + tid + ", tname=" + tname + '}';
     }
-    
+
 }

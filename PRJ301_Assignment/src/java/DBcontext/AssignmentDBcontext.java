@@ -6,6 +6,7 @@ package DBcontext;
 
 import Model.Assignment;
 import Model.AssignmentStudent;
+import Model.Classs;
 import Model.Subjects;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -19,6 +20,7 @@ import java.util.logging.Logger;
  * @author phung
  */
 public class AssignmentDBcontext extends DBcontext<Assignment> {
+
     public ArrayList<Assignment> SearchByclass(String id) {
         ArrayList<Assignment> Assignments = new ArrayList<>();
         try {
@@ -41,20 +43,48 @@ public class AssignmentDBcontext extends DBcontext<Assignment> {
         return Assignments;
     }
 
-    public ArrayList<Assignment> getid_course(String id) {
+    public ArrayList<Assignment> getid_course(String id ,String iduser ) {
         ArrayList<Assignment> Assignments = new ArrayList<>();
         try {
             String sql = " select a.Aweight, a.Aname , a.Aid from Assessment a left join Course c on  a.Coid = c.Coid\n"
-                    + "	 left join [Group] g on g.Coid= c.Coid\n"
-                    + "	where g.Coid=?";
+                    + "                    	 left join [Group] g on g.Coid= c.Coid left join GroupStudent gs on gs.Gid = g.Gid \n"
+                    + "						 left join Student s on s.Sid  = gs.Sid left join Account ac on s.Sid = ac.Sid\n"
+                    + "                    	where g.Coid=? and ac.username = ?";
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setString(1, id);
+            stm.setString(2, iduser);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
                 Assignment S = new Assignment();
                 S.setAid(rs.getInt("Aid"));
                 S.setAname(rs.getString("Aname"));
-                S.setAweight(rs.getFloat("Aweight"));    
+                S.setAweight(rs.getFloat("Aweight"));
+                Assignments.add(S);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ClassDBcontext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return Assignments;
+    }
+
+    public ArrayList<Assignment> getid_class(String id, String idclass) {
+        ArrayList<Assignment> Assignments = new ArrayList<>();
+        try {
+            String sql = " select a.Aweight, a.Aname , a.Aid ,g.Gid from Assessment a \n"
+                    + "						left join AssessmentIDStudent ass on ass.Aid = a.Aid\n"
+                    + "						left join Course c on  a.Coid = c.Coid\n"
+                    + "                        left join [Group] g on g.Coid= c.Coid LEFT JOIN Student s on ass.Sid=s.Sid\n"
+                    + "                         where s.Sid =? and g.Gid=?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setString(1, id);
+            stm.setString(2, idclass);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                Assignment S = new Assignment();
+                S.setAid(rs.getInt("Aid"));
+                S.setAname(rs.getString("Aname"));
+                S.setAweight(rs.getFloat("Aweight"));
+
                 Assignments.add(S);
             }
         } catch (SQLException ex) {
@@ -85,7 +115,7 @@ public class AssignmentDBcontext extends DBcontext<Assignment> {
 
     public static void main(String[] args) {
         AssignmentDBcontext dao = new AssignmentDBcontext();
-        ArrayList<Assignment> a = dao.list();
+        ArrayList<Assignment> a = dao.getid_class("1", "se1");
 
         //System.out.println(a);
         //  for (Assignment student : a) {

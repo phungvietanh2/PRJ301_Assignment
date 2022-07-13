@@ -10,6 +10,8 @@ import DBcontext.ClassDBcontext;
 import DBcontext.CourseDBcontext;
 import DBcontext.StudentDBcontext;
 import DBcontext.TermDBcontext;
+import Model.AssignmentStudent;
+import Model.Student;
 import Model.Subjects;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -40,7 +42,7 @@ public class AcademicTranscriptController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String iduser = request.getParameter("iduser");
-        ArrayList<Subjects> courses = dbcourse.getidcourse_user(iduser);
+        ArrayList<Subjects> courses = dbcourse.getidcourse_user(iduser);      
         
         
         

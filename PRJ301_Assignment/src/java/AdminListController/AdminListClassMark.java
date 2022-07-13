@@ -42,6 +42,7 @@ public class AdminListClassMark extends HttpServlet {
             throws ServletException, IOException {
         String id = request.getParameter("id");
         String[] sub = id.split("_");
+        // SE3_MAS291
         request.setAttribute("Assignments", dbas.SearchByclass(sub[0]));
         request.setAttribute("classs", dbclass.list());
 
@@ -54,9 +55,7 @@ public class AdminListClassMark extends HttpServlet {
        
         for (Student student : students) {
             boolean check = true;
-            ArrayList<AssignmentStudent> asidstudent = dbasidstudent.countAvg(student.getSid(), sub[1]);
-           
-            
+            ArrayList<AssignmentStudent> asidstudent = dbasidstudent.countAvg(student.getSid(), sub[1]);          
             for (AssignmentStudent o : asidstudent) {
                 if ((o.getAssignments().getAweight() == 40 && o.getAsmarkk() < 4)
                         || (o.getAssignments().getAweight() == 50 && o.getAsmarkk() < 4)
