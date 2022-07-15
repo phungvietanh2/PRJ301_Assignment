@@ -55,11 +55,14 @@ public class AdminListClassMark extends HttpServlet {
        
         for (Student student : students) {
             boolean check = true;
-            ArrayList<AssignmentStudent> asidstudent = dbasidstudent.countAvg(student.getSid(), sub[1]);          
+            ArrayList<AssignmentStudent> asidstudent = dbasidstudent.countAvg(student.getSid(), sub[1]); 
+            System.out.println(dbasidstudent.countAvg(student.getSid(), sub[1]));
             for (AssignmentStudent o : asidstudent) {
-                if ((o.getAssignments().getAweight() == 40 && o.getAsmarkk() < 4)
+                if (  (o.getAssignments().getAweight() == 40 && o.getAsmarkk() < 4)
                         || (o.getAssignments().getAweight() == 50 && o.getAsmarkk() < 4)
-                        || (o.getAssignments().getAweight() == 35 && o.getAsmarkk() < 4)) {
+                        || (o.getAssignments().getAweight() == 35 && o.getAsmarkk() < 4)
+                        
+                        ) {
                     check = false;
                     student.setStatus(0);
                 }

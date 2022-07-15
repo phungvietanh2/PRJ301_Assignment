@@ -42,10 +42,38 @@ public class AcademicTranscriptController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String iduser = request.getParameter("iduser");
-        ArrayList<Subjects> courses = dbcourse.getidcourse_user(iduser);      
+        ArrayList<Subjects> courses = dbcourse.getidcourse_user(iduser); 
+         int pass = 0;
+        double avg = 0;
+
+         float avg1 = 0;
+        for (Subjects o : courses) {
+            boolean check = true;        
+            ArrayList<AssignmentStudent> asidstudent = dbass.countAvg1(iduser , o.getSuid());                   
+            for (AssignmentStudent oo : asidstudent) {
+                if ((oo.getAssignments().getAweight() == 40 && oo.getAsmarkk() < 4)
+                        || (oo.getAssignments().getAweight() == 50 && oo.getAsmarkk() < 4)
+                        || (oo.getAssignments().getAweight() == 35 && oo.getAsmarkk() < 4)) {
+                    check = false;
+                    o.setStatus(0);
+                    
+                }
+              
+                avg += oo.getAsmarkk() * oo.getAssignments().getAweight() / 100;
+            }
+            
+          
+            if (avg >= 5 && check == true) {
+                pass++;
+                o.setStatus(1);
+            } else {
+                o.setStatus(0);
+            }
+        }
         
-        
-        
+       // request.setAttribute("a", dbass.getid_average1(iduser, idcourse));
+       
+       //request.setAttribute("courses", avg1);
         request.setAttribute("courses", courses);
         request.getRequestDispatcher("HomeSV/Academic Transcript.jsp").forward(request, response);
     }

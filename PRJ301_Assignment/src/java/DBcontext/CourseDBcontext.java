@@ -50,12 +50,13 @@ public class CourseDBcontext extends DBcontext<Subjects> {
                     + "								  left join GroupStudent gs on gs.Gid = g.Gid\n"
                     + "								  left join Student s on s.Sid = gs.Sid \n"
                     + "								  left join Account ac on ac.Sid = s.Sid \n"
-                    + "								  where ac.username = ?";
+                    + "								  where  s.Sid = ?";
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setString(1, user);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
                 Subjects s = new Subjects();
+                s.setNo(rs.getString("NO"));
                 s.setSuid(rs.getString("Coid"));
                 s.setSuname(rs.getString("Coname"));
                 s.setCredit(rs.getInt("Cocredit"));
@@ -72,7 +73,7 @@ public class CourseDBcontext extends DBcontext<Subjects> {
 
     public static void main(String[] args) {
         CourseDBcontext dao = new CourseDBcontext();
-        ArrayList<Subjects> a = dao.getid_course("Summer2022");
+        ArrayList<Subjects> a = dao.getidcourse_user("1");
         System.out.println(a);
 //      for (Subjects student : a) {
 //           System.out.println(a);

@@ -15,6 +15,7 @@ public class Student {
 
     private int sid;
     private int no;
+    private String simg;
     private String sname;
     private String sgender;
     private Date sdob;
@@ -23,6 +24,14 @@ public class Student {
     private int status;
     private Classs classss;
     private Subjects Subjectss;
+
+    public String getSimg() {
+        return simg;
+    }
+
+    public void setSimg(String simg) {
+        this.simg = simg;
+    }
 
     public Classs getClassss() {
         return classss;

@@ -25,18 +25,22 @@
                 <div style="font-family: 'Nanum Gothic', sans-serif;font-size: 25px" class="table-responsive ">          
                     <table class="table">
                         <thead>
-                            <tr>                     
+                            <tr>            
+                                <th class="selec1">NO</th>
                                 <th class="selec1">SEMESTER</th>
                                 <th class="selec1">SUBJECT CODE</th>                           
                                 <th class="selec1">SUBJECT NAME </th>
                                 <th class="selec1">CREDIT</th>
-                                <th class="selec1">GRADE</th>
+
                                 <th class="selec1">STATUS</th>
                             </tr>
                         </thead>
                         <tbody>
                             <c:forEach items="${requestScope.courses}" var="c"> 
                                 <tr>
+                                    <td>
+                                        ${c.no}
+                                    </td>
                                     <td>
                                         ${c.terms.tname}
                                     </td>
@@ -45,9 +49,18 @@
                                     </td>
                                     <td>${c.suname}</td>
                                     <td>${c.credit  }</td>
-                                    <td>${requestScope.student.status}</td>
-                                        
-                                    
+
+                                    <c:if test="${c.status == 1}">
+                                        <td><h4 style="color: green">PASSED</h4></td>
+                                    </c:if>
+                                        <c:if test="${c.status == 2}">
+                                        <td><h4 style="color: green">a</h4></td>
+                                    </c:if>
+                                    <c:if test="${c.status == 0}">
+                                        <td><h4 style="color: red">NOT PASSED</h4></td>
+                                    </c:if>
+
+
                                 </tr> 
                             </c:forEach> 
                         </tbody>

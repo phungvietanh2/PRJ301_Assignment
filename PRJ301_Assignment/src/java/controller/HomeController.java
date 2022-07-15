@@ -47,6 +47,7 @@ public class HomeController extends CheckacountController {
             throws ServletException, IOException {
         request.setAttribute("terms", dbterm.list());
         request.setAttribute("student", dbstudent.list_viewmark());
+       //  request.setAttribute("students",dbstudent.getlist_dssv());
         
         request.getRequestDispatcher("HomeSV/Home.jsp").forward(request, response);
     }

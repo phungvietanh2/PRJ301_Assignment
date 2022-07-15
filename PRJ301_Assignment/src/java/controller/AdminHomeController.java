@@ -38,7 +38,9 @@ public class AdminHomeController  extends CheckacountController  {
     @Override
     protected void processget(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-       
+       StudentDBcontext dbstudent = new StudentDBcontext();
+      
+      
         request.getRequestDispatcher("admin/AdminHome.jsp").forward(request, response);
 
     } 

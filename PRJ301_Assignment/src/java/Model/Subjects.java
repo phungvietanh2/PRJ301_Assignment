@@ -14,10 +14,13 @@ import java.util.ArrayList;
 public class Subjects {
 
     private String suid;
+    private String no;
     private String suname;
     private int credit;
     private Term terms;
-     ArrayList<Student> Students = new ArrayList<>();
+    private int Status;
+
+    ArrayList<Student> Students = new ArrayList<>();
     ArrayList<Assignment> Assignments = new ArrayList<>();
     ArrayList<Classs> Classsss = new ArrayList<>();
 
@@ -31,6 +34,14 @@ public class Subjects {
 
     public ArrayList<Student> getStudents() {
         return Students;
+    }
+
+    public String getNo() {
+        return no;
+    }
+
+    public void setNo(String no) {
+        this.no = no;
     }
 
     public void setStudents(ArrayList<Student> Students) {
@@ -77,9 +88,17 @@ public class Subjects {
         this.Classsss = Classsss;
     }
 
+    public int getStatus() {
+        return Status;
+    }
+
+    public void setStatus(int Status) {
+        this.Status = Status;
+    }
+
     @Override
     public String toString() {
-        return "Subjects{" + "suid=" + suid + ", suname=" + suname + ", credit=" + credit + ", terms=" + terms + ", Assignments=" + Assignments + '}';
+        return "Subjects{" + "suid=" + suid + ", suname=" + suname + ", credit=" + credit + ", terms=" + terms + ", Status=" + Status + ", Students=" + Students + ", Assignments=" + Assignments + ", Classsss=" + Classsss + '}';
     }
 
 }

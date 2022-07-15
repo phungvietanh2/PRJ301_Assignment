@@ -153,10 +153,11 @@
                                             <td>
                                                 ${s.no}
                                             </td>
+                                           
                                             <td>
                                                 ${s.sname}${s.sid}
                                                 <br>
-                                                <a href="Viewgrade?idstudent=${s.sid}&idclass=${s.classss.cid}&idcourse=${s.subjectss.suid}">View grade</a>
+                                                <a href="Viewgrade?idstudent=${s.sid}&idclass=${s.classss.cid}&idcourse=${s.subjectss.suid}">View Mark</a>
                                             </td>
                                             <td>
                                                 ${s.sid}

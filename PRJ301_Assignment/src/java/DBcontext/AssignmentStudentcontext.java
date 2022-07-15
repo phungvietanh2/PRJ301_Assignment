@@ -149,6 +149,8 @@ public class AssignmentStudentcontext extends DBcontext<AssignmentStudent> {
         return AssignmentIDSTUDENTs;
     }
 
+    
+
     public ArrayList<AssignmentStudent> getid_average_student(String id, String userid, String coid) {
         ArrayList<AssignmentStudent> AssignmentIDSTUDENTs = new ArrayList<>();
         try {
@@ -188,6 +190,31 @@ public class AssignmentStudentcontext extends DBcontext<AssignmentStudent> {
                     + "where ad.Sid = ? and a.Coid = ?";
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setInt(1, id);
+            stm.setString(2, className);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                Assignment S = new Assignment();
+                S.setAweight(rs.getFloat("Aweight"));
+                AssignmentStudent as = new AssignmentStudent();
+                as.setAsmarkk(rs.getFloat("Mark"));
+                as.setAssignments(S);
+                assignmentStudents.add(as);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AssignmentStudentcontext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return assignmentStudents;
+    }
+
+    public ArrayList<AssignmentStudent> countAvg1(String id, String className) {
+        ArrayList<AssignmentStudent> assignmentStudents = new ArrayList<>();
+        try {
+            String sql = "select  ad.Mark ,a.Aweight from AssessmentIDStudent ad\n"
+                    + "inner join \n"
+                    + "Assessment a on  a.Aid = ad.Aid \n"
+                    + "where ad.Sid = ? and a.Coid = ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setString(1, id);
             stm.setString(2, className);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
@@ -279,9 +306,9 @@ public class AssignmentStudentcontext extends DBcontext<AssignmentStudent> {
     }
 
     public static void main(String[] args) {
-        AssignmentStudentcontext dao = new AssignmentStudentcontext();
-        ArrayList<AssignmentStudent> a = dao.getid_class_student("se1", "1");
-        System.out.println(a);
+       // AssignmentStudentcontext dao = new AssignmentStudentcontext();
+       // ArrayList<AssignmentStudent> a = dao.getid_average1("1", "iot102");
+      //  System.out.println(a);
 
     }
 

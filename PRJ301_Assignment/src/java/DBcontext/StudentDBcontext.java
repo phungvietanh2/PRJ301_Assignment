@@ -69,7 +69,29 @@ public class StudentDBcontext extends DBcontext<Student> {
         return students;
     }
 
-    
+//    public ArrayList<Student> getlist_dssv() {
+//        ArrayList<Student> students = new ArrayList<>();
+//        try {
+//            String sql = "select s.Sid , c.Coid from Student s inner join\n"
+//                    + "					GroupStudent gs on s.Sid = gs.Sid inner join\n"
+//                    + "					[Group] g on g.Gid = gs.Gid\n"
+//                    + "					inner join Course c on g.Coid = c.Coid ";
+//            PreparedStatement stm = connection.prepareStatement(sql);
+//      
+//            ResultSet rs = stm.executeQuery();
+//            while (rs.next()) {
+//                Subjects s = new Subjects();
+//                s.setSuid(rs.getString("Coid"));
+//                Student S = new Student();
+//                S.setSid(rs.getInt("Sid"));
+//                S.setSubjectss(s);
+//                students.add(S);
+//            }
+//        } catch (SQLException ex) {
+//            Logger.getLogger(StudentDBcontext.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        return students;
+//    }
 
     public ArrayList<Student> getid_list(String idcourse, String idterm, String idclass) {
         ArrayList<Student> students = new ArrayList<>();
