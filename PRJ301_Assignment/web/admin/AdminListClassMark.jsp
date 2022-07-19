@@ -85,7 +85,7 @@
                                     <option <c:if test="${className eq c.cid and course eq c.subjectss.suid}" >
                                             selected="selected" 
                                         </c:if>  value="${c.cid}_${c.subjectss.suid}" >
-                                        ${c.cid}(${c.subjectss.suid})
+                                        ${c.cname}(${c.subjectss.suid})
 
                                     </option>
 
@@ -113,7 +113,7 @@
                                 <tr>
                                     <th></th>
                                         <c:forEach  items="${requestScope.Assignments}" var="v">
-                                        <th>${v.aname}(${v.aweight})</th>
+                                        <th>${v.aname}(${v.aweight}%)</th>
                                         </c:forEach>
                                 
                                     <th>Status</th>

@@ -55,20 +55,19 @@ public class AdminViewgradeController extends HttpServlet {
         String idterms = request.getParameter("idterms");
         String idclass = request.getParameter("idclass");
         String idcounrse = request.getParameter("idcourse");
-         
-        request.setAttribute("assignment", dba.getid_class(idstudent, idclass));
+
+        request.setAttribute("assignments", dba.getid_class(idclass));
 
         request.setAttribute("classs", dbclass.getid_user(idterms, iduser));
 
         request.setAttribute("assidstudent", dbass.getid_class_student(idclass, idstudent));
-        System.out.println( dbass.getid_class_user(idclass, iduser));
+        System.out.println(dbass.getid_class_user(idclass, iduser));
         ArrayList<Student> students = dbstudent.SearchByidStudent_student(idstudent);
         double avg = 0;
         for (Student student : students) {
             boolean check = true;
+
             ArrayList<AssignmentStudent> asidstudent = dbass.avg_sv_view(idstudent, idcounrse);
-            System.out.println(student);
-            System.out.println(asidstudent);
             for (AssignmentStudent o : asidstudent) {
                 if ((o.getAssignments().getAweight() == 40 && o.getAsmarkk() < 4)
                         || (o.getAssignments().getAweight() == 50 && o.getAsmarkk() < 4)
@@ -78,7 +77,8 @@ public class AdminViewgradeController extends HttpServlet {
                 }
                 avg += o.getAsmarkk() * o.getAssignments().getAweight() / 100;
             }
-            if (avg >= 5 && check == true) {
+            if (avg >= 5 && avg <= 10 && check == true
+                    || avg >= 750 && check == true) {
                 student.setStatus(1);
             } else {
                 student.setStatus(0);
@@ -86,11 +86,13 @@ public class AdminViewgradeController extends HttpServlet {
         }
 
         request.setAttribute("as", students);
+        ArrayList<AssignmentStudent> assig = dbass.getid_average_student(idclass, idstudent, idcounrse);
+        request.setAttribute("average", assig);
+        
+//       reqystem.out.println(avg);uest.setAttribute("assstudent1", dbass.getidstudentmark1(sid, iduser));
 
-        System.out.println(avg);
-//       request.setAttribute("assstudent1", dbass.getidstudentmark1(sid, iduser));
-        request.setAttribute("average", dbass.getid_average_student(idclass, idstudent, idcounrse));
-     //   request.setAttribute("asstudent", dba.getid_course(idcounrse));
+        System.out.println(dbass.getid_average_student(idclass, idstudent, idcounrse));
+        //   request.setAttribute("asstudent", dba.getid_course(idcounrse));
         request.getRequestDispatcher("admin/adminViewgrade.jsp").forward(request, response);
     }
 

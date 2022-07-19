@@ -123,7 +123,7 @@
                                                 <tr>
                                                     <td>
                                                         <a href="AdminListStudent?idcourse=${b.subjectss.suid}&idterms=${b.terms.tname}&idclass=${b.cid}"> 
-                                                            ${b.cid}</a>
+                                                            ${b.cname}</a>
                                                     </td>
                                                 </tr>               
                                             </c:forEach> 

@@ -68,10 +68,12 @@ public class AdminListClassMark extends HttpServlet {
                 }
                 avg += o.getAsmarkk() * o.getAssignments().getAweight() / 100;
             }
-            if (avg >= 5 && check == true) {
+            if (avg >= 5  && check == true || 
+                avg >= 750 && check == true    ) {
                 pass++;
                 student.setStatus(1);
-            } else {
+            } 
+            else {
                 student.setStatus(0);
             }
         }

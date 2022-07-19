@@ -45,12 +45,13 @@ public class CourseDBcontext extends DBcontext<Subjects> {
     public ArrayList<Subjects> getidcourse_user(String user) {
         ArrayList<Subjects> subjectss = new ArrayList<>();
         try {
-            String sql = "select   ROW_NUMBER() OVER (ORDER BY t.Tname ) AS [NO] , t.Tname , c.Coid , c.Coname ,c.Cocredit from Term t  left join Course c  on t.Tid = c.Tid \n"
-                    + "								 left join [Group] g on c.Coid = g.Coid \n"
-                    + "								  left join GroupStudent gs on gs.Gid = g.Gid\n"
-                    + "								  left join Student s on s.Sid = gs.Sid \n"
-                    + "								  left join Account ac on ac.Sid = s.Sid \n"
-                    + "								  where  s.Sid = ?";
+            String sql = "select   ROW_NUMBER() OVER (ORDER BY t.Tname ) AS [NO],c.Cterm , t.Tname , c.Coid , c.Coname ,c.Cocredit from\n"
+                    + "Term t  left join Course c  on t.Tid = c.Tid \n"
+                    + "             							 left join [Group] g on c.Coid = g.Coid \n"
+                    + "           							  left join GroupStudent gs on gs.Gid = g.Gid\n"
+                    + "                   						  left join Student s on s.Sid = gs.Sid \n"
+                    + "                    							  left join Account ac on ac.Sid = s.Sid \n"
+                    + "                    						  where  s.Sid = ?  ";
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setString(1, user);
             ResultSet rs = stm.executeQuery();
@@ -60,6 +61,7 @@ public class CourseDBcontext extends DBcontext<Subjects> {
                 s.setSuid(rs.getString("Coid"));
                 s.setSuname(rs.getString("Coname"));
                 s.setCredit(rs.getInt("Cocredit"));
+                s.setTermm(rs.getInt("Cterm"));
                 Term t = new Term();
                 t.setTname(rs.getString("Tname"));
                 s.setTerms(t);

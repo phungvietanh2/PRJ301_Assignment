@@ -43,7 +43,7 @@ public class AssignmentDBcontext extends DBcontext<Assignment> {
         return Assignments;
     }
 
-    public ArrayList<Assignment> getid_course(String id ,String iduser ) {
+    public ArrayList<Assignment> getid_course(String id, String iduser) {
         ArrayList<Assignment> Assignments = new ArrayList<>();
         try {
             String sql = " select a.Aweight, a.Aname , a.Aid from Assessment a left join Course c on  a.Coid = c.Coid\n"
@@ -67,17 +67,16 @@ public class AssignmentDBcontext extends DBcontext<Assignment> {
         return Assignments;
     }
 
-    public ArrayList<Assignment> getid_class(String id, String idclass) {
+    public ArrayList<Assignment> getid_class(String id) {
         ArrayList<Assignment> Assignments = new ArrayList<>();
         try {
-            String sql = " select a.Aweight, a.Aname , a.Aid ,g.Gid from Assessment a \n"
-                    + "						left join AssessmentIDStudent ass on ass.Aid = a.Aid\n"
-                    + "						left join Course c on  a.Coid = c.Coid\n"
-                    + "                        left join [Group] g on g.Coid= c.Coid LEFT JOIN Student s on ass.Sid=s.Sid\n"
-                    + "                         where s.Sid =? and g.Gid=?";
+            String sql = " select a.Aweight, a.Aname , a.Aid  from Assessment a                 					\n"
+                    + "                  					left join Course c on  a.Coid = c.Coid\n"
+                    + "                                           left join [Group] g on g.Coid= c.Coid \n"
+                    + "                                         where  g.Gid=?";
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setString(1, id);
-            stm.setString(2, idclass);
+           
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
                 Assignment S = new Assignment();
@@ -115,7 +114,7 @@ public class AssignmentDBcontext extends DBcontext<Assignment> {
 
     public static void main(String[] args) {
         AssignmentDBcontext dao = new AssignmentDBcontext();
-        ArrayList<Assignment> a = dao.getid_class("1", "se1");
+        ArrayList<Assignment> a = dao.getid_class("1");
 
         //System.out.println(a);
         //  for (Assignment student : a) {

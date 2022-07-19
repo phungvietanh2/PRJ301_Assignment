@@ -46,7 +46,7 @@ public class StudentDBcontext extends DBcontext<Student> {
     public ArrayList<Student> list_viewmark() {
         ArrayList<Student> students = new ArrayList<>();
         try {
-            String sql = "select  s.Sid ,g.Gid , c.Coid from Student  s  \n"
+            String sql = "select  s.Sid ,g.Gname , c.Coid from Student  s  \n"
                     + "				 left join GroupStudent gs on s.Sid = gs.Sid\n"
                     + "				 left join [Group] g on g.Gid = gs.Gid\n"
                     + "				 left join Course c on c.Coid = g.Coid ";
@@ -54,7 +54,7 @@ public class StudentDBcontext extends DBcontext<Student> {
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
                 Classs cl = new Classs();
-                cl.setCid(rs.getString("Gid"));
+                cl.setCname(rs.getString("Gname"));
                 Subjects s = new Subjects();
                 s.setSuid(rs.getString("Coid"));
                 Student S = new Student();
@@ -96,7 +96,7 @@ public class StudentDBcontext extends DBcontext<Student> {
     public ArrayList<Student> getid_list(String idcourse, String idterm, String idclass) {
         ArrayList<Student> students = new ArrayList<>();
         try {
-            String sql = "select ROW_NUMBER() OVER (ORDER BY t.Tname ) AS [NO] ,g.Gid , s.Sid , s.Sname ,c.Coid from Course c\n"
+            String sql = "select ROW_NUMBER() OVER (ORDER BY t.Tname ) AS [NO] ,g.Gname ,g.Gid , s.Sid , s.Sname ,c.Coid from Course c\n"
                     + "	 left join Term t on c.Tid=t.Tid\n"
                     + "	left join [Group] g on c.Coid = g.Coid\n"
                     + "	  left join GroupStudent gs on gs.Gid = g.Gid\n"
@@ -111,7 +111,8 @@ public class StudentDBcontext extends DBcontext<Student> {
                 Subjects s = new Subjects();
                 s.setSuid(rs.getString("Coid"));
                 Classs cl = new Classs();
-                cl.setCid(rs.getString("Gid"));
+                cl.setCname(rs.getString("Gname"));
+                cl.setCid(rs.getInt("Gid"));
                 Student S = new Student();
                 S.setSid(rs.getInt("Sid"));
                 S.setSname(rs.getString("Sname"));
@@ -183,7 +184,7 @@ public class StudentDBcontext extends DBcontext<Student> {
 
     public static void main(String[] args) {
         StudentDBcontext dao = new StudentDBcontext();
-        ArrayList<Student> a = dao.list_viewmark();
+        ArrayList<Student> a = dao.getid_list("iot102", "Summer2021", "1");
         System.out.println(a);
         for (Student student : a) {
             System.out.println(a);

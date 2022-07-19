@@ -88,7 +88,7 @@
                                 <th class="selec1">Total</th> 
                                 </thead>
                                 <tbody >
-                                    <c:forEach items="${requestScope.assignment}" var="c">
+                                    <c:forEach items="${requestScope.assignments}" var="c">
                                         <tr>
                                             <td>${c.aname}</td>
                                             <td>${c.aweight}%</td>
@@ -119,7 +119,7 @@
                                             <td>Average</td>
                                             <td colspan="3">${b.average}</td>
 
-                                            <c:set value="${b.average}" var="av"></c:set>
+                                           
                                             </tr>
                                             <tr>
                                                 <td>STATUS</td> 

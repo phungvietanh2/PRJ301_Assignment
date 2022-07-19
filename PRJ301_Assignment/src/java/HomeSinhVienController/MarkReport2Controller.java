@@ -62,7 +62,9 @@ public class MarkReport2Controller extends HttpServlet {
                 }
                 avg += o.getAsmarkk() * o.getAssignments().getAweight() / 100;
             }
-            if (avg >= 5 && check == true) {  
+            if (avg >= 5 && avg<=10 && check == true || 
+                avg >= 750 && check == true    
+                    ) {  
                 student.setStatus(1);
             } else {
                 student.setStatus(0);

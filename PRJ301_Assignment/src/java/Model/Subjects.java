@@ -17,6 +17,7 @@ public class Subjects {
     private String no;
     private String suname;
     private int credit;
+    private int termm;
     private Term terms;
     private int Status;
 
@@ -38,6 +39,14 @@ public class Subjects {
 
     public String getNo() {
         return no;
+    }
+
+    public int getTermm() {
+        return termm;
+    }
+
+    public void setTermm(int termm) {
+        this.termm = termm;
     }
 
     public void setNo(String no) {

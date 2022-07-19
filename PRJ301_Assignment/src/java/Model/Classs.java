@@ -13,36 +13,28 @@ import java.util.ArrayList;
  */
 public class Classs {
 
-    private String cid;
+    private int cid;
+    private String cname;
     private Date clstart;
     private Date clend;
-    private Teacher teachers;
     private Subjects subjectss;
     private Term Terms;
     private ArrayList<Student> students = new ArrayList<>();
 
-    public ArrayList<Student> getStudents() {
-        return students;
-    }
-
-    public void setStudents(ArrayList<Student> students) {
-        this.students = students;
-    }
-    
-    public Term getTerms() {
-        return Terms;
-    }
-
-    public void setTerms(Term Terms) {
-        this.Terms = Terms;
-    }
-    
-    public String getCid() {
+    public int getCid() {
         return cid;
     }
 
-    public void setCid(String cid) {
+    public void setCid(int cid) {
         this.cid = cid;
+    }
+
+    public String getCname() {
+        return cname;
+    }
+
+    public void setCname(String cname) {
+        this.cname = cname;
     }
 
     public Date getClstart() {
@@ -68,24 +60,28 @@ public class Classs {
     public void setSubjectss(Subjects subjectss) {
         this.subjectss = subjectss;
     }
-     public String getSubjectss1() {
-        return subjectss.getSuname();
+
+    public Term getTerms() {
+        return Terms;
     }
 
-    public Teacher getTeachers() {
-        return teachers;
+    public void setTerms(Term Terms) {
+        this.Terms = Terms;
     }
 
-    public void setTeachers(Teacher teachers) {
-        this.teachers = teachers;
+    public ArrayList<Student> getStudents() {
+        return students;
+    }
+
+    public void setStudents(ArrayList<Student> students) {
+        this.students = students;
     }
 
     @Override
     public String toString() {
-        return "Classs{" + "cid=" + cid + ", clstart=" + clstart + ", clend=" + clend + ", teachers=" + teachers + ", subjectss=" + subjectss + ", Terms=" + Terms + '}';
+        return "Classs{" + "cid=" + cid + ", cname=" + cname + ", clstart=" + clstart + ", clend=" + clend + ", subjectss=" + subjectss + ", Terms=" + Terms + ", students=" + students + '}';
     }
 
-    
+ 
 
-    
 }

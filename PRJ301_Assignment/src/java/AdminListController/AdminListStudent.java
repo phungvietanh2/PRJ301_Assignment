@@ -46,9 +46,10 @@ public class AdminListStudent extends HttpServlet {
         request.setAttribute("students", dbstudent.getid_list(idcourse,idterms,idclass));
         request.setAttribute("Terms", dbterm.list());
         request.setAttribute("course", dbcourse.getid_course(idterms));
+       
         request.setAttribute("classs", dbclass.getid_course(idcourse ,idterms));
         
-          
+           System.out.println(  dbstudent.getid_list(idcourse,idterms,idclass));
           
           
           

@@ -46,25 +46,24 @@ public class AcademicTranscriptController extends HttpServlet {
          int pass = 0;
         double avg = 0;
 
-         float avg1 = 0;
+        // float avg1 = 0;
         for (Subjects o : courses) {
             boolean check = true;        
-            ArrayList<AssignmentStudent> asidstudent = dbass.countAvg1(iduser , o.getSuid());                   
+            ArrayList<AssignmentStudent> asidstudent = dbass.countAvg1(iduser , o.getSuid()); 
             for (AssignmentStudent oo : asidstudent) {
+                System.out.println(oo);
                 if ((oo.getAssignments().getAweight() == 40 && oo.getAsmarkk() < 4)
                         || (oo.getAssignments().getAweight() == 50 && oo.getAsmarkk() < 4)
                         || (oo.getAssignments().getAweight() == 35 && oo.getAsmarkk() < 4)) {
                     check = false;
-                    o.setStatus(0);
-                    
-                }
-              
+                    o.setStatus(0);          
+                }           
                 avg += oo.getAsmarkk() * oo.getAssignments().getAweight() / 100;
+                System.out.println(avg);
             }
-            
-          
-            if (avg >= 5 && check == true) {
-                pass++;
+
+            if (avg >= 5 &&  avg <= 10  && check == true || 
+                avg >= 750 && check == true ) {
                 o.setStatus(1);
             } else {
                 o.setStatus(0);

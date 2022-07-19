@@ -84,7 +84,7 @@
                                     text-align: center; "  name="id" >
                                 <c:forEach items="${requestScope.classs}" var="c">
                                     <option <c:if test="${param.id == c.cid}" >selected="selected" </c:if>  value="${c.cid}" >
-                                        ${c.cid}(${c.subjectss.suid})
+                                        ${c.cname}(${c.subjectss.suid})
                                     </option>
                                 </c:forEach>
                             </select>
